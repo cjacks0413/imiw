@@ -1,97 +1,168 @@
-var width = 960,
-    height = 500,
-    rotate = -40; 
-    maxlat = 83; 
-
-var projection = d3.geo.mercator()
-    .rotate([rotate, -28])
-    .scale(.55)
-    .translate([width/2, height/2]);
-
-
-function mercatorBounds(projection, maxlat) {
-	var yaw = projection.rotate()[0],
-		xymax = projection([-yaw+180-1e-6,-maxlat]),
-		xymin = projection([-yaw-180+1e-6, maxlat]);
-	
-	return [xymin,xymax];
-} 
-
-var b = mercatorBounds(projection, maxlat),
-	s = width/(b[1][0]-b[0][0]),
-	scaleExtent = [s, 10*s];
-
-projection.scale(scaleExtent[0]); 
+d3.select(window).on("resize", throttle);
 
 var zoom = d3.behavior.zoom()
-	.scaleExtent(scaleExtent)
-	.scale(projection.scale())
-	.translate([0,0]) 
-	.on("zoom", redraw);
+    .scaleExtent([1, 9])
+    .on("zoom", move);
 
-var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .call(zoom); 
 
-var path = d3.geo.path()
-    .projection(projection);
+var width = document.getElementById('container').offsetWidth;
+var height = width / 2;
 
-var g = svg.append("g");
+var topo, projection, path, svg, g;
+var zoomStart = 0; 
 
-d3.json("json/world-110m2.json", function(error, topology) {
-    svg.selectAll("path")
-      .data(topojson.feature(topology, topology.objects.countries)
-          .features)
-    .enter()
-      .append("path")
-      .attr("d", path)
+var tooltip = d3.select("body")
+    .append("div")
+    .style("position", "absolute")
+    .style("z-index", "10")
+    .style("visibility", "hidden")
+    .text("a simple tooltip");
+
+// var tooltip = d3.select("#container").append("div").attr("class", "tooltip hidden");
+
+setup(width,height);
+
+function setup(width,height){
+  projection = d3.geo.mercator()
+  	.center([31, 33])
+    .translate([(width/2), (height/2)])
+    .scale(width / Math.PI);
+    //.scale( width / 2 / Math.PI);
+
+  path = d3.geo.path().projection(projection);
+
+  svg = d3.select("#container").append("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .call(zoom)
+      .on("click", click)
+      .append("g");
+
+  g = svg.append("g");
+
+}
+
+d3.json("data/world-topo-min.json", function(error, world) {
+
+  var countries = topojson.feature(world, world.objects.countries).features;
+
+  topo = countries;
+  draw(topo);
+
 });
 
-var tlast = [0,0],
-slast = null;
- 
+function draw(topo) {
+
+  g.append("path")
+   .datum({type: "LineString", coordinates: [[-180, 0], [-90, 0], [0, 0], [90, 0], [180, 0]]})
+   .attr("class", "equator")
+   .attr("d", path);
+
+
+  var country = g.selectAll(".country").data(topo);
+
+  country.enter().insert("path")
+      .attr("class", "country")
+      .attr("d", path)
+      .attr("id", function(d,i) { return d.id; })
+      .attr("title", function(d,i) { return d.properties.name; }); 
+      
+
+  //EXAMPLE: adding some capitals from external CSV file
+  d3.csv("data/country-capitals.csv", function(err, capitals) {
+
+    capitals.forEach(function(i){
+      addpoint(i.CapitalLongitude, i.CapitalLatitude, i.CapitalName );
+    });
+
+  });
+
+  //offsets for tooltips
+  var offsetL = document.getElementById('container').offsetLeft+20;
+  var offsetT = document.getElementById('container').offsetTop+10;
+
+}
+
+
 function redraw() {
-	if (d3.event) {
-		var scale = d3.event.scale,
-		t = d3.event.translate;
+  width = document.getElementById('container').offsetWidth;
+  height = width / 2;
+  d3.select('svg').remove();
+  setup(width,height);
+  draw(topo);
+}
 
-		// if scaling changes, ignore translation (otherwise touch zooms are weird)
-		if (scale != slast) {
-			projection.scale(scale);
-		} else {
-			var dx = t[0]-tlast[0],
-			dy = t[1]-tlast[1],
-			yaw = projection.rotate()[0],
-			tp = projection.translate();
 
-			// use x translation to rotate based on current scale
-			projection.rotate([yaw+360.*dx/width*scaleExtent[0]/scale, 0, 0]);
+function move() {
 
-			// use y translation to translate projection, clamped by min/max
-			var b = mercatorBounds(projection, maxlat);
-			if (b[0][1] + dy > 0) dy = -b[0][1];
-			else if (b[1][1] + dy < height) dy = height-b[1][1];
-			projection.translate([tp[0],tp[1]+dy]);
-		}
+  var t = d3.event.translate;
+  var s = d3.event.scale; 
+  zscale = s;
+  var h = height/4;
 
-		// save last values. resetting zoom.translate() and scale() would
-		// seem equivalent but doesn't seem to work reliably?
-		slast = scale;
-		tlast = t;
-	}
 
-	svg.selectAll('path') // re-project path data
-	.attr('d', path);
+  t[0] = Math.min(
+    (width/height)  * (s - 1), 
+    Math.max( width * (1 - s), t[0] )
+  );
+
+  t[1] = Math.min(
+    h * (s - 1) + h * s, 
+    Math.max(height  * (1 - s) - h * s, t[1])
+  );
+
+  zoom.translate(t);
+  g.attr("transform", "translate(" + t + ")scale(" + s + ")");
+
+  //adjust the country hover stroke width based on zoom level
+  d3.selectAll(".country").style("stroke-width", 1.5 / s);
+
 }
 
 
 
+var throttleTimer;
+function throttle() {
+  window.clearTimeout(throttleTimer);
+    throttleTimer = window.setTimeout(function() {
+      redraw();
+    }, 200);
+}
 
 
+//geo translation on mouse click in map
+function click() {
+  var latlon = projection.invert(d3.mouse(this));
+  console.log(latlon);
+}
 
 
+//function to add points and text to the map (used in plotting capitals)
+function addpoint(lat,lon,text) {
+
+  var gpoint = g.append("g").attr("class", "gpoint");
+  var x = projection([lat,lon])[0];
+  var y = projection([lat,lon])[1];
+
+  gpoint.append("svg:circle")
+        .attr("cx", x)
+        .attr("cy", y)
+        .attr("class","point")
+        .attr("r", 1.5)
+
+  //conditional in case a point has no associated text
+  if(text.length>0){
+
+    gpoint.append("text")
+          .attr("x", x+2)
+          .attr("y", y+2)
+          .attr("class","text")
+          .text(text)
+          .on("mouseover", function(){return tooltip.style("visibility", "visible").text("( " + x + ", " + y + ")");})
+	  	  .on("mousemove", function(){return tooltip.style("top",
+      	  	(d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");})
+          .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
+  }
 
 
-
-
+}
