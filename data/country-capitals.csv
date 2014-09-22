@@ -1,4 +1,4 @@
-CountryName,CapitalName,CapitalLatitude,CapitalLongitude,CountryCode,ContinentName
+CountryName,name,CapitalLatitude,CapitalLongitude,CountryCode,ContinentName
 Brazil,Brasilia,-15.783333333333333,-47.916667,BR,South America
 Colombia,Bogota,4.6,-74.083333,CO,South America
 Egypt,Cairo,30.05,31.250000,EG,Africa

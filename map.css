@@ -1,0 +1,17 @@
+#map { 
+	position:absolute; 
+	top:0; 
+	bottom:0; 
+	width:100%; 
+}
+
+.text {
+	font-size:7px;
+}
+
+
+path {
+	stroke: red;
+	stroke-width: 2px;
+	fill: grey;
+}

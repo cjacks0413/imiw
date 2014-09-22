@@ -1,168 +1,52 @@
-d3.select(window).on("resize", throttle);
+L.mapbox.accessToken = 'pk.eyJ1IjoiY2phY2tzMDQiLCJhIjoiVFNPTXNrOCJ9.k6TnctaSxIcFQJWZFg0CBA';
+var map = L.mapbox.map('map', 'cjacks04.jij42jel')
+    .setView([31, 35], 4);
 
-var zoom = d3.behavior.zoom()
-    .scaleExtent([1, 9])
-    .on("zoom", move);
+var svg = d3.select(map.getPanes().overlayPane).append("svg"),
+    g = svg.append("g").attr("class", "leaflet-zoom-hide");
+
+d3.json("data/03_Iraq.geojson", function(collection) {
+	var transform = d3.geo.transform({point: projectPoint}),
+	path = d3.geo.path().projection(transform);
+	var feature = g.selectAll("path")
+				   .data(collection.features)
+				   .enter().append("path");
+	
+	map.on("viewreset", reset);
+	reset();
+	
+	// Reposition the SVG to cover the features.
+	function reset() {
+		var bounds = path.bounds(collection),
+		topLeft = bounds[0],
+		bottomRight = bounds[1];
+		svg.attr("width", bottomRight[0] - topLeft[0])
+			.attr("height", bottomRight[1] - topLeft[1])
+			.style("left", topLeft[0] + "px")
+			.style("top", topLeft[1] + "px");
+		g.attr("transform", "translate(" + -topLeft[0] + "," + -topLeft[1] + ")");
+		feature.attr("d", path);
+	}
 
 
-var width = document.getElementById('container').offsetWidth;
-var height = width / 2;
+}); 
 
-var topo, projection, path, svg, g;
-var zoomStart = 0; 
-
-var tooltip = d3.select("body")
-    .append("div")
-    .style("position", "absolute")
-    .style("z-index", "10")
-    .style("visibility", "hidden")
-    .text("a simple tooltip");
-
-// var tooltip = d3.select("#container").append("div").attr("class", "tooltip hidden");
-
-setup(width,height);
-
-function setup(width,height){
-  projection = d3.geo.mercator()
-  	.center([31, 33])
-    .translate([(width/2), (height/2)])
-    .scale(width / Math.PI);
-    //.scale( width / 2 / Math.PI);
-
-  path = d3.geo.path().projection(projection);
-
-  svg = d3.select("#container").append("svg")
-      .attr("width", width)
-      .attr("height", height)
-      .call(zoom)
-      .on("click", click)
-      .append("g");
-
-  g = svg.append("g");
-
+function projectPoint(x, y) {
+		var point = map.latLngToLayerPoint(new L.LatLng(y, x));
+		this.stream.point(point.x, point.y);
 }
 
-d3.json("data/world-topo-min.json", function(error, world) {
-
-  var countries = topojson.feature(world, world.objects.countries).features;
-
-  topo = countries;
-  draw(topo);
-
-});
-
-function draw(topo) {
-
-  g.append("path")
-   .datum({type: "LineString", coordinates: [[-180, 0], [-90, 0], [0, 0], [90, 0], [180, 0]]})
-   .attr("class", "equator")
-   .attr("d", path);
-
-
-  var country = g.selectAll(".country").data(topo);
-
-  country.enter().insert("path")
-      .attr("class", "country")
-      .attr("d", path)
-      .attr("id", function(d,i) { return d.id; })
-      .attr("title", function(d,i) { return d.properties.name; }); 
-      
-
-  //EXAMPLE: adding some capitals from external CSV file
-  d3.csv("data/country-capitals.csv", function(err, capitals) {
-
-    capitals.forEach(function(i){
-      addpoint(i.CapitalLongitude, i.CapitalLatitude, i.CapitalName );
-    });
-
-  });
-
-  //offsets for tooltips
-  var offsetL = document.getElementById('container').offsetLeft+20;
-  var offsetT = document.getElementById('container').offsetTop+10;
-
-}
-
-
-function redraw() {
-  width = document.getElementById('container').offsetWidth;
-  height = width / 2;
-  d3.select('svg').remove();
-  setup(width,height);
-  draw(topo);
-}
-
-
-function move() {
-
-  var t = d3.event.translate;
-  var s = d3.event.scale; 
-  zscale = s;
-  var h = height/4;
-
-
-  t[0] = Math.min(
-    (width/height)  * (s - 1), 
-    Math.max( width * (1 - s), t[0] )
-  );
-
-  t[1] = Math.min(
-    h * (s - 1) + h * s, 
-    Math.max(height  * (1 - s) - h * s, t[1])
-  );
-
-  zoom.translate(t);
-  g.attr("transform", "translate(" + t + ")scale(" + s + ")");
-
-  //adjust the country hover stroke width based on zoom level
-  d3.selectAll(".country").style("stroke-width", 1.5 / s);
-
-}
+omnivore.csv("data/country-capitals.csv")
+		.on('ready', function(layer) {
+			this.eachLayer(function(marker) {
+				marker.setIcon(L.mapbox.marker.icon ({
+					'marker-color' : "#ff8888",
+					'marker-size': 'medium'
+				}));
+				marker.bindPopup(marker.toGeoJSON().properties.name); 
+			}); 
+		})
+		.addTo(map); 
 
 
 
-var throttleTimer;
-function throttle() {
-  window.clearTimeout(throttleTimer);
-    throttleTimer = window.setTimeout(function() {
-      redraw();
-    }, 200);
-}
-
-
-//geo translation on mouse click in map
-function click() {
-  var latlon = projection.invert(d3.mouse(this));
-  console.log(latlon);
-}
-
-
-//function to add points and text to the map (used in plotting capitals)
-function addpoint(lat,lon,text) {
-
-  var gpoint = g.append("g").attr("class", "gpoint");
-  var x = projection([lat,lon])[0];
-  var y = projection([lat,lon])[1];
-
-  gpoint.append("svg:circle")
-        .attr("cx", x)
-        .attr("cy", y)
-        .attr("class","point")
-        .attr("r", 1.5)
-
-  //conditional in case a point has no associated text
-  if(text.length>0){
-
-    gpoint.append("text")
-          .attr("x", x+2)
-          .attr("y", y+2)
-          .attr("class","text")
-          .text(text)
-          .on("mouseover", function(){return tooltip.style("visibility", "visible").text("( " + x + ", " + y + ")");})
-	  	  .on("mousemove", function(){return tooltip.style("top",
-      	  	(d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");})
-          .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
-  }
-
-
-}
