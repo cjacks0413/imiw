@@ -13,5 +13,14 @@
 path {
 	stroke: red;
 	stroke-width: 2px;
-	fill: grey;
+}
+
+.site-icon {
+  background: black;
+  border:5px solid rgba(255,255,255,0.5);
+  color: black;
+  font-weight:bold;
+  text-align:center;
+  border-radius:50%;
+  line-height:30px;
 }

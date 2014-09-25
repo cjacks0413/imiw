@@ -36,12 +36,12 @@ function projectPoint(x, y) {
 		this.stream.point(point.x, point.y);
 }
 
-omnivore.csv("data/country-capitals.csv")
+omnivore.csv("data/cornu_all.csv")
 		.on('ready', function(layer) {
 			this.eachLayer(function(marker) {
-				marker.setIcon(L.mapbox.marker.icon ({
-					'marker-color' : "#ff8888",
-					'marker-size': 'medium'
+				marker.setIcon(L.divIcon ({
+					className: 'site-icon', 
+					iconSize: [5, 5]
 				}));
 				marker.bindPopup(marker.toGeoJSON().properties.name); 
 			}); 
