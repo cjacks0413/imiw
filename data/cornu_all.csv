@@ -7,7 +7,6 @@ cornu1,31.93113,35.91903,عمان,ʿAmmān,ʿAmmān,Amman,towns,AMMAN_359N319E_C
 cornu1,36.38345,36.47102,عمق,ʿAmq,ʿAmq,Amq,waystations,AMQ_364N363E_C01
 cornu1,33.88074,36.18816,عقبة الرمان,ʿAqabaŧ al-Rummān ?,ʿAqabat al-Rummān ?,Aqabat al-Rumman ?,waystations,AQABARUMMAN_361N338E_C01
 cornu1,33.86315,35.89165,عرجموش,ʿArǧamūš,ʿArjamūsh,Arjamush,towns,ARJAMUSH_358N338E_C01
-cornu1,30.08115,35.19579,عرندل,ʿArandal,ʿArandal,Arandal,towns,ARANDAL_351N300E_C01
 cornu1,34.52991,36.07300,عرقة,ʿArqaŧ,ʿArqa,Arqa,towns,ARQA_360N345E_C01
 cornu1,31.66572,34.55455,عسقلان,ʿAsqalān,ʿAsqalān,Asqalan,towns,ASQALAN_345N316E_C01
 cornu1,33.72730,35.90422,عين الجر,ʿAyn al-Ǧarr,ʿAyn al-Jarr,Ayn al-Jarr,waystations,AYNJARR_359N337E_C01
@@ -46,6 +45,7 @@ cornu1,34.44044,35.85194,أطرابلس|طرابلس,Aṭrābulus/Ṭarābulus,A
 cornu1,36.96023,35.34272,أذنة,Aḏanaŧ,Adhana,Adhana,sites,ADHANA_353N369E_C01
 cornu1,30.33962,35.75502,أذروح,Aḏrūḥ,Adhrūḥ,Adhruh,capitals,ADHRUH_357N303E_C01
 cornu1,32.61046,36.09087,أذرعات,Aḏriʿāt,Adhriʿāt,Adhriat,capitals,ADHRIAT_360N326E_C01
+cornu1,31.12453,33.80807,العريش,al-ʿArīš,al-ʿArīsh,al-Arish,towns,ARISH_338N311E_C01
 cornu1,33.50849,36.44363,الغوطة,al-Ġūṭaŧ,al-Ghūṭa,al-Ghuta,regions,GHUTA_364N335E_C01
 cornu1,31.86882,35.48149,الغور,al-Ġawr,al-Ghawr,al-Ghawr,sites,GHAWR_354N318E_C01
 cornu1,32.65059,36.73153,الحوران,al-Ḥawrān,al-Ḥawrān,al-Hawran,regions,HAWRAN_367N326E_C01
@@ -79,7 +79,7 @@ cornu1,35.06025,37.57892,القسطل,al-Qasṭal,al-Qasṭal,al-Qastal,waystati
 cornu1,33.74546,36.60247,القطيفة,al-Quṭayyifaŧ,al-Quṭayyifa,al-Qutayyifa,waystations,QUTAYYIFA_366N337E_C01
 cornu1,31.92484,34.86436,الرملة,al-Ramlaŧ,al-Ramla,al-Ramla,capitals,RAMLA_348N319E_C01
 cornu1,31.89279,35.96419,الرقيم|الرقم,al-Raqīm/al-Raqam,al-Raqīm/al-Raqam,al-Raqim/al-Raqam,villages,RAQIM_359N318E_C01
-cornu1,35.64344,38.78470,الرصافة,al-Ruṣāfaŧ,al-Ruṣāfa,al-Rusafa,waystations,RUSAFA_387N356E_C01
+cornu1,35.60242,38.77933,الرصافة,al-Ruṣāfaŧ,al-Ruṣāfa,al-Rusafa,waystations,RUSAFA_387N356E_C01
 cornu1,31.56416,34.65335,السكرية,al-Sukkariyyaŧ ?,al-Sukkariyya ?,al-Sukkariyya ?,villages,SUKKARIYYA_346N315E_C01
 cornu1,36.08960,35.99387,السويدية,al-Suwaydiyyaŧ,al-Suwaydiyya,al-Suwaydiyya,towns,SUWAYDIYYA_359N360E_C01
 cornu1,32.07029,36.08689,الزرقاء,al-Zarqāʾ ?,al-Zarqāʾ ?,al-Zarqa ?,waystations,ZARQA_360N320E_C01
@@ -87,7 +87,6 @@ cornu1,36.19718,36.18418,أنطاكية,Anṭākiyyaŧ,Anṭākiyya,Antakiyya,to
 cornu1,34.89985,35.90356,أنطرطوس|أنطرسوس|طرطوس,Anṭarṭūs/Anṭarsūs/Ṭarṭūs,Anṭarṭūs/Anṭarsūs/Ṭarṭūs,Antartus/Antarsus/Tartus,towns,ANTARTUS_359N348E_C01
 cornu1,34.35634,35.73678,أنفة,Anafaŧ,Anafa,Anafa,towns,ANAFA_357N343E_C01
 cornu1,32.19588,34.80739,أرسوف,Arsūf,Arsūf,Arsuf,towns,ARSUF_348N321E_C01
-cornu1,29.54282,34.93982,أيلة|ويلة,Aylaŧ/Waylaŧ,Aylat/Wayla,Ayla/Wayla,towns,AYLA_349N295E_C01
 cornu1,31.79837,34.66817,أزدود|يزدود,Azdūd/Yazdūd,Azdūd/Yazdūd,Azdud/Yazdud,sites,AZDUD_346N317E_C01
 cornu1,36.02806,38.09005,بالس,Bālis,Bālis,Balis,towns,BALIS_380N360E_C01
 cornu1,33.25150,35.67787,بانياس,Bāniyās,Bāniyās,Baniyas,towns,BANIYAS_356N332E_C01
@@ -105,7 +104,6 @@ cornu1,36.75139,36.23856,بياس,Bayyās,Bayyās,Bayyas,towns,BAYYAS_362N367E_C
 cornu1,32.80982,35.57727,بحيرة طبرية,Buḥayraŧ Ṭabariyyaŧ,Buḥayrat Ṭabariyya,Buhayrat Tabariyya,waters,BUHAYRATABARIYYA_355N328E_C01
 cornu1,31.38450,35.46173,بحيرة المنتنة|بحيرة المقلوبة|بحيرة الميتة|بحيرة الصغر,Buḥayraŧ al-Muntinaŧ/Buḥayraŧ al-Maqlūbaŧ/Buḥayraŧ al-Miyyataŧ/Buḥayraŧ al-Ṣuġar,Buḥayrat al-Muntinat/Buḥayrat al-Maqlūbat/Buḥayrat al-Miyyatat/Buḥayrat al-Ṣughar,Buhayrat al-Muntina/Buhayrat al-Maqluba/Buhayrat al-Miyyata/Buhayrat al-Sughar,waters,BUHAYRAMUNTINA_354N313E_C01
 cornu1,33.06755,35.59845,بحيرة قدس,Buḥayraŧ Qadas,Buḥayrat Qadas,Buhayrat Qadas,waters,BUHAYRAQADAS_355N330E_C01
-cornu1,32.50000,36.47474,بصرى,Buṣrá,Buṣrā,Busra,towns,BUSRA_364N325E_C01
 cornu1,35.18256,35.97212,بلنياس,Bulunyās ?,Bulunyās ?,Bulunyas ?,towns,BULUNYAS_359N351E_C01
 cornu1,33.46544,36.23184,داريا,Dārayyā,Dārayyā,Darayya,villages,DARAYYA_362N334E_C01
 cornu1,35.92575,38.49243,دوسر,Dawsar,Dawsar,Dawsar,waystations,DAWSAR_384N359E_C01
@@ -235,9 +233,7 @@ cornu2,35.79513,42.69628,الحضر,al-Ḥaḍr,al-Ḥaḍr,al-Hadr,temp,HADR_42
 cornu2,35.62554,43.32428,البقيعة,al-Baqīʿaŧ ?,al-Baqīʿa ?,al-Baqia ?,temp,BAQIA_433N356E_C02
 cornu2,35.26076,43.46591,السن,al-Sinn,al-Sinn,al-Sinn,temp,SINN_434N352E_C02
 cornu2,35.64182,44.10965,زاب الصغير,Zāb al-Ṣaġīr,Zāb al-Ṣaghīr,Zab al-Saghir,river,ZABSAGHIR_441N356E_C02
-cornu2,36.21078,37.17358,حلب,Ḥalab,Ḥalab,Halab,temp,HALAB_371N362E_C02
 cornu2,36.54651,37.98957,منبج,Manbiǧ,Manbij,Manbij,temp,MANBIJ_379N365E_C02
-cornu2,36.07390,38.05257,بالس,Bālis,Bālis,Balis,temp,BALIS_380N360E_C02
 cornu2,36.67173,38.22057,جسر منبج,Ǧisr Manbiǧ,Jisr Manbij,Jisr Manbij,temp,JISRMANBIJ_382N366E_C02
 cornu2,36.97910,38.43806,سروج,Sarūǧ,Sarūj,Saruj,temp,SARUJ_384N369E_C02
 cornu2,36.69218,38.72906,تل عبدا,Tall ʿAbdā ?,Tall ʿAbdā ?,Tall Abda ?,temp,TALLABDA_387N366E_C02
@@ -325,12 +321,12 @@ cornu2,38.18191,40.42465,وادي الرمس,Wādī al-Rams,Wādī al-Rams,Wadi 
 cornu2,38.14322,41.00798,ميافارقين,Mayyāfāriqīn,Mayyāfāriqīn,Mayyafariqin,temp,MAYYAFARIQIN_410N381E_C02
 cornu2,38.75648,41.48709,موش,Mūš,Mūsh,Mush,temp,MUSH_414N387E_C02
 cornu2,38.39550,42.13266,بدليس,Badlīs,Badlīs,Badlis,temp,BADLIS_421N383E_C02
-cornu2,38.76551,42.51044,خلاط,Ḫilāṭ,Khilāṭ,Khilat,temp,KHILAT_425N387E_C02
+cornu2,38.76551,42.51044,أخلاط|خلاط,Aḫlāṭ/Ḫilāṭ,Akhlāṭ/Khilāṭ,Akhlat/Khilat,temp,AKHLAT_425N387E_C02
 cornu2,39.05271,38.53819,قلعة إبريق,Qalʿaŧ Ibrīq,Qalʿat Ibrīq,Qalat Ibriq,temp,QALAIBRIQ_385N390E_C02
 cornu2,39.58627,39.02492,كمخ,Kamaḫ,Kamakh,Kamakh,temp,KAMAKH_390N395E_C02
 cornu2,40.32189,38.49484,قلونية العوفي,Qalūniyaŧ al-ʿAwfī,Qalūniyat al-ʿAwfī,Qaluniyat al-Awfi,temp,QALUNIYAAWFI_384N403E_C02
 cornu2,39.91956,41.27233,قاليقلا,Qālīqalā,Qālīqalā,Qaliqala,temp,QALIQALA_412N399E_C02
-cornu2,39.39009,41.69403,سن نحاس,Sinn Nuḥās,Sinn Nuḥās,Sinn Nuhas,temp,SINNNUHAS_416N393E_C02
+cornu2,39.39009,41.69403,سن نحاس|باجنيس,Sinn Nuḥās/Bāǧunays,Sinn Nuḥās/Bājunays,Sinn Nuhas/Bajunays,temp,SINNNUHAS_416N393E_C02
 cornu2,39.14370,42.55713,ملازكرد,Malāzkird,Malāzkird,Malazkird,temp,MALAZKIRD_425N391E_C02
 cornu2,34.26758,42.13480,crossroads,RoutPoint0201,RoutPoint0201,RoutPoint0201,rPoint,ROUTPOINT_421N342E_C02
 cornu2,34.39315,41.61558,crossroads,RoutPoint0202,RoutPoint0202,RoutPoint0202,rPoint,ROUTPOINT_416N343E_C02
@@ -395,7 +391,8 @@ cornu3,32.17087,46.59233,باذبين,Bāḏibīn ?,Bādhibīn ?,Badhibin ?,town
 cornu3,32.54047,46.46676,نهر دجلة,Nahr Diǧlaŧ,Nahr Dijla,Nahr Dijla,river,NAHRDIJLA_464N325E_C03
 cornu3,32.19607,46.77226,السكر,al-Sikr ?,al-Sikr ?,al-Sikr ?,towns,SIKR_467N321E_C03
 cornu3,32.94441,46.46935,باكسايا,Bākusāyā,Bākusāyā,Bakusaya,regions,BAKUSAYA_464N329E_C03
-cornu3,32.16539,47.67579,قرقوب,Qurqūb ?,Qurqūb ?,Qurqub ?,towns,QURQUB_476N321E_C03
+cornu3,32.22674,47.30428,الطيب,al-Ṭīb,al-Ṭīb,al-Tib,towns,TIB_473N322E_C03
+cornu3,32.17254,47.70188,قرقوب,Qurqūb ?,Qurqūb ?,Qurqub ?,towns,QURQUB_477N321E_C03
 cornu3,33.82317,42.61179,الناوسة,al-Nāwusaŧ,al-Nāwusa,al-Nawusa,waystations,NAWUSA_426N338E_C03
 cornu3,33.64370,42.80628,هيت,Hīt,Hīt,Hit,towns,HIT_428N336E_C03
 cornu3,33.46273,43.26055,الرب,al-Rabb,al-Rabb,al-Rabb,villages,RABB_432N334E_C03
@@ -428,7 +425,6 @@ cornu3,33.94151,44.92310,دسكرة,Daskaraŧ,Daskara,Daskara,towns,DASKARA_449N
 cornu3,33.97686,45.01502,الهاروني|طرستان,al-Hārūniyya/Ṭarastān,al-Hārūniyya/Ṭarastān,al-Haruniyya/Tarastan,towns,HARUNIYYA_450N339E_C03
 cornu3,33.71797,45.48927,بندنيجان|بندنيجين,Bandanīǧān/Bandanīǧīn,Bandanījān/Bandanījīn,Bandanijan/Bandanijin,towns,BANDANIJAN_454N337E_C03
 cornu3,33.09968,45.93688,بادرايا,Bādarāyā ?,Bādarāyā ?,Badaraya ?,regions,BADARAYA_459N330E_C03
-cornu3,33.56159,46.82277,السيروان | شروان,al-Sīrawān / Širwān,al-Sīrawān / Shirwān,al-Sirawan / Shirwan,towns,SIRAWAN_468N335E_C03
 cornu3,34.81448,43.60292,السودقانية,al-Sūdaqāniyyaŧ,al-Sūdaqāniyya,al-Sudaqaniyya,waystations,SUDAQANIYYA_436N348E_C03
 cornu3,34.62614,43.72814,جبلتا,Ǧabiltā,Jabiltā,Jabilta,waystations,JABILTA_437N346E_C03
 cornu3,34.59215,43.69617,تكريت,Takrīt,Takrīt,Takrit,towns,TAKRIT_436N345E_C03
@@ -439,9 +435,9 @@ cornu3,34.93688,43.88401,جبل بارما,Ǧabal Bārimmā,Jabal Bārimmā,Jaba
 cornu3,34.09388,43.98259,القادسية,al-Qādisiyyaŧ,al-Qādisiyya,al-Qadisiyya,waystations,QADISIYYA_439N340E_C03
 cornu3,34.02656,44.08916,علث | العلث,ʿAlṯ / al-ʿAlṯ,ʿAlth / al-ʿAlth,Alth / al-Alth,towns,ALTH_440N340E_C03
 cornu3,34.17989,45.11759,جلولا,Ǧalūlā,Jalūlā,Jalula,towns,JALULA_451N341E_C03
-cornu3,34.34394,45.38669,خانقين,Ḫāniqīn,Khāniqīn,Khaniqin,towns,KHANIQIN_453N343E_C03
-cornu3,34.51206,45.57453,قصر شيرين,Qaṣr Šīrīn,Qaṣr Shīrīn,Qasr Shirin,villages,QASRSHIRIN_455N345E_C03
-cornu3,34.47692,45.85828,حلوان,Ḥulwān,Ḥulwān,Hulwan,capitals,HULWAN_458N344E_C03
+cornu3,34.34844,45.44708,خانقين,Ḫāniqīn,Khāniqīn,Khaniqin,towns,KHANIQIN_454N343E_C03
+cornu3,34.49996,45.62659,قصر شيرين,Qaṣr Šīrīn,Qaṣr Shīrīn,Qasr Shirin,villages,QASRSHIRIN_456N344E_C03
+cornu3,34.47862,45.93468,حلوان,Ḥulwān,Ḥulwān,Hulwan,capitals,HULWAN_459N344E_C03
 cornu3,35.07982,43.57361,بارما,Bārimmā,Bārimmā,Barimma,waystations,BARIMMA_435N350E_C03
 cornu3,35.13976,44.46217,دقوقاء,Daqūqāʾ,Daqūqāʾ,Daquqa,villages,DAQUQA_444N351E_C03
 cornu3,32.59694,45.42650,النعمانية | تل نعمان,al-Nuʿmāniyyaŧ / Tall Nuʿmān,al-Nuʿmāniyyat / Tall Nuʿmān,al-Numaniyya / Tall Numan,towns,NUMANIYYA_454N325E_C03
@@ -461,7 +457,6 @@ cornu4,30.96763,49.80777,الخابران,al-Ḫābarān ?,al-Khābarān ?,al-Kh
 cornu4,30.88498,49.83759,الجايزن,al-Ǧāyzan,al-Jāyzan,al-Jayzan,temp,JAYZAN_498N308E_C04
 cornu4,30.77763,49.97179,دهليزان,Dahlīzān,Dahlīzān,Dahlizan,temp,DAHLIZAN_499N307E_C04
 cornu4,30.72440,50.14499,سنبيل,Sanbīl ?,Sanbīl ?,Sanbil ?,temp,SANBIL_501N307E_C04
-cornu4,30.66423,50.23446,أرجان,Arraǧān,Arrajān,Arrajan,temp,ARRAJAN_502N306E_C04
 cornu4,31.46790,48.38090,نهر تيرا,Nahr Tīrā,Nahr Tīrā,Nahr Tira,temp,NAHRTIRA_483N314E_C04
 cornu4,31.39058,48.53345,مناذر,Manāḏir,Manādhir,Manadhir,regions,MANADHIR_485N313E_C04
 cornu4,31.32986,48.69059,الأهواز,al-Ahwāz,al-Ahwāz,al-Ahwaz,temp,AHWAZ_486N313E_C04
@@ -484,12 +479,9 @@ cornu4,31.47670,50.23675,جسر جهنم,Ǧisr Ǧahannam,Jisr Jahannam,Jisr Jaha
 cornu4,31.71801,50.29984,رستجرد|الدز,Rustaǧird/al-Diz,Rustajird/al-Diz,Rustajird/al-Diz,temp,RUSTAJIRD_502N317E_C04
 cornu4,31.53831,50.73914,لوردكان,Lūrdikān,Lūrdikān,Lurdikan,temp,LURDIKAN_507N315E_C04
 cornu4,31.93047,50.60379,بوين,Buwayn,Buwayn,Buwayn,temp,BUWAYN_506N319E_C04
-cornu4,32.26279,47.32451,الطيب,al-Ṭīb,al-Ṭīb,al-Tib,temp,TIB_473N322E_C04
-cornu4,32.17254,47.70188,قرقوب,Qurqūb ?,Qurqūb ?,Qurqub ?,temp,QURQUB_477N321E_C04
 cornu4,32.06082,47.90375,بيروت,Bayrūt ?,Bayrūt ?,Bayrut ?,temp,BAYRUT_479N320E_C04
 cornu4,32.16186,48.20426,نهر سوس,Nahr Sūs,Nahr Sūs,Nahr Sus,river,NAHRSUS_482N321E_C04
 cornu4,32.46817,48.14577,كرجة,Karǧaŧ,Karja,Karja,temp,KARJA_481N324E_C04
-cornu4,32.99018,48.25473,الدز,al-Diz,al-Diz,al-Diz,temp,DIZ_482N329E_C04
 cornu4,32.53782,48.30291,اللور,al-Lūr,al-Lūr,al-Lur,regions,LUR_483N325E_C04
 cornu4,32.38975,48.42219,الدز,al-Diz,al-Diz,al-Diz,temp,DIZ_484N323E_C04
 cornu4,32.20166,48.26047,سوس,Sūs,Sūs,Sus,temp,SUS_482N322E_C04
@@ -500,22 +492,13 @@ cornu4,32.09289,50.84351,سوجر,Sawǧar,Sawjar,Sawjar,temp,SAWJAR_508N320E_C04
 cornu4,32.01123,51.21056,رباط باركان,Ribāṭ Bārakān,Ribāṭ Bārakān,Ribat Barakan,temp,RIBATBARAKAN_512N320E_C04
 cornu4,32.13467,51.18532,أسبيذ دشت,Asbīḏ Dašt,Asbīdh Dasht,Asbidh Dasht,temp,ASBIDHDASHT_511N321E_C04
 cornu4,32.40331,51.56268,خان لنجان,Ḫān Lanǧān,Khān Lanjān,Khan Lanjan,temp,KHANLANJAN_515N324E_C04
-cornu4,32.66634,51.66477,إصبهان,Iṣbahān,Iṣbahān,Isbahan,temp,ISBAHAN_516N326E_C04
 cornu4,32.19102,48.22336,crossroads,RoutPoint0401,RoutPoint0401,RoutPoint0401,rPoint,ROUTPOINT_482N321E_C04
 cornu4,31.28389,49.70340,crossroads,RoutPoint0402,RoutPoint0402,RoutPoint0402,rPoint,ROUTPOINT_497N312E_C04
-cornu5,31.29161,48.72048,الأهواز,al-Ahwāz,al-Ahwāz,al-Ahwaz,temp,AHWAZ_487N312E_C05
-cornu5,31.22746,49.60608,رام هرمز,Rām Hurmuz,Rām Hurmuz,Ram Hurmuz,temp,RAMHURMUZ_496N312E_C05
-cornu5,31.89254,54.35766,يزد|كثة,Yazd/Kaṯaŧ,Yazd/Katha,Yazd/Katha,temp,YAZD_543N318E_C05
-cornu5,33.34455,44.36753,بغداد,Baġdād,Baghdād,Baghdad,temp,BAGHDAD_443N333E_C05
-cornu5,33.52303,46.86539,السراوان,al-Sirāwān,al-Sirāwān,al-Sirawan,temp,SIRAWAN_468N335E_C05
+cornu5,33.52303,46.86539,السيروان | الشيراوان,al-Sīrawān / al-Šīrāwān,al-Sīrawān / al-Shīrāwān,al-Sirawan / al-Shirawan,temp,SIRAWAN_468N335E_C05
 cornu5,33.58473,46.92023,ماسبذان,Māsabaḏān,Māsabadhān,Masabadhan,regions,MASABADHAN_469N335E_C05
 cornu5,33.20013,47.52071,مهرجانقذق,Mihrǧānqaḏaq,Mihrjānqadhaq,Mihrjanqadhaq,regions,MIHRJANQADHAQ_475N332E_C05
 cornu5,33.14964,47.40829,الصيمرة,al-Ṣaymaraŧ,al-Ṣaymara,al-Saymara,temp,SAYMARA_474N331E_C05
-cornu5,32.39577,48.42553,قنطرة أندامش,Qanṭaraŧ Andāmiš,Qanṭarat Andāmish,Qantarat Andamish,temp,QANTARAANDAMISH_484N323E_C05
-cornu5,32.28689,48.55166,جنديسابور,Ǧundaysābūr,Jundaysābūr,Jundaysabur,temp,JUNDAYSABUR_485N322E_C05
-cornu5,32.05015,48.87520,تستر,Tustar,Tustar,Tustar,temp,TUSTAR_488N320E_C05
 cornu5,32.98650,48.45021,الدز,al-Diz ?,al-Diz ?,al-Diz ?,temp,DIZ_484N329E_C05
-cornu5,32.17092,48.27473,سوس,Sūs,Sūs,Sus,temp,SUS_482N321E_C05
 cornu5,33.86750,48.25553,لاشتر,Lāštar,Lāshtar,Lashtar,temp,LASHTAR_482N338E_C05
 cornu5,33.49102,48.36521,سابورخشت,Sābūrḫašt,Sābūrkhasht,Saburkhasht,temp,SABURKHASHT_483N334E_C05
 cornu5,33.44757,48.75730,دارقان,Dāraqān,Dāraqān,Daraqan,temp,DARAQAN_487N334E_C05
@@ -527,9 +510,6 @@ cornu5,33.62812,50.05422,أبتعة,Abtiʿaŧ,Abtiʿa,Abtia,temp,ABTIA_500N336E_
 cornu5,33.38120,50.29276,جرباذقان,Ǧarbāḏaqān,Jarbādhaqān,Jarbadhaqan,temp,JARBADHAQAN_502N333E_C05
 cornu5,33.23683,50.65469,قنوان,Qanūwān,Qanūwān,Qanuwan,temp,QANUWAN_506N332E_C05
 cornu5,33.08994,50.95356,مرج وزهر,Marǧ wa-Zahr,Marj wa-Zahr,Marj wa-Zahr,temp,MARJWAZAHR_509N330E_C05
-cornu5,32.21037,51.06598,أسبيذ دشت,Asbīḏ Dašt,Asbīdh Dasht,Asbidh Dasht,temp,ASBIDHDASHT_510N322E_C05
-cornu5,32.34482,51.48274,خن لنجان,Ḫan Lanǧān,Khan Lanjān,Khan Lanjan,temp,KHANLANJAN_514N323E_C05
-cornu5,32.26139,51.76790,خان رش,Ḫān Ruš,Khān Rush,Khan Rush,temp,KHANRUSH_517N322E_C05
 cornu5,32.40272,51.72677,كروان,Karwān,Karwān,Karwan,regions,KARWAN_517N324E_C05
 cornu5,32.45826,51.91596,نهر زندروذ,Nahr Zandarūḏ,Nahr Zandarūdh,Nahr Zandarudh,river,NAHRZANDARUDH_519N324E_C05
 cornu5,32.66855,51.65000,إصبهان,Iṣbahān,Iṣbahān,Isbahan,temp,ISBAHAN_516N326E_C05
@@ -542,19 +522,13 @@ cornu5,33.07845,51.48549,رباط إبن رستم,Ribāṭ Ibn Rustam,Ribāṭ I
 cornu5,33.39951,51.46355,حصن بدرة,Ḥiṣn Badraŧ,Ḥiṣn Badra,Hisn Badra,temp,HISNBADRA_514N333E_C05
 cornu5,33.96762,51.50468,قاشان,Qāšān,Qāshān,Qashan,temp,QASHAN_515N339E_C05
 cornu5,33.55960,52.01467,باذ,Bāḏ,Bādh,Badh,temp,BADH_520N335E_C05
-cornu5,33.35830,52.36838,أردستان,Ardistān,Ardistān,Ardistan,temp,ARDISTAN_523N333E_C05
-cornu5,32.85070,53.07304,نئن,Naʾin,Naʾin,Nain,temp,NAIN_530N328E_C05
-cornu5,34.34879,45.44783,خانقين,Ḫāniqīn,Khāniqīn,Khaniqin,temp,KHANIQIN_454N343E_C05
-cornu5,34.50032,45.62606,قصر شيرين,Qaṣr Šīrīn,Qaṣr Shīrīn,Qasr Shirin,temp,QASRSHIRIN_456N345E_C05
-cornu5,34.47772,45.93589,حلوان,Ḥulwān,Ḥulwān,Hulwan,temp,HULWAN_459N344E_C05
 cornu5,34.43477,46.04283,ماذروستان,Māḏarwistān ?,Mādharwistān ?,Madharwistan ?,temp,MADHARWISTAN_460N344E_C05
 cornu5,34.30577,46.22379,المرج,al-Marǧ ?,al-Marj ?,al-Marj ?,temp,MARJ_462N343E_C05
 cornu5,34.16749,46.44040,الطزر,al-Ṭazar,al-Ṭazar,al-Tazar,temp,TAZAR_464N341E_C05
 cornu5,34.43457,46.93427,الزبيدية,al-Zubaydiyyaŧ !?,al-Zubaydiyyat !?,al-Zubaydiyya !?,temp,ZUBAYDIYYA_469N344E_C05
 cornu5,34.23099,46.85168,الزبيدية,al-Zubaydiyyaŧ ?!,al-Zubaydiyya ?!,al-Zubaydiyya ?!,temp,ZUBAYDIYYA_468N342E_C05
 cornu5,34.32388,47.09845,قرماسين,Qarmāsīn,Qarmāsīn,Qarmasin,temp,QARMASIN_470N343E_C05
-cornu5,35.38138,45.94412,شهرزور,Šahrazūr,Shahrazūr,Shahrazur,temp,SHAHRAZUR_459N353E_C05
-cornu5,35.29863,47.04910,سيسر,Sīsar,Sīsar,Sisar,temp,SISAR_470N352E_C05
+cornu5,35.25767,46.01676,شهرزور,Šahrazūr,Shahrazūr,Shahrazur,temp,SHAHRAZUR_460N352E_C05
 cornu5,34.60195,47.49055,دينور,Dīnawar,Dīnawar,Dinawar,temp,DINAWAR_474N346E_C05
 cornu5,34.37821,47.47958,بيستون,Bīsutūn,Bīsutūn,Bisutun,temp,BISUTUN_474N343E_C05
 cornu5,34.46868,47.65232,قنطرة النعمان,Qanṭaraŧ al-Nuʿmān ?,Qanṭarat al-Nuʿmān ?,Qantarat al-Numan ?,temp,QANTARANUMAN_476N344E_C05
@@ -589,23 +563,14 @@ cornu5,34.44607,51.11259,قرية المجوس,Qaryaŧ al-Maǧūs,Qaryat al-Maj�
 cornu5,34.92405,51.31000,كاج,Kāǧ,Kāj,Kaj,temp,KAJ_513N349E_C05
 cornu5,35.30758,50.77259,مشكوية,Maškūyaŧ,Mashkūya,Mashkuya,temp,MASHKUYA_507N353E_C05
 cornu5,35.41491,51.03856,قسطانة,Qusṭānaŧ,Qusṭāna,Qustana,temp,QUSTANA_510N354E_C05
-cornu5,35.62914,51.43887,الري,al-Rayy,al-Rayy,al-Rayy,temp,RAYY_514N356E_C05
 cornu5,35.30310,51.65000,دزا,Dizā,Dizā,Diza,temp,DIZA_516N353E_C05
 cornu5,35.24938,51.65000,ورمين,Waramīn #?,Waramīn #?,Waramin #?,temp,WARAMIN_516N352E_C05
 cornu5,35.08576,51.61984,دير الجص,Dayr al-Ǧiṣṣ,Dayr al-Jiṣṣ,Dayr al-Jiss,temp,DAYRJISS_516N350E_C05
 cornu5,35.75607,52.07774,دماوند,Dummāwand,Dummāwand,Dummawand,temp,DUMMAWAND_520N357E_C05
-cornu5,35.47522,53.38562,سمنان,Simnān,Simnān,Simnan,temp,SIMNAN_533N354E_C05
-cornu5,36.03151,53.77497,دمغان,Damġān,Damghān,Damghan,temp,DAMGHAN_537N360E_C05
-cornu5,36.67093,48.50775,زنجان,Zanǧān,Zanjān,Zanjan,temp,ZANJAN_485N366E_C05
 cornu5,36.45828,48.63061,سهرورد,Suhraward,Suhraward,Suhraward,temp,SUHRAWARD_486N364E_C05
-cornu5,36.05502,49.32797,أبهر,Abhar,Abhar,Abhar,temp,ABHAR_493N360E_C05
-cornu5,36.27854,50.00110,قزوين,Qazwīn,Qazwīn,Qazwin,temp,QAZWIN_500N362E_C05
-cornu5,36.45828,52.36140,آمل,Āmul,Āmul,Amul,temp,AMUL_523N364E_C05
-cornu5,35.32503,45.96582,crossroads,RoutPoint0501,RoutPoint0501,RoutPoint0501,rPoint,ROUTPOINT_459N353E_C05
 cornu5,35.67123,49.24766,crossroads,RoutPoint0502,RoutPoint0502,RoutPoint0502,rPoint,ROUTPOINT_492N356E_C05
 cornu5,35.49041,49.11483,crossroads,RoutPoint0503,RoutPoint0503,RoutPoint0503,rPoint,ROUTPOINT_491N354E_C05
 cornu5,35.28295,51.10802,crossroads,RoutPoint0504,RoutPoint0504,RoutPoint0504,rPoint,ROUTPOINT_511N352E_C05
-cornu5,34.85236,50.71791,crossroads,RoutPoint0505,RoutPoint0505,RoutPoint0505,rPoint,ROUTPOINT_507N348E_C05
 cornu5,32.79657,51.71485,crossroads,RoutPoint0506,RoutPoint0506,RoutPoint0506,rPoint,ROUTPOINT_517N327E_C05
 cornu5,32.61096,51.66347,crossroads,RoutPoint0508,RoutPoint0508,RoutPoint0508,rPoint,ROUTPOINT_516N326E_C05
 cornu5,34.48350,48.61600,crossroads,RoutPoint0509,RoutPoint0509,RoutPoint0509,rPoint,ROUTPOINT_486N344E_C05
@@ -763,8 +728,6 @@ cornu6,29.91949,59.96927,إسبيذ,Isbīḏ,Isbīdh,Isbidh,temp,ISBIDH_599N299E
 cornu6,29.20052,58.17433,درجين,Darǧīn,Darjīn,Darjin,temp,DARJIN_581N292E_C06
 cornu6,29.70224,58.03255,نشك,Našk,Nashk,Nashk,temp,NASHK_580N297E_C06
 cornu6,29.71534,58.26785,كشيد,Kašīd,Kashīd,Kashid,temp,KASHID_582N297E_C06
-cornu6,31.31565,48.78526,الأهواز,al-Ahwāz,al-Ahwāz,al-Ahwaz,temp,AHWAZ_487N313E_C06
-cornu6,31.26226,49.65209,رام هرمز,Rām Hurmuz,Rām Hurmuz,Ram Hurmuz,temp,RAMHURMUZ_496N312E_C06
 cornu6,30.25118,49.70675,هندوان,Hinduwān,Hinduwān,Hinduwan,temp,HINDUWAN_497N302E_C06
 cornu6,30.61030,50.29766,أراجان,Arrāǧān,Arrājān,Arrajan,temp,ARRAJAN_502N306E_C06
 cornu6,30.99710,50.42781,سردان,Sardān,Sardān,Sardan,regions,SARDAN_504N309E_C06
@@ -843,19 +806,7 @@ cornu6,31.68852,58.52604,نيمة,Nīmaŧ ?,Nīma ?,Nima ?,temp,NIMA_585N316E_C0
 cornu6,31.90091,58.78635,الحوض,al-Ḥawḍ,al-Ḥawḍ,al-Hawd,temp,HAWD_587N319E_C06
 cornu6,31.25781,59.28094,قرية سلم,Qaryaŧ Salm,Qaryat Salm,Qaryat Salm,temp,QARYASALM_592N312E_C06
 cornu6,31.57770,60.05406,نه,Nih,Nih,Nih,temp,NIH_600N315E_C06
-cornu6,30.70435,61.68880,زرنج,Zaranǧ,Zaranj,Zaranj,temp,ZARANJ_616N307E_C06
-cornu6,32.26043,48.83732,الديز,al-Dīz,al-Dīz,al-Diz,temp,DIZ_488N322E_C06
-cornu6,32.18002,51.09476,أسبيذ دشت,Asbīḏ Dašt,Asbīdh Dasht,Asbidh Dasht,temp,ASBIDHDASHT_510N321E_C06
 cornu6,32.23981,51.79877,خان روش,Ḫān Rūš,Khān Rūsh,Khan Rush,temp,KHANRUSH_517N322E_C06
-cornu6,32.33053,51.51612,خان لنجان,Ḫān Lanǧān,Khān Lanjān,Khan Lanjan,temp,KHANLANJAN_515N323E_C06
-cornu6,32.68807,51.69932,إصبهان,Iṣbahān,Iṣbahān,Isbahan,temp,ISBAHAN_516N326E_C06
-cornu6,32.90366,51.73858,دنجي,Danǧī,Danjī,Danji,temp,DANJI_517N329E_C06
-cornu6,33.08147,51.52136,رباط إبن رستم,Ribāṭ Ibn Rustam,Ribāṭ Ibn Rustam,Ribat Ibn Rustam,temp,RIBATIBNRUSTAM_515N330E_C06
-cornu6,33.08585,51.80662,رباط وز,Ribāṭ Wazz,Ribāṭ Wazz,Ribat Wazz,temp,RIBATWAZZ_518N330E_C06
-cornu6,33.31798,51.81709,طرق,Ṭarq,Ṭarq,Tarq,temp,TARQ_518N333E_C06
-cornu6,33.38575,51.49257,بدرة,Badraŧ,Badra,Badra,temp,BADRA_514N333E_C06
-cornu6,33.96725,51.57108,قشان,Qašān,Qashān,Qashan,temp,QASHAN_515N339E_C06
-cornu6,33.56257,52.08142,باذ,Bāḏ,Bādh,Badh,temp,BADH_520N335E_C06
 cornu6,32.69688,52.12330,سكش,Sakš,Saksh,Saksh,temp,SAKSH_521N326E_C06
 cornu6,32.89927,52.24892,كركس كوه,Karkas Kūh,Karkas Kūh,Karkas Kuh,mount,KARKASKUH_522N328E_C06
 cornu6,33.37701,52.36669,أردستان,Ardistān,Ardistān,Ardistan,temp,ARDISTAN_523N333E_C06
@@ -885,34 +836,15 @@ cornu6,32.93881,58.45153,خور,Ḫūr,Khūr,Khur,temp,KHUR_584N329E_C06
 cornu6,32.77833,58.87551,خوست,Ḫawst,Khawst,Khawst,temp,KHAWST_588N327E_C06
 cornu6,32.62196,58.85980,كوكور,Kūkūr ?,Kūkūr ?,Kukur ?,temp,KUKUR_588N326E_C06
 cornu6,32.43440,58.87027,رأس الماء,Raʾs al-Māʾ ?,Raʾs al-Māʾ ?,Ras al-Ma ?,temp,RASMA_588N324E_C06
-cornu6,33.72816,59.10058,قايين,Qāyīn,Qāyīn,Qayin,temp,QAYIN_591N337E_C06
 cornu6,32.81573,60.20763,طبس مسينان,Ṭabas Masīnān,Ṭabas Masīnān,Tabas Masinan,temp,TABASMASINAN_602N328E_C06
-cornu6,34.78374,48.63117,همذان,Hamaḏān,Hamadhān,Hamadhan,temp,HAMADHAN_486N347E_C06
-cornu6,35.60216,51.52048,الري,al-Rayy,al-Rayy,al-Rayy,temp,RAYY_515N356E_C06
-cornu6,35.27841,51.68337,دزه,Dizah,Dizah,Dizah,temp,DIZAH_516N352E_C06
-cornu6,35.07410,51.64843,دي الجص,Day al-Ǧiṣṣ,Day al-Jiṣṣ,Day al-Jiss,temp,DAYJISS_516N350E_C06
-cornu6,34.92219,51.33934,كاج,Kāǧ,Kāj,Kaj,temp,KAJ_513N349E_C06
-cornu6,34.63299,50.98456,قم,Qumm,Qumm,Qumm,temp,QUMM_509N346E_C06
-cornu6,34.45367,51.13776,قرية المجوس,Qaryaŧ al-Maǧūs,Qaryat al-Majūs,Qaryat al-Majus,temp,QARYAMAJUS_511N344E_C06
 cornu6,34.57768,52.27735,سياه كوه,Siyāh Kūh,Siyāh Kūh,Siyah Kuh,mount,SIYAHKUH_522N345E_C06
-cornu6,35.50081,53.44113,سمنان,Simnān,Simnān,Simnan,temp,SIMNAN_534N355E_C06
 cornu6,34.11501,56.48900,نجاي,Nuǧāy ?,Nujāy ?,Nujay ?,temp,NUJAY_564N341E_C06
 cornu6,34.25952,56.60995,دسكردان,Daskardān #?,Daskardān #?,Daskardan #?,temp,DASKARDAN_566N342E_C06
 cornu6,34.30394,56.73090,درزينك,Darzīnak ?,Darzīnak ?,Darzinak ?,temp,DARZINAK_567N343E_C06
 cornu6,34.16617,56.87872,بستداران,Bustadārān,Bustadārān,Bustadaran,temp,BUSTADARAN_568N341E_C06
 cornu6,34.42374,56.97011,بنة,Bannaŧ ?,Banna ?,Banna ?,temp,BANNA_569N344E_C06
 cornu6,34.84612,57.43239,رباط زنجي,Ribāṭ Zanǧī ?,Ribāṭ Zanjī ?,Ribat Zanji ?,temp,RIBATZANJI_574N348E_C06
-cornu6,35.15435,58.45104,طرثيث,Ṭurṯīṯ,Ṭurthīth,Turthith,temp,TURTHITH_584N351E_C06
-cornu6,34.34833,58.67412,جناباذ,Ǧunābāḏ,Junābādh,Junabadh,temp,JUNABADH_586N343E_C06
-cornu6,34.35720,62.13052,هراة,Harāŧ,Harā,Hara,temp,HARA_621N343E_C06
-cornu6,36.45524,52.35814,آمل,Āmul,Āmul,Amul,temp,AMUL_523N364E_C06
-cornu6,36.15702,54.35362,دامغان,Dāmġān,Dāmghān,Damghan,temp,DAMGHAN_543N361E_C06
-cornu6,36.03626,55.88938,بيار,Biyār,Biyār,Biyar,temp,BIYAR_558N360E_C06
-cornu6,36.20872,57.49630,خسروجرد,Ḫusrūǧird,Khusrūjird,Khusrujird,temp,KHUSRUJIRD_574N362E_C06
-cornu6,36.21692,58.81270,نيسابور,Naysābūr,Naysābūr,Naysabur,temp,NAYSABUR_588N362E_C06
 cornu6,28.11572,56.29939,كشستان,Kašistān ?,Kashistān ?,Kashistan ?,temp,KASHISTAN_562N281E_C06
-cornu6,32.86235,51.77508,crossroads,RoutPoint0601,RoutPoint0601,RoutPoint0601,rPoint,ROUTPOINT_517N328E_C06
-cornu6,32.60105,51.70116,crossroads,RoutPoint0602,RoutPoint0602,RoutPoint0602,rPoint,ROUTPOINT_517N326E_C06
 cornu6,31.65660,51.76804,crossroads,RoutPoint0603,RoutPoint0603,RoutPoint0603,rPoint,ROUTPOINT_517N316E_C06
 cornu6,27.24617,56.36540,crossroads,RoutPoint0604,RoutPoint0604,RoutPoint0604,rPoint,ROUTPOINT_563N272E_C06
 cornu6,29.88928,56.59167,crossroads,RoutPoint0605,RoutPoint0605,RoutPoint0605,rPoint,ROUTPOINT_565N298E_C06
@@ -922,24 +854,11 @@ cornu6,32.69885,52.92404,crossroads,RoutPoint0608,RoutPoint0608,RoutPoint0608,rP
 cornu6,29.81491,53.26823,crossroads,RoutPoint0609,RoutPoint0609,RoutPoint0609,rPoint,ROUTPOINT_532N298E_C06
 cornu6,29.09437,56.21906,crossroads,RoutPoint0610,RoutPoint0610,RoutPoint0610,rPoint,ROUTPOINT_562N290E_C06
 cornu6,31.25797,57.81614,crossroads,RoutPoint0611,RoutPoint0611,RoutPoint0611,rPoint,ROUTPOINT_578N312E_C06
-cornu7,13.31198,43.27301,موخا,Mūḫā,Mūkhā,Mukha,temp,MUKHA_432N133E_C07
-cornu7,12.72778,43.51007,المندب,al-Mandab,al-Mandab,al-Mandab,temp,MANDAB_435N127E_C07
-cornu7,13.05673,44.86827,لحج,Laḥǧ,Laḥj,Lahj,temp,LAHJ_448N130E_C07
-cornu7,12.81210,44.99099,عدن,ʿAdan,ʿAdan,Adan,temp,ADAN_449N128E_C07
 cornu7,13.81354,45.89739,دثينة,Daṯīnaŧ,Dathīna,Dathina,regions,DATHINA_458N138E_C07
 cornu7,13.67538,46.54442,أحور,Aḥwar,Aḥwar,Ahwar,regions,AHWAR_465N136E_C07
 cornu7,13.56967,46.61972,أحور,Aḥwar,Aḥwar,Ahwar,temp,AHWAR_466N135E_C07
 cornu7,15.63308,39.48117,باضع,Bāḍiʿ,Bāḍiʿ,Badi,temp,BADI_394N156E_C07
 cornu7,15.69528,40.07137,دهلك,Dahlak,Dahlak,Dahlak,island,DAHLAK_400N156E_C07
-cornu7,15.46971,42.54671,جزيرة كمران,Ǧazīraŧ Kamarān,Jazīrat Kamarān,Jazirat Kamaran,island,JAZIRAKAMARAN_425N154E_C07
-cornu7,14.47122,43.02533,غلافقة,Ġalāfiqaŧ,Ghalāfiqa,Ghalafiqa,temp,GHALAFIQA_430N144E_C07
-cornu7,15.72708,42.82566,مور,Mawr,Mawr,Mawr,temp,MAWR_428N157E_C07
-cornu7,15.23753,43.05763,المهجم,al-Mahǧam,al-Mahjam,al-Mahjam,temp,MAHJAM_430N152E_C07
-cornu7,14.19526,43.23381,زبيد,Zabīd,Zabīd,Zabid,temp,ZABID_432N141E_C07
-cornu7,15.87118,44.09710,ريدة,Raydaŧ,Rayda,Rayda,temp,RAYDA_440N158E_C07
-cornu7,15.41877,44.17050,صنعاء,Ṣanʿāʾ,Ṣanʿāʾ,Sana,temp,SANA_441N154E_C07
-cornu7,14.54229,44.39660,ذمار,Ḏimār,Dhimār,Dhimar,temp,DHIMAR_443N145E_C07
-cornu7,14.05288,44.12940,الثججة,al-Ṯuǧǧaŧ,al-Thujja,al-Thujja,temp,THUJJA_441N140E_C07
 cornu7,15.55742,45.43900,مأرب,Maʾrib,Maʾrib,Marib,temp,MARIB_454N155E_C07
 cornu7,15.24886,46.92186,شنوة,Šanuwaŧ #,Shanuwa #,Shanuwa #,temp,SHANUWA_469N152E_C07
 cornu7,15.64792,48.80405,حضرموت,Ḥaḍramawt,Ḥaḍramawt,Hadramawt,regions,HADRAMAWT_488N156E_C07
@@ -947,16 +866,8 @@ cornu7,15.92483,48.57208,شبام,Šibām,Shibām,Shibam,temp,SHIBAM_485N159E_C0
 cornu7,15.30551,48.67779,كندة سكون,Kindaŧ Sakūn,Kindat Sakūn,Kindat Sakun,temp,KINDASAKUN_486N153E_C07
 cornu7,15.14685,50.21937,مهرة,Mahraŧ,Mahra,Mahra,regions,MAHRA_502N151E_C07
 cornu7,14.76671,49.59980,الشحر,al-Šiḥr,al-Shiḥr,al-Shihr,temp,SHIHR_495N147E_C07
-cornu7,17.33475,42.36220,عطار,ʿAṭṭār,ʿAṭṭār,Attar,temp,ATTAR_423N173E_C07
-cornu7,17.05108,42.52744,جازان,Ǧāzān,Jāzān,Jazan,temp,JAZAN_425N170E_C07
-cornu7,16.46407,42.74775,الشرجة,al-Šarǧaŧ ?,al-Sharja ?,al-Sharja ?,temp,SHARJA_427N164E_C07
-cornu7,17.34161,42.50109,بيش,Bayš,Baysh,Baysh,temp,BAYSH_425N173E_C07
-cornu7,17.91444,42.18021,ضنكان,Ḍankān,Ḍankān,Dankan,regions,DANKAN_421N179E_C07
 cornu7,17.85975,43.43742,شرورة,Šarūraŧ ?,Sharūra ?,Sharura ?,temp,SHARURA_434N178E_C07
 cornu7,17.60657,43.54039,المهجرة,al-Mahǧaraŧ ?,al-Mahjara ?,al-Mahjara ?,temp,MAHJARA_435N176E_C07
-cornu7,17.31417,43.59547,عريقة,ʿArīqaŧ ?,ʿArīqa ?,Ariqa ?,temp,ARIQA_435N173E_C07
-cornu7,17.02818,43.68167,صعدة,Ṣaʿdaŧ,Ṣaʿda,Sada,temp,SADA_436N170E_C07
-cornu7,16.39057,44.02411,خيوان,Ḫaywān,Khaywān,Khaywan,temp,KHAYWAN_440N163E_C07
 cornu7,17.58603,44.29950,نجران,Naǧrān,Najrān,Najran,temp,NAJRAN_442N175E_C07
 cornu7,17.58374,42.51067,تهامة,Tihāmaŧ,Tihāma,Tihama,regions,TIHAMA_425N175E_C07
 cornu7,19.02737,39.48379,بحر القلزم,Baḥr al-Qulzum,Baḥr al-Qulzum,Bahr al-Qulzum,sea,BAHRQULZUM_394N190E_C07
@@ -1001,7 +912,6 @@ cornu7,21.10664,40.43179,جبل جزوان,Ǧabal Ǧazwān #?,Jabal Jazwān #?,J
 cornu7,21.21629,40.40566,الطائف,al-Ṭāʾif,al-Ṭāʾif,al-Taif,temp,TAIF_404N212E_C07
 cornu7,20.30924,42.10410,رنية,Ranyaŧ,Ranya,Ranya,temp,RANYA_421N203E_C07
 cornu7,20.04558,42.41439,تبالة,Tabālaŧ,Tabāla,Tabala,temp,TABALA_424N200E_C07
-cornu7,22.87825,35.66637,عيذب,ʿAyḏab,ʿAydhab,Aydhab,temp,AYDHAB_356N228E_C07
 cornu7,22.60833,39.12422,الجحفة,al-Ǧuḥfaŧ,al-Juḥfa,al-Juhfa,temp,JUHFA_391N226E_C07
 cornu7,23.81820,38.50713,الجار,al-Ǧār,al-Jār,al-Jar,temp,JAR_385N238E_C07
 cornu7,23.51137,39.02138,الحجاز,al-Ḥiǧāz,al-Ḥijāz,al-Hijaz,regions,HIJAZ_390N235E_C07
@@ -1095,16 +1005,12 @@ cornu7,27.67097,36.48835,رحبة,Ruḥbaŧ,Ruḥba,Ruhba,regions,RUHBA_364N276E
 cornu7,27.19891,36.47366,سغب,Saġb,Saghb,Saghb,temp,SAGHB_364N271E_C07
 cornu7,27.03413,36.74694,بدا يعقوب,Badā Yaʿqūb,Badā Yaʿqūb,Bada Yaqub,temp,BADAYAQUB_367N270E_C07
 cornu7,26.79044,37.01435,البيضاء,al-Bayḍāʾ,al-Bayḍāʾ,al-Bayda,temp,BAYDA_370N267E_C07
-cornu7,27.78542,37.46101,المضثة,al-Muḍaṯaŧ,al-Muḍatha,al-Mudatha,temp,MUDATHA_374N277E_C07
 cornu7,27.15186,37.83126,الأقراع,al-Aqrāʿ,al-Aqrāʿ,al-Aqra,temp,AQRA_378N271E_C07
-cornu7,26.86125,37.93999,حجر صالح,Ḥiǧr Ṣāliḥ,Ḥijr Ṣāliḥ,Hijr Salih,temp,HIJRSALIH_379N268E_C07
+cornu7,26.86125,37.93999,حجر صالح|الحجر,Ḥiǧr Ṣāliḥ/al-Ḥiǧr,Ḥijr Ṣāliḥ/al-Ḥijr,Hijr Salih/al-Hijr,temp,HIJRSALIH_379N268E_C07
 cornu7,26.55412,37.99288,قرح,Qurḥ,Qurḥ,Qurh,temp,QURH_379N265E_C07
 cornu7,26.15916,38.35433,سقيا يزيد,Suqyā Yazīd,Suqyā Yazīd,Suqya Yazid,temp,SUQYAYAZID_383N261E_C07
-cornu7,27.60589,38.50125,تيماء,Taymāʾ,Taymāʾ,Tayma,temp,TAYMA_385N276E_C07
 cornu7,26.41998,42.03339,سميراء,Samīrāʾ,Samīrāʾ,Samira,temp,SAMIRA_420N264E_C07
 cornu7,26.71435,42.29198,توز,Tūz,Tūz,Tuz,temp,TUZ_422N267E_C07
-cornu7,27.08908,42.58583,فيد,Fayd,Fayd,Fayd,temp,FAYD_425N270E_C07
-cornu7,27.45736,43.02661,الأجفر,al-Aǧfur,al-Ajfur,al-Ajfur,temp,AJFUR_430N274E_C07
 cornu7,26.07604,43.91699,عنيزة,ʿUnayzaŧ #?,ʿUnayza #?,Unayza #?,temp,UNAYZA_439N260E_C07
 cornu7,26.35812,44.45181,النباج,al-Nibāǧ,al-Nibāj,al-Nibaj,temp,NIBAJ_444N263E_C07
 cornu7,26.78388,47.21404,الصمان,al-Ṣammān,al-Ṣammān,al-Samman,regions,SAMMAN_472N267E_C07
@@ -1115,20 +1021,13 @@ cornu7,26.53966,49.96159,القطيف,al-Qaṭīf,al-Qaṭīf,al-Qatif,temp,QATI
 cornu7,26.18157,49.98216,مسيلحة,Musayliḥaŧ ?,Musayliḥa ?,Musayliha ?,temp,MUSAYLIHA_499N261E_C07
 cornu7,26.28437,50.19373,دارين,Dārīn,Dārīn,Darin,temp,DARIN_501N262E_C07
 cornu7,26.11827,50.56693,أوال,Uwāl,Uwāl,Uwal,temp,UWAL_505N261E_C07
-cornu7,29.65149,34.99063,أيلة,Aylaŧ,Ayla,Ayla,temp,AYLA_349N296E_C07
 cornu7,29.27449,35.03845,الحقل,al-Ḥaql,al-Ḥaql,al-Haql,temp,HAQL_350N292E_C07
 cornu7,28.94260,35.19783,شرف ذو النمل,Šaraf Ḏū al-Naml,Sharaf Dhū al-Naml,Sharaf Dhu al-Naml,temp,SHARAFDHUNAML_351N289E_C07
 cornu7,28.47663,35.07298,مدين شعيب,Madyan Šuʿayb,Madyan Shuʿayb,Madyan Shuayb,temp,MADYANSHUAYB_350N284E_C07
 cornu7,28.06253,35.57504,الأعراء,al-Aʿrāʾ,al-Aʿrāʾ,al-Ara,temp,ARA_355N280E_C07
 cornu7,28.17030,35.19783,عينونة,ʿAynūnaŧ,ʿAynūna,Aynuna,temp,AYNUNA_351N281E_C07
-cornu7,28.30370,43.20428,الثغلبية,al-Ṯaġlabiyyaŧ,al-Thaghlabiyya,al-Thaghlabiyya,temp,THAGHLABIYYA_432N283E_C07
-cornu7,28.75879,43.31851,بطن,Biṭan,Biṭan,Bitan,temp,BITAN_433N287E_C07
-cornu7,29.10056,43.45664,الشقوق,al-Šuqūq,al-Shuqūq,al-Shuquq,temp,SHUQUQ_434N291E_C07
-cornu7,29.45738,43.62134,زبالة,Zubālaŧ,Zubāla,Zubala,temp,ZUBALA_436N294E_C07
-cornu7,28.39721,45.97228,حفر,Ḥafar,Ḥafar,Hafar,temp,HAFAR_459N283E_C07
 cornu7,29.29998,47.92209,كاظمة,Kāẓimaŧ,Kāẓima,Kazima,temp,KAZIMA_479N292E_C07
 cornu7,28.54666,48.37368,الحدوثة,al-Ḥadūṯaŧ ?,al-Ḥadūtha ?,al-Hadutha ?,temp,HADUTHA_483N285E_C07
-cornu7,14.88167,44.17560,crossroads,RoutPoint0701,RoutPoint0701,RoutPoint0701,rPoint,ROUTPOINT_441N148E_C07
 cornu7,22.41979,39.24636,crossroads,RoutPoint0702,RoutPoint0702,RoutPoint0702,rPoint,ROUTPOINT_392N224E_C07
 cornu7,22.82697,39.11532,crossroads,RoutPoint0703,RoutPoint0703,RoutPoint0703,rPoint,ROUTPOINT_391N228E_C07
 cornu7,22.99819,39.17322,crossroads,RoutPoint0704,RoutPoint0704,RoutPoint0704,rPoint,ROUTPOINT_391N229E_C07
@@ -1222,7 +1121,6 @@ cornu8,15.59445,44.81642,جوف همدان,Ǧawf Hamdān,Jawf Hamdān,Jawf Hamda
 cornu8,15.40346,44.64961,ذو جرة,Ḏū Ǧurraŧ,Dhū Jurra,Dhu Jurra,regions,DHUJURRA_446N154E_C08
 cornu8,15.28324,44.69438,خولان,Ḫawlān,Khawlān,Khawlan,regions,KHAWLAN_446N152E_C08
 cornu8,15.40854,45.33616,سباء,Sabāʾ,Sabāʾ,Saba,regions,SABA_453N154E_C08
-cornu8,15.44240,45.32826,مأرب,Maʾrib,Maʾrib,Marib,temp,MARIB_453N154E_C08
 cornu8,15.10298,45.44152,جوف مراد,Ǧawf Murād,Jawf Murād,Jawf Murad,temp,JAWFMURAD_454N151E_C08
 cornu8,16.89564,42.55043,جازان,Ǧāzān,Jāzān,Jazan,temp,JAZAN_425N168E_C08
 cornu8,16.99054,42.72032,جازان,Ǧāzān,Jāzān,Jazan,regions,JAZAN_427N169E_C08
@@ -1238,38 +1136,25 @@ cornu8,16.29079,44.06424,خيوان,Ḫaywān,Khaywān,Khaywan,temp,KHAYWAN_440N
 cornu8,17.52221,42.35312,ضنكان,Ḍankān,Ḍankān,Dankan,regions,DANKAN_423N175E_C08
 cornu8,17.37689,42.53617,بيش,Bayš,Baysh,Baysh,temp,BAYSH_425N173E_C08
 cornu8,17.18513,42.39306,عطار,ʿAṭṭār,ʿAṭṭār,Attar,temp,ATTAR_423N171E_C08
-cornu8,17.64001,43.52035,المهجرة,al-Mahǧaraŧ,al-Mahjara,al-Mahjara,temp,MAHJARA_435N176E_C08
 cornu8,17.31174,43.71306,عرقة,ʿAriqaŧ,ʿAriqa,Ariqa,temp,ARIQA_437N173E_C08
-cornu8,17.49039,44.13162,نجران,Naǧrān,Najrān,Najran,temp,NAJRAN_441N174E_C08
 cornu8,14.31533,44.37876,crossroads,RoutPoint0801,RoutPoint0801,RoutPoint0801,rPoint,ROUTPOINT_443N143E_C08
 cornu8,14.88867,44.26913,crossroads,RoutPoint0802,RoutPoint0802,RoutPoint0802,rPoint,ROUTPOINT_442N148E_C08
 cornu8,16.10818,43.12845,crossroads,RoutPoint0803,RoutPoint0803,RoutPoint0803,rPoint,ROUTPOINT_431N161E_C08
 cornu8,16.45034,42.81942,crossroads,RoutPoint0804,RoutPoint0804,RoutPoint0804,rPoint,ROUTPOINT_428N164E_C08
 cornu8,16.77760,42.71626,crossroads,RoutPoint0805,RoutPoint0805,RoutPoint0805,rPoint,ROUTPOINT_427N167E_C08
 cornu8,17.00988,42.55098,crossroads,RoutPoint0806,RoutPoint0806,RoutPoint0806,rPoint,ROUTPOINT_425N170E_C08
-cornu9,24.08274,38.04189,ينبوع,Yanbūʿ,Yanbūʿ,Yanbu,temp,YANBU_380N240E_C09
-cornu9,25.78047,39.21945,خيبر,Ḫaybar,Khaybar,Khaybar,temp,KHAYBAR_392N257E_C09
-cornu9,24.44955,39.53597,يثرب|المدينة,Yaṯrib/al-Madīnaŧ,Yathrib/al-Madīna,Yathrib/al-Madina,temp,YATHRIB_395N244E_C09
-cornu9,25.55300,41.42429,معدن النقرة,Maʿdin al-Naqiraŧ,Maʿdin al-Naqira,Madin al-Naqira,temp,MADINNAQIRA_414N255E_C09
-cornu9,24.58959,46.69314,الحجر,al-Ḥaǧr,al-Ḥajr,al-Hajr,temp,HAJR_466N245E_C09
-cornu9,25.27985,49.54316,الأحسا,al-Aḥsā,al-Aḥsā,al-Ahsa,temp,AHSA_495N252E_C09
 cornu9,27.92136,37.19786,الجنينة,al-Ǧunaynaŧ,al-Junayna,al-Junayna,temp,JUNAYNA_371N279E_C09
 cornu9,27.73026,37.46327,المحدثة,al-Muḥdaṯaŧ,al-Muḥdatha,al-Muhdatha,temp,MUHDATHA_374N277E_C09
-cornu9,26.79664,37.97240,الحجر,al-Ḥiǧr,al-Ḥijr,al-Hijr,temp,HIJR_379N267E_C09
-cornu9,26.60624,37.97634,قرح,Qurḥ,Qurḥ,Qurh,temp,QURH_379N266E_C09
-cornu9,27.09700,37.84314,الأقرع,al-Aqraʿ,al-Aqraʿ,al-Aqra,temp,AQRA_378N270E_C09
 cornu9,27.58081,38.52000,تيماء,Taymāʾ,Taymāʾ,Tayma,temp,TAYMA_385N275E_C09
 cornu9,27.05571,41.94575,وادي طي,Wādī Ṭayy #?,Wādī Ṭayy #?,Wadi Tayy #?,temp,WADITAYY_419N270E_C09
 cornu9,27.24360,42.35028,سلما,Salmā #?,Salmā #?,Salma #?,regions,SALMA_423N272E_C09
 cornu9,27.27430,42.21215,المنهب,al-Manhab,al-Manhab,al-Manhab,temp,MANHAB_422N272E_C09
-cornu9,26.74510,42.26444,توز,Tūz,Tūz,Tuz,temp,TUZ_422N267E_C09
 cornu9,27.06977,42.50815,فيد,Fayd,Fayd,Fayd,temp,FAYD_425N270E_C09
 cornu9,27.44255,42.97781,الأجفر,al-Aǧfur,al-Ajfur,al-Ajfur,temp,AJFUR_429N274E_C09
 cornu9,27.91046,43.13666,الخزيمية,al-Ḫuzaymiyyaŧ,al-Khuzaymiyya,al-Khuzaymiyya,temp,KHUZAYMIYYA_431N279E_C09
 cornu9,26.08634,43.92995,القريتين,al-Qaryatayn,al-Qaryatayn,al-Qaryatayn,temp,QARYATAYN_439N260E_C09
-cornu9,26.36250,44.39764,النباج,al-Nibāǧ,al-Nibāj,al-Nibaj,temp,NIBAJ_443N263E_C09
-cornu9,30.03245,35.17023,غرندل,Ġarandal,Gharandal,Gharandal,temp,GHARANDAL_351N300E_C09
-cornu9,29.57226,34.94527,ويلة,Waylaŧ,Wayla,Wayla,temp,WAYLA_349N295E_C09
+cornu9,30.03245,35.17023,غرندل|عرندل,Ġarandal/ʿArandal,Gharandal/ʿArandal,Gharandal/Arandal,temp,GHARANDAL_351N300E_C09
+cornu9,29.57226,34.94527,أيلة|ويلة,Aylaŧ/Waylaŧ,Aylat/Wayla,Ayla/Wayla,temp,AYLA_349N295E_C09
 cornu9,28.37114,36.50620,تبوك,Tabūk,Tabūk,Tabuk,temp,TABUK_365N283E_C09
 cornu9,29.87858,37.43170,الأجولي,al-Aǧwalī,al-Ajwalī,al-Ajwali,temp,AJWALI_374N298E_C09
 cornu9,28.87521,37.89149,ثجر,Ṯaǧr,Thajr,Thajr,temp,THAJR_378N288E_C09
@@ -1283,12 +1168,6 @@ cornu9,29.08495,43.41491,الشقوق,al-Šuqūq,al-Shuqūq,al-Shuquq,temp,SHUQU
 cornu9,29.40521,43.56390,زبالة,Zubālaŧ,Zubāla,Zubala,temp,ZUBALA_435N294E_C09
 cornu9,29.78571,43.61126,القاء,al-Qāʾ,al-Qāʾ,al-Qa,temp,QA_436N297E_C09
 cornu9,28.41584,45.92797,حفر أبو موسى,Ḥafar Abū Mūsá,Ḥafar Abū Mūsā,Hafar Abu Musa,temp,HAFARABUMUSA_459N284E_C09
-cornu9,29.28136,47.95066,كازمة,Kāzimaŧ,Kāzima,Kazima,temp,KAZIMA_479N292E_C09
-cornu9,30.07515,35.51952,معان,Muʿān,Muʿān,Muan,temp,MUAN_355N300E_C09
-cornu9,30.98790,35.48844,صغر,Ṣuġar,Ṣughar,Sughar,temp,SUGHAR_354N309E_C09
-cornu9,31.51257,34.75731,السكرية,al-Sukkariyyaŧ,al-Sukkariyya,al-Sukkariyya,temp,SUKKARIYYA_347N315E_C09
-cornu9,31.89870,34.82440,الرملة,al-Ramlaŧ,al-Ramla,al-Ramla,temp,RAMLA_348N318E_C09
-cornu9,31.87776,35.96204,عمان,ʿAmmān,ʿAmmān,Amman,temp,AMMAN_359N318E_C09
 cornu9,30.73317,36.70106,أبير,Ubayr,Ubayr,Ubayr,temp,UBAYR_367N307E_C09
 cornu9,31.84612,36.87768,الأزرق,al-Azraq,al-Azraq,al-Azraq,temp,AZRAQ_368N318E_C09
 cornu9,31.64055,36.92899,العونيد,al-ʿAwnīd,al-ʿAwnīd,al-Awnid,temp,AWNID_369N316E_C09
@@ -1317,29 +1196,21 @@ cornu9,31.65292,44.18717,القادسية,al-Qādisiyyaŧ,al-Qādisiyya,al-Qadis
 cornu9,31.85995,43.95117,الرهيمة,al-Ruhaymaŧ,al-Ruhayma,al-Ruhayma,temp,RUHAYMA_439N318E_C09
 cornu9,31.93660,43.82290,القطقطانة,al-Quṭquṭānaŧ,al-Quṭquṭāna,al-Qutqutana,temp,QUTQUTANA_438N319E_C09
 cornu9,31.49049,44.13666,الأذيب,al-Uḏayb,al-Udhayb,al-Udhayb,temp,UDHAYB_441N314E_C09
-cornu9,32.57658,36.15839,أدرعات,Adriʿāt #,Adriʿāt #,Adriat #,temp,ADRIAT_361N325E_C09
 cornu9,32.51503,36.43071,بصرى,Buṣrá,Buṣrā,Busra,temp,BUSRA_364N325E_C09
 cornu9,32.31179,36.79381,الأعنك,al-Aʿnak,al-Aʿnak,al-Anak,temp,ANAK_367N323E_C09
-cornu9,33.35142,36.29258,كسوة,Kuswaŧ,Kuswa,Kuswa,temp,KUSWA_362N333E_C09
-cornu9,33.49430,36.32613,دمشق,Dimašq,Dimashq,Dimashq,temp,DIMASHQ_363N334E_C09
 cornu9,33.72767,37.85153,سوى,Suwá,Suwā,Suwa,temp,SUWA_378N337E_C09
 cornu9,32.21167,37.32662,البقيعة,al-Baqīʿaŧ,al-Baqīʿa,al-Baqia,temp,BAQIA_373N322E_C09
 cornu9,32.13274,37.98572,الساعدة,al-Sāʿidaŧ,al-Sāʿida,al-Saida,temp,SAIDA_379N321E_C09
 cornu9,32.03911,38.64087,الروارى,al-Rawārá,al-Rawārā,al-Rawara,temp,RAWARA_386N320E_C09
 cornu9,32.14778,39.59203,القلوفي,al-Qulūfī,al-Qulūfī,al-Qulufi,temp,QULUFI_395N321E_C09
 cornu9,32.07507,41.37298,الخلاط,al-Ḫalāṭ,al-Khalāṭ,al-Khalat,temp,KHALAT_413N320E_C09
-cornu9,33.57325,42.80761,هيت,Hīt,Hīt,Hit,temp,HIT_428N335E_C09
 cornu9,32.28927,42.23928,الأخدمية,al-Aḫdamiyyaŧ,al-Akhdamiyya,al-Akhdamiyya,temp,AKHDAMIYYA_422N322E_C09
-cornu9,30.70785,35.42136,crossroads,RoutPoint0901,RoutPoint0901,RoutPoint0901,rPoint,ROUTPOINT_354N307E_C09
-cornu9,30.14544,35.75004,crossroads,RoutPoint0902,RoutPoint0902,RoutPoint0902,rPoint,ROUTPOINT_357N301E_C09
-cornu9,31.79393,35.91693,crossroads,RoutPoint0903,RoutPoint0903,RoutPoint0903,rPoint,ROUTPOINT_359N317E_C09
-cornu9,31.75556,35.84456,crossroads,RoutPoint0904,RoutPoint0904,RoutPoint0904,rPoint,ROUTPOINT_358N317E_C09
-cornu9,31.97035,35.88713,crossroads,RoutPoint0905,RoutPoint0905,RoutPoint0905,rPoint,ROUTPOINT_358N319E_C09
+cornu9,30.37325,35.36474,crossroads,RoutPoint0902,RoutPoint0902,RoutPoint0902,rPoint,ROUTPOINT_353N303E_C09
 cornu9,32.14625,39.20032,crossroads,RoutPoint0906,RoutPoint0906,RoutPoint0906,rPoint,ROUTPOINT_392N321E_C09
 cornu9,32.01350,39.82533,crossroads,RoutPoint0907,RoutPoint0907,RoutPoint0907,rPoint,ROUTPOINT_398N320E_C09
 cornu9,27.17653,40.29365,crossroads,RoutPoint0908,RoutPoint0908,RoutPoint0908,rPoint,ROUTPOINT_402N271E_C09
 cornu9,28.06301,37.09882,crossroads,RoutPoint0909,RoutPoint0909,RoutPoint0909,rPoint,ROUTPOINT_370N280E_C09
-cornu10,27.25207,31.07519,أسيوط,Asyūṭ,Asyūṭ,Asyut,temp,ASYUT_310N272E_C10
+cornu10,27.17922,31.18485,أسيوط,Asyūṭ,Asyūṭ,Asyut,temp,ASYUT_311N271E_C10
 cornu10,27.76484,30.70110,تندة,Tandaŧ,Tanda,Tanda,temp,TANDA_307N277E_C10
 cornu10,27.85616,30.75576,الأشمونين,al-Ušmūnayn,al-Ushmūnayn,al-Ushmunayn,temp,USHMUNAYN_307N278E_C10
 cornu10,27.90125,30.84685,أنصنا,Anṣinā,Anṣinā,Ansina,temp,ANSINA_308N279E_C10
@@ -1475,7 +1346,6 @@ cornu10,31.25935,31.99133,بحيرة تنيس,Buḥayraŧ Tinnīs,Buḥayrat Tin
 cornu10,31.16442,32.08240,تونة,Tūnaŧ,Tūna,Tuna,temp,TUNA_320N311E_C10
 cornu10,31.21262,32.22755,تنيس,Tinnīs,Tinnīs,Tinnis,temp,TINNIS_322N312E_C10
 cornu10,31.02282,32.59811,الفرما,al-Faramā,al-Faramā,al-Farama,temp,FARAMA_325N310E_C10
-cornu10,27.25506,31.05809,أسيوط,Asyūṭ,Asyūṭ,Asyut,temp,ASYUT_310N272E_C10
 cornu10,27.10901,31.22681,بوتيج,Būtīǧ,Būtīj,Butij,temp,BUTIJ_312N271E_C10
 cornu10,26.94253,31.47498,قو قهقاوة,Qaw Qahqāwaŧ ?,Qaw Qahqāwa ?,Qaw Qahqawa ?,temp,QAWQAHQAWA_314N269E_C10
 cornu10,26.69354,31.64900,فاو,Fāw,Fāw,Faw,temp,FAW_316N266E_C10
@@ -1493,15 +1363,7 @@ cornu10,25.64017,32.51795,أرمنت,Armant,Armant,Armant,temp,ARMANT_325N256E_C
 cornu10,25.32189,32.55162,أسنا,Asnā,Asnā,Asna,temp,ASNA_325N253E_C10
 cornu10,25.22987,32.74002,نهر النيل,Nahr al-Nīl,Nahr al-Nīl,Nahr al-Nil,river,NAHRNIL_327N252E_C10
 cornu10,25.01203,32.87999,أتفو,Atfū,Atfū,Atfu,temp,ATFU_328N250E_C10
-cornu10,24.45420,32.93106,أنبوة,Unbuwaŧ,Unbuwa,Unbuwa,temp,UNBUWA_329N244E_C10
-cornu10,24.07483,32.85199,أسوان,Uswān,Uswān,Uswan,temp,USWAN_328N240E_C10
-cornu10,24.02232,32.78693,الجنادل,al-Ǧanādil #,al-Janādil #,al-Janadil #,cataract,JANADIL_327N240E_C10
-cornu10,24.01161,32.81795,بلاق,Bilāq,Bilāq,Bilaq,temp,BILAQ_328N240E_C10
-cornu10,23.86016,32.81303,القصر,al-Qaṣr,al-Qaṣr,al-Qasr,temp,QASR_328N238E_C10
-cornu10,23.16952,32.65149,كبان,Kubān,Kubān,Kuban,temp,KUBAN_326N231E_C10
-cornu10,23.13126,32.63674,علاقي,ʿAllāqī,ʿAllāqī,Allaqi,temp,ALLAQI_326N231E_C10
 cornu10,30.43271,31.05262,سبك العبيد,Subk al-ʿAbīd,Subk al-ʿAbīd,Subk al-Abid,temp,SUBKABID_310N304E_C10
-cornu10,23.00335,32.70635,وادي علاقي,Wādī ʿAllāqī,Wādī ʿAllāqī,Wadi Allaqi,waters,WADIALLAQI_327N230E_C10
 cornu10,30.03235,32.52584,crossroads,RoutPoint1001,RoutPoint1001,RoutPoint1001,rPoint,ROUTPOINT_325N300E_C10
 cornu10,31.00529,30.87188,crossroads,RoutPoint1002,RoutPoint1002,RoutPoint1002,rPoint,ROUTPOINT_308N310E_C10
 cornu10,30.77793,31.97132,crossroads,RoutPoint1003,RoutPoint1003,RoutPoint1003,rPoint,ROUTPOINT_319N307E_C10
@@ -1512,7 +1374,7 @@ cornu11,15.06046,32.35560,النيل الأبيض,al-Nīl al-Abyaḍ,al-Nīl al-
 cornu11,14.94825,34.14753,بلاد الحبشة,Bilād al-Ḥabašaŧ,Bilād al-Ḥabasha,Bilad al-Habasha,regions,BILADHABASHA_341N149E_C11
 cornu11,15.48074,32.55275,سوبة,Sūbaŧ,Sūba,Suba,temp,SUBA_325N154E_C11
 cornu11,17.49927,34.09472,الأبواب,al-Abwāb,al-Abwāb,al-Abwab,temp,ABWAB_340N174E_C11
-cornu11,19.16770,37.79836,سواكن,Suwākin,Suwākin,Suwakin,temp,SUWAKIN_377N191E_C11
+cornu11,19.11304,37.33032,سواكن,Suwākin,Suwākin,Suwakin,temp,SUWAKIN_373N191E_C11
 cornu11,18.04347,30.73756,دنقلة,Dunqalaŧ,Dunqala,Dunqala,temp,DUNQALA_307N180E_C11
 cornu11,19.63029,30.25325,الجنادل,al-Ǧanādil,al-Janādil,al-Janadil,cataract,JANADIL_302N196E_C11
 cornu11,18.06095,32.46943,مقرة,Maqurraŧ,Maqurra,Maqurra,regions,MAQURRA_324N180E_C11
@@ -1523,10 +1385,12 @@ cornu11,21.75496,30.94294,نهر النيل,Nahr al-Nīl,Nahr al-Nīl,Nahr al-Ni
 cornu11,22.48899,36.24428,عيذب,ʿAyḏab,ʿAydhab,Aydhab,temp,AYDHAB_362N224E_C11
 cornu11,22.13452,34.10934,وادي علقي,Wādī ʿAllaqī,Wādī ʿAllaqī,Wadi Allaqi,waters,WADIALLAQI_341N221E_C11
 cornu11,23.01969,32.87404,علقي,ʿAllaqī,ʿAllaqī,Allaqi,temp,ALLAQI_328N230E_C11
+cornu10,22.98246,32.97579,وادي علاقي,Wādī ʿAllāqī,Wādī ʿAllāqī,Wadi Allaqi,waters,WADIALLAQI_329N229E_C10
 cornu11,22.61001,33.35835,معادن التبر,Maʿādin al-Tibr,Maʿādin al-Tibr,Maadin al-Tibr,temp,MAADINTIBR_333N226E_C11
 cornu11,23.12192,32.88630,كبان,Kubān,Kubān,Kuban,temp,KUBAN_328N231E_C11
 cornu11,23.86056,32.93994,القصر,al-Qaṣr,al-Qaṣr,al-Qasr,temp,QASR_329N238E_C11
 cornu11,24.10701,32.98286,أسوان,Uswān,Uswān,Uswan,temp,USWAN_329N241E_C11
+cornu11,23.99294,32.94356,بلاق,Bilāq,Bilāq,Bilaq,temp,BILAQ_329N239E_C11
 cornu11,24.01605,32.92462,الجنادل,al-Ǧanādil,al-Janādil,al-Janadil,cataract,JANADIL_329N240E_C11
 cornu11,25.54178,28.73902,الداخلة,al-Dāḫilaŧ,al-Dākhila,al-Dakhila,regions,DAKHILA_287N255E_C11
 cornu11,25.44771,28.92294,قلمون,Qalamūn,Qalamūn,Qalamun,temp,QALAMUN_289N254E_C11
@@ -1534,38 +1398,18 @@ cornu11,25.67032,28.83405,القصر,al-Qaṣr,al-Qaṣr,al-Qasr,temp,QASR_288N2
 cornu11,24.98738,30.51687,الخارجة,al-Ḫāriǧaŧ,al-Khārija,al-Kharija,regions,KHARIJA_305N249E_C11
 cornu11,24.59152,30.50461,بيريس,Bayrīs,Bayrīs,Bayris,temp,BAYRIS_305N245E_C11
 cornu11,24.46534,32.98745,أنبوة,Unbuwaŧ,Unbuwa,Unbuwa,temp,UNBUWA_329N244E_C11
-cornu11,24.95820,32.86025,أتفو,Atfū,Atfū,Atfu,temp,ATFU_328N249E_C11
-cornu11,25.25900,32.54759,أسنا,Asnā,Asnā,Asna,temp,ASNA_325N252E_C11
-cornu11,25.63094,32.53840,أرمنت,Armant,Armant,Armant,temp,ARMANT_325N256E_C11
-cornu11,25.89182,32.83266,قوص,Qūṣ,Qūṣ,Qus,temp,QUS_328N258E_C11
-cornu11,25.99449,32.86638,قفط,Qifṭ,Qifṭ,Qift,temp,QIFT_328N259E_C11
 cornu11,25.07556,33.89324,معادن الزمرذ,Maʿādin al-Zumurruḏ,Maʿādin al-Zumurrudh,Maadin al-Zumurrudh,temp,MAADINZUMURRUDH_338N250E_C11
 cornu11,26.96368,28.20107,فرفارون,Farfārūn,Farfārūn,Farfarun,regions,FARFARUN_282N269E_C11
-cornu11,26.19613,31.98818,بليانة,Bulyānaŧ,Bulyāna,Bulyana,temp,BULYANA_319N261E_C11
-cornu11,26.57610,31.79967,أخميم,Aḫmīm,Akhmīm,Akhmim,temp,AKHMIM_317N265E_C11
-cornu11,26.83350,31.58664,قاو,Qāw,Qāw,Qaw,temp,QAW_315N268E_C11
-cornu11,27.13192,31.18662,أسيوط,Asyūṭ,Asyūṭ,Asyut,temp,ASYUT_311N271E_C11
-cornu11,27.82334,30.80193,الأشمونين,al-Ušmūnayn,al-Ushmūnayn,al-Ushmunayn,temp,USHMUNAYN_308N278E_C11
-cornu11,26.04339,34.32237,قصير,Quṣayr,Quṣayr,Qusayr,temp,QUSAYR_343N260E_C11
+cornu11,26.10673,34.27748,قصير,Quṣayr,Quṣayr,Qusayr,temp,QUSAYR_342N261E_C11
 cornu11,26.52400,29.46855,الواحات,al-Wāḥāt,al-Wāḥāt,al-Wahat,regions,WAHAT_294N265E_C11
 cornu11,28.28725,28.83711,بنهسى,Banhasá,Banhasā,Banhasa,regions,BANHASA_288N282E_C11
-cornu11,28.11031,30.74369,طحا,Ṭaḥā,Ṭaḥā,Taha,temp,TAHA_307N281E_C11
-cornu11,29.31064,30.78508,الفيوم,al-Fayyūm,al-Fayyūm,al-Fayyum,temp,FAYYUM_307N293E_C11
-cornu11,30.04301,31.33835,الفسطاط,al-Fusṭāṭ,al-Fusṭāṭ,al-Fustat,temp,FUSTAT_313N300E_C11
-cornu11,30.80292,29.34288,ذات الحمام,Ḏāt al-Ḥumām,Dhāt al-Ḥumām,Dhat al-Humam,temp,DHATHUMAM_293N308E_C11
 cornu11,29.16755,33.80128,تيه بنو إسرائل,Tīh Banū Isrāʾil #,Tīh Banū Isrāʾil #,Tih Banu Israil #,temp,TIHBANUISRAIL_338N291E_C11
 cornu11,28.67926,33.67254,فاران,Fārān,Fārān,Faran,temp,FARAN_336N286E_C11
 cornu11,28.35876,33.95454,طور سيناء,Ṭūr Sīnāʾ,Ṭūr Sīnāʾ,Tur Sina,temp,TURSINA_339N283E_C11
-cornu11,29.52825,35.00898,ويلة,Waylaŧ,Wayla,Wayla,temp,WAYLA_350N295E_C11
-cornu11,30.02974,32.59357,قلزم,Qulzum,Qulzum,Qulzum,temp,QULZUM_325N300E_C11
-cornu11,30.87398,29.68312,بومينى,Būmīná,Būmīnā,Bumina,temp,BUMINA_296N308E_C11
-cornu11,31.17081,29.90688,الإسكندرية,al-Iskandariyyaŧ,al-Iskandariyya,al-Iskandariyya,temp,ISKANDARIYYA_299N311E_C11
-cornu11,31.33164,30.44330,رشيد,Rašīd,Rashīd,Rashid,temp,RASHID_304N313E_C11
-cornu11,30.40818,30.85404,ترنوط,Tarnūṭ,Tarnūṭ,Tarnut,temp,TARNUT_308N304E_C11
 cornu11,30.75519,33.23727,الجفار,al-Ǧifār,al-Jifār,al-Jifar,regions,JIFAR_332N307E_C11
+cornu11,19.40078,33.43051,السنطة,al-Sanṭaŧ ?,al-Sanṭa ?,al-Santa ?,temp,SANTA_334N194E_C11
 cornu11,32.20303,30.28697,بح الروم,Baḥ al-Rūm,Baḥ al-Rūm,Bah al-Rum,sea,BAHRUM_302N322E_C11
 cornu11,25.90701,33.13064,crossroads,RoutPoint1101,RoutPoint1101,RoutPoint1101,rPoint,ROUTPOINT_331N259E_C11
-cornu11,26.17087,32.73951,crossroads,RoutPoint1111,RoutPoint1111,RoutPoint1111,rPoint,ROUTPOINT_327N261E_C11
 cornu12,30.06450,-9.64810,ماسة,Māssaŧ,Māssa,Massa,temp,MASSA_096N300W_C12
 cornu12,30.50052,-8.84130,ترقالة,Tarqālaŧ,Tarqāla,Tarqala,temp,TARQALA_088N305W_C12
 cornu12,29.19903,-8.07804,وادي درعة,Wādī Darʿaŧ,Wādī Darʿa,Wadi Dara,waters,WADIDARA_080N291W_C12
@@ -1758,8 +1602,6 @@ cornu13,30.80549,28.85190,حنية الروم,Ḥaniyyaŧ al-Rūm,Ḥaniyyat al-
 cornu13,30.86496,29.30208,ذات الحمام,Ḏāt al-Ḥumām,Dhāt al-Ḥumām,Dhat al-Humam,temp,DHATHUMAM_293N308E_C13
 cornu13,30.93264,29.71572,بومينة,Būmīnaŧ,Būmīna,Bumina,temp,BUMINA_297N309E_C13
 cornu13,31.26948,15.30735,crossroads,RoutPoint1301,RoutPoint1301,RoutPoint1301,rPoint,ROUTPOINT_153N312E_C13
-cornu14,35.76719,-5.77175,تنجة,Tanǧaŧ,Tanja,Tanja,temp,TANJA_057N357W_C14
-cornu14,35.85216,-5.33559,سبتة,Sabtaŧ,Sabta,Sabta,temp,SABTA_053N358W_C14
 cornu14,37.22519,-8.42308,مدينة شلب,Madīnaŧ Šalab,Madīnat Shalab,Madinat Shalab,temp,MADINASHALAB_084N372W_C14
 cornu14,37.06463,-7.90515,خشونبة,Ḫušūnubaŧ,Khushūnuba,Khushunuba,temp,KHUSHUNUBA_079N370W_C14
 cornu14,37.23807,-7.21996,لب,Lab,Lab,Lab,temp,LAB_072N372W_C14
@@ -1893,10 +1735,7 @@ cornu15,38.15878,15.40177,دمنش,Damannaš,Damannash,Damannash,temp,DAMANNASH_
 cornu15,38.18022,15.44048,رمطة,Ramṭaŧ,Ramṭa,Ramta,temp,RAMTA_154N381E_C15
 cornu15,38.14806,15.48403,ميقش,Mīquš,Mīqush,Miqush,temp,MIQUSH_154N381E_C15
 cornu15,38.17331,15.52846,مسينة,Massīnaŧ,Massīna,Massina,temp,MASSINA_155N381E_C15
-cornu16,35.19457,46.05227,شهرزور,Šahrazūr,Shahrazūr,Shahrazur,temp,SHAHRAZUR_460N351E_C16
 cornu16,35.31623,46.98439,سيسر,Sīsar,Sīsar,Sisar,temp,SISAR_469N353E_C16
-cornu16,34.60864,47.46172,دينور,Dīnawar,Dīnawar,Dinawar,temp,DINAWAR_474N346E_C16
-cornu16,34.77385,48.53333,همذان,Hamaḏān,Hamadhān,Hamadhan,temp,HAMADHAN_485N347E_C16
 cornu16,35.62754,51.50831,الري,al-Rayy,al-Rayy,al-Rayy,temp,RAYY_515N356E_C16
 cornu16,35.72749,51.92730,نامهند,Nāmahand ?,Nāmahand ?,Namahand ?,temp,NAMAHAND_519N357E_C16
 cornu16,35.42345,51.77466,أفريذين,Afrīḏīn ?,Afrīdhīn ?,Afridhin ?,temp,AFRIDHIN_517N354E_C16
@@ -1911,11 +1750,7 @@ cornu16,35.74424,53.73487,ريباط علياباذ,Rībāṭ ʿAliyyābāḏ,R�
 cornu16,35.81911,52.06670,بلور,Balūr,Balūr,Balur,temp,BALUR_520N358E_C16
 cornu16,35.87340,52.21623,أشك,Ašak,Ashak,Ashak,temp,ASHAK_522N358E_C16
 cornu16,35.97336,54.04249,جرمجوي,Ǧarmǧuwī,Jarmjuwī,Jarmjuwi,temp,JARMJUWI_540N359E_C16
-cornu16,35.14086,58.14671,كندر,Kundur,Kundur,Kundur,temp,KUNDUR_581N351E_C16
-cornu16,35.07843,58.50574,بست,Bust,Bust,Bust,regions,BUST_585N350E_C16
-cornu16,35.14341,58.46290,طرثيث,Ṭurṯīṯ,Ṭurthīth,Turthith,temp,TURTHITH_584N351E_C16
 cornu16,36.47095,42.69942,الموصل,al-Mawṣil,al-Mawṣil,al-Mawsil,temp,MAWSIL_426N364E_C16
-cornu16,37.51993,45.06928,أرمية,Urmiyyaŧ,Urmiyya,Urmiyya,temp,URMIYYA_450N375E_C16
 cornu16,37.02695,45.12379,أشنه,Ušnuh,Ushnuh,Ushnuh,temp,USHNUH_451N370E_C16
 cornu16,36.96475,45.60275,جبروان,Ǧabrawān ?,Jabrawān ?,Jabrawan ?,temp,JABRAWAN_456N369E_C16
 cornu16,37.70285,45.35353,بحيرة أرمية,Buḥayraŧ Urmiyyaŧ,Buḥayrat Urmiyya,Buhayrat Urmiyya,lake,BUHAYRAURMIYYA_453N377E_C16
@@ -1935,7 +1770,7 @@ cornu16,37.79153,49.00372,كهنروذ,Kuhanrūḏ,Kuhanrūdh,Kuhanrudh,temp,KUH
 cornu16,37.48626,49.18674,خشم,Ḫašm ?,Khashm ?,Khashm ?,temp,KHASHM_491N374E_C16
 cornu16,36.97532,48.83940,نهر إسبيذروذ,Nahr Isbīḏrūḏ,Nahr Isbīdhrūdh,Nahr Isbidhrudh,river,NAHRISBIDHRUDH_488N369E_C16
 cornu16,36.93549,49.67893,نهر إسبيذروذ,Nahr Isbīḏrūḏ,Nahr Isbīdhrūdh,Nahr Isbidhrudh,river,NAHRISBIDHRUDH_496N369E_C16
-cornu16,36.06391,49.31524,أبهر,Abhar,Abhar,Abhar,temp,ABHAR_493N360E_C16
+cornu16,36.15722,49.23473,أبهر,Abhar,Abhar,Abhar,temp,ABHAR_492N361E_C16
 cornu16,37.13924,49.65635,جيل,Ǧīl,Jīl,Jil,regions,JIL_496N371E_C16
 cornu16,36.26165,50.00135,قزوين,Qazwīn,Qazwīn,Qazwin,temp,QAZWIN_500N362E_C16
 cornu16,36.52902,50.19216,نهر طالقانروذ,Nahr Ṭālaqānrūḏ,Nahr Ṭālaqānrūdh,Nahr Talaqanrudh,river,NAHRTALAQANRUDH_501N365E_C16
@@ -1984,24 +1819,15 @@ cornu16,36.18956,57.47851,خسروجرد,Ḫusrawǧird,Khusrawjird,Khusrawjird,t
 cornu16,36.86045,56.69972,جوين,Ǧuwayn,Juwayn,Juwayn,regions,JUWAYN_566N368E_C16
 cornu16,36.20464,57.70280,بيهق,Bayhaq,Bayhaq,Bayhaq,regions,BAYHAQ_577N362E_C16
 cornu16,36.15624,57.66932,سابزوار,Sābzawār,Sābzawār,Sabzawar,temp,SABZAWAR_576N361E_C16
-cornu16,36.16630,57.90996,حسيناباذ,Ḥusaynābāḏ,Ḥusaynābādh,Husaynabadh,regions,HUSAYNABADH_579N361E_C16
-cornu16,36.61767,57.93021,مهرجان,Mihraǧān ?,Mihrajān ?,Mihrajan ?,temp,MIHRAJAN_579N366E_C16
 cornu16,36.68546,56.59926,أزاذوار,Azāḏwār,Azādhwār,Azadhwar,temp,AZADHWAR_565N366E_C16
 cornu16,36.98777,57.43023,أسفراين,Asfarāyin,Asfarāyin,Asfarayin,temp,ASFARAYIN_574N369E_C16
 cornu16,37.51437,56.95205,أجغ,Aǧġ,Ajgh,Ajgh,temp,AJGH_569N375E_C16
-cornu16,36.09963,58.51119,بيسكند,Bīskand ?,Bīskand ?,Biskand ?,temp,BISKAND_585N360E_C16
-cornu16,36.14366,58.85385,نيسابور,Naysābūr,Naysābūr,Naysabur,temp,NAYSABUR_588N361E_C16
-cornu16,38.54422,42.08843,بدليس,Badlīs,Badlīs,Badlis,temp,BADLIS_420N385E_C16
-cornu16,38.95424,41.54917,موش,Mūš,Mūsh,Mush,temp,MUSH_415N389E_C16
-cornu16,38.92386,42.47598,أخلاط,Aḫlāṭ,Akhlāṭ,Akhlat,temp,AKHLAT_424N389E_C16
 cornu16,38.77880,42.91010,بحيرة أخلاط,Buḥayraŧ Aḫlāṭ,Buḥayrat Akhlāṭ,Buhayrat Akhlat,lake,BUHAYRAAKHLAT_429N387E_C16
-cornu16,39.63372,41.82256,باجنيس,Bāǧunays,Bājunays,Bajunays,temp,BAJUNAYS_418N396E_C16
-cornu16,39.35726,42.54358,ملازكرد,Malāzkird,Malāzkird,Malazkird,temp,MALAZKIRD_425N393E_C16
 cornu16,39.47331,44.11256,أرمنية,Arminiyyaŧ,Arminiyya,Arminiyya,regions,ARMINIYYA_441N394E_C16
 cornu16,40.00234,43.16621,بغروند,Baġrawand,Baghrawand,Baghrawand,regions,BAGHRAWAND_431N400E_C16
 cornu16,39.90562,44.27779,جبل الحريث,Ǧabal al-Ḥarīṯ,Jabal al-Ḥarīth,Jabal al-Harith,mount,JABALHARITH_442N399E_C16
-cornu16,39.13973,43.29540,أرجيش,Arǧīš,Arjīsh,Arjish,temp,ARJISH_432N391E_C16
-cornu16,39.08029,43.80462,بركري,Barkarī,Barkarī,Barkari,temp,BARKARI_438N390E_C16
+cornu16,39.02230,43.35895,أرجيش,Arǧīš,Arjīsh,Arjish,temp,ARJISH_433N390E_C16
+cornu16,38.98412,43.75682,بركري|بركوي,Barkarī/Barkawī,Barkarī/Barkawī,Barkari/Barkawi,temp,BARKARI_437N389E_C16
 cornu16,38.57711,43.34872,وان,Wān,Wān,Wan,temp,WAN_433N385E_C16
 cornu16,38.34421,43.13392,وسطان,Wasṭān,Wasṭān,Wastan,temp,WASTAN_431N383E_C16
 cornu16,38.22277,44.82832,سلماس,Salamās,Salamās,Salamas,temp,SALAMAS_448N382E_C16
@@ -2028,7 +1854,6 @@ cornu16,38.26671,54.61471,رباط دهستان,Ribāṭ Dihistān,Ribāṭ Dihi
 cornu16,39.09457,55.63466,دهستان,Dihistān,Dihistān,Dihistan,regions,DIHISTAN_556N390E_C16
 cornu16,39.19825,55.71277,آخر,Āḫur,Ākhur,Akhur,temp,AKHUR_557N391E_C16
 cornu16,38.92182,56.26856,رباط أفراوة,Ribāṭ Afrāwaŧ,Ribāṭ Afrāwa,Ribat Afrawa,temp,RIBATAFRAWA_562N389E_C16
-cornu16,40.23295,41.46956,قاليقلا,Qālīqalā,Qālīqalā,Qaliqala,temp,QALIQALA_414N402E_C16
 cornu16,40.16468,44.68562,دبيل,Dabīl,Dabīl,Dabil,temp,DABIL_446N401E_C16
 cornu16,41.56808,45.16780,قلعة إبن كندمان,Qalʿaŧ Ibn Kandamān ?,Qalʿat Ibn Kandamān ?,Qalat Ibn Kandaman ?,temp,QALAIBNKANDAMAN_451N415E_C16
 cornu16,41.39027,45.50578,خنان,Ḫunān ?,Khunān ?,Khunan ?,temp,KHUNAN_455N413E_C16
@@ -2051,20 +1876,16 @@ cornu16,42.27111,45.26094,سغدبيل,Suġdabīl,Sughdabīl,Sughdabil,temp,SUGH
 cornu16,40.67871,48.68505,الشماخية,al-Šamāḫiyyaŧ,al-Shamākhiyya,al-Shamakhiyya,temp,SHAMAKHIYYA_486N406E_C16
 cornu16,41.11585,48.75339,شروان,Širwān,Shirwān,Shirwan,regions,SHIRWAN_487N411E_C16
 cornu16,41.27070,48.76916,شابران,Šābarān,Shābarān,Shabaran,temp,SHABARAN_487N412E_C16
-cornu16,42.18157,48.31477,باب الأبواب,Bāb al-Abwāb,Bāb al-Abwāb,Bab al-Abwab,temp,BABABWAB_483N421E_C16
+cornu16,42.04308,48.30854,باب الأبواب,Bāb al-Abwāb,Bāb al-Abwāb,Bab al-Abwab,temp,BABABWAB_483N420E_C16
 cornu16,40.37900,49.86422,باكوه,Bākūh,Bākūh,Bakuh,temp,BAKUH_498N403E_C16
 cornu16,40.18649,57.45149,رباط أبو سهل,Ribāṭ Abū Sahl,Ribāṭ Abū Sahl,Ribat Abu Sahl,temp,RIBATABUSAHL_574N401E_C16
 cornu16,35.79772,46.37005,crossroads,RoutPoint1601,RoutPoint1601,RoutPoint1601,rPoint,ROUTPOINT_463N357E_C16
-cornu16,36.06817,49.35928,crossroads,RoutPoint1602,RoutPoint1602,RoutPoint1602,rPoint,ROUTPOINT_493N360E_C16
-cornu16,36.05049,49.41561,crossroads,RoutPoint1603,RoutPoint1603,RoutPoint1603,rPoint,ROUTPOINT_494N360E_C16
 cornu16,35.69230,51.83058,crossroads,RoutPoint1604,RoutPoint1604,RoutPoint1604,rPoint,ROUTPOINT_518N356E_C16
 cornu16,38.29658,45.88063,crossroads,RoutPoint1605,RoutPoint1605,RoutPoint1605,rPoint,ROUTPOINT_458N382E_C16
 cornu16,38.13725,44.90509,crossroads,RoutPoint1606,RoutPoint1606,RoutPoint1606,rPoint,ROUTPOINT_449N381E_C16
 cornu16,37.55636,45.04559,crossroads,RoutPoint1607,RoutPoint1607,RoutPoint1607,rPoint,ROUTPOINT_450N375E_C16
 cornu16,37.58893,45.87267,crossroads,RoutPoint1608,RoutPoint1608,RoutPoint1608,rPoint,ROUTPOINT_458N375E_C16
 cornu16,37.20353,46.14572,crossroads,RoutPoint1609,RoutPoint1609,RoutPoint1609,rPoint,ROUTPOINT_461N372E_C16
-cornu16,39.10290,43.01599,crossroads,RoutPoint1610,RoutPoint1610,RoutPoint1610,rPoint,ROUTPOINT_430N391E_C16
-cornu16,39.36367,42.48018,crossroads,RoutPoint1611,RoutPoint1611,RoutPoint1611,rPoint,ROUTPOINT_424N393E_C16
 cornu16,40.52049,47.19945,crossroads,RoutPoint1612,RoutPoint1612,RoutPoint1612,rPoint,ROUTPOINT_471N405E_C16
 cornu16,40.73903,47.61548,crossroads,RoutPoint1613,RoutPoint1613,RoutPoint1613,rPoint,ROUTPOINT_476N407E_C16
 cornu16,38.37865,48.28798,crossroads,RoutPoint1614,RoutPoint1614,RoutPoint1614,rPoint,ROUTPOINT_482N383E_C16
@@ -2072,10 +1893,11 @@ cornu16,40.66162,48.72306,crossroads,RoutPoint1615,RoutPoint1615,RoutPoint1615,r
 cornu16,37.87282,48.33669,crossroads,RoutPoint1616,RoutPoint1616,RoutPoint1616,rPoint,ROUTPOINT_483N378E_C16
 cornu16,36.42534,52.31039,crossroads,RoutPoint1617,RoutPoint1617,RoutPoint1617,rPoint,ROUTPOINT_523N364E_C16
 cornu16,37.63592,54.76182,crossroads,RoutPoint1618,RoutPoint1618,RoutPoint1618,rPoint,ROUTPOINT_547N376E_C16
+cornu16,35.98341,49.57716,crossroads,RoutPoint1619,RoutPoint1619,RoutPoint1619,rPoint,ROUTPOINT_495N359E_C16
 cornu17,33.92591,58.11679,تون,Tūn,Tūn,Tun,temp,TUN_581N339E_C17
-cornu17,33.64706,59.09428,قاين,Qāyin,Qāyin,Qayin,temp,QAYIN_590N336E_C17
+cornu17,33.64706,59.09428,قايين,Qāyīn,Qāyīn,Qayin,temp,QAYIN_590N336E_C17
 cornu17,33.77051,59.44592,قوهستان,Qūhistān,Qūhistān,Quhistan,regions,QUHISTAN_594N337E_C17
-cornu17,34.24652,58.63618,ينابذ,Yunābiḏ,Yunābidh,Yunabidh,temp,YUNABIDH_586N342E_C17
+cornu17,34.24652,58.63618,ينابيذ|جنابذ,Yunābīḏ/Ǧunābiḏ,Yunābīdh/Junābidh,Yunabidh/Junabidh,temp,YUNABIDH_586N342E_C17
 cornu17,34.31050,59.86207,زوزن,Zūzan,Zūzan,Zuzan,temp,ZUZAN_598N343E_C17
 cornu17,34.64655,59.98232,سلومك,Salūmak,Salūmak,Salumak,temp,SALUMAK_599N346E_C17
 cornu17,34.56282,60.07273,خوف,Ḫawaf,Khawaf,Khawaf,regions,KHAWAF_600N345E_C17
@@ -2106,7 +1928,6 @@ cornu17,34.34906,63.94658,خشت,Ḫašt,Khasht,Khasht,temp,KHASHT_639N343E_C17
 cornu17,34.88273,64.44388,غرج الشار,Ġarǧ al-Šār,Gharj al-Shār,Gharj al-Shar,temp,GHARJSHAR_644N348E_C17
 cornu17,34.38521,65.09941,جبل الغور,Ǧibal al-Ġūr,Jibal al-Ghūr,Jibal al-Ghur,mount,JIBALGHUR_650N343E_C17
 cornu17,34.84737,67.80206,باميان,Bāmiyān,Bāmiyān,Bamiyan,temp,BAMIYAN_678N348E_C17
-cornu17,33.54097,68.40249,غزنة,Ġaznaŧ,Ghazna,Ghazna,temp,GHAZNA_684N335E_C17
 cornu17,34.08270,68.74862,سكاوند,Sakāwand,Sakāwand,Sakawand,temp,SAKAWAND_687N340E_C17
 cornu17,34.52442,69.16963,كابل,Kābul,Kābul,Kabul,temp,KABUL_691N345E_C17
 cornu17,35.12055,58.12875,كندر,Kundur,Kundur,Kundur,temp,KUNDUR_581N351E_C17
@@ -2124,8 +1945,7 @@ cornu17,35.78200,59.56978,فرهاكرد,Farhākird,Farhākird,Farhakird,temp,FA
 cornu17,36.03203,59.12900,قصر الريح,Qaṣr al-Rīḥ,Qaṣr al-Rīḥ,Qasr al-Rih,temp,QASRRIH_591N360E_C17
 cornu17,36.08485,57.64840,بيهق,Bayhaq,Bayhaq,Bayhaq,regions,BAYHAQ_576N360E_C17
 cornu17,36.10768,57.92813,حسيناباذ,Ḥusaynābāḏ ?,Ḥusaynābādh ?,Husaynabadh ?,temp,HUSAYNABADH_579N361E_C17
-cornu17,36.11567,57.57918,سابزوار,Sābzawār,Sābzawār,Sabzawar,temp,SABZAWAR_575N361E_C17
-cornu17,36.08371,58.39294,بسكند,Biskand ?,Biskand ?,Biskand ?,temp,BISKAND_583N360E_C17
+cornu17,36.08371,58.39294,بيسكند|بيشكند,Bīskand/Bīšakand ?,Bīskand/Bīshakand ?,Biskand/Bishakand ?,temp,BISKAND_583N360E_C17
 cornu17,36.12138,58.79841,نيسابور,Naysābūr,Naysābūr,Naysabur,temp,NAYSABUR_587N361E_C17
 cornu17,36.17813,59.24061,بشتفروش,Buštafrūš,Bushtafrūsh,Bushtafrush,regions,BUSHTAFRUSH_592N361E_C17
 cornu17,36.08000,59.66585,خاكسار,Ḫākisār,Khākisār,Khakisar,temp,KHAKISAR_596N360E_C17
@@ -2473,7 +2293,6 @@ cornu17,40.26668,69.66363,crossroads,RoutPoint1726,RoutPoint1726,RoutPoint1726,r
 cornu17,38.49824,69.14618,crossroads,RoutPoint1727,RoutPoint1727,RoutPoint1727,rPoint,ROUTPOINT_691N384E_C17
 cornu17,38.56018,68.96102,crossroads,RoutPoint1728,RoutPoint1728,RoutPoint1728,rPoint,ROUTPOINT_689N385E_C17
 cornu18,42.21330,44.66088,السرير,al-Sarīr,al-Sarīr,al-Sarir,regions,SARIR_446N422E_C18
-cornu18,42.03054,48.25116,باب الأبواب,Bāb al-Abwāb,Bāb al-Abwāb,Bab al-Abwab,temp,BABABWAB_482N420E_C18
 cornu18,42.90467,47.51198,سمندر,Samandar,Samandar,Samandar,temp,SAMANDAR_475N429E_C18
 cornu18,43.28166,46.42082,بلنجر,Balanǧar,Balanjar,Balanjar,temp,BALANJAR_464N432E_C18
 cornu18,42.55994,50.10497,بحر الخزر,Baḥr al-Ḫazar,Baḥr al-Khazar,Bahr al-Khazar,lake,BAHRKHAZAR_501N425E_C18
@@ -2518,7 +2337,6 @@ cornu19,25.32721,69.67968,بانية,Bānyaŧ ?,Bānya ?,Banya ?,temp,BANYA_696N
 cornu19,25.86510,68.87697,المنصورة,al-Manṣūraŧ,al-Manṣūra,al-Mansura,temp,MANSURA_688N258E_C19
 cornu19,26.44591,68.85922,قالري,Qāllarī ?,Qāllarī ?,Qallari ?,temp,QALLARI_688N264E_C19
 cornu19,27.18279,68.25990,نهر مهران,Nahr Mihrān,Nahr Mihrān,Nahr Mihran,river,NAHRMIHRAN_682N271E_C19
-cornu19,27.94899,58.81423,إلى جيرفت,ilá Ǧīruft,ilā Jīruft,ila Jiruft,direction,ILAJIRUFT_588N279E_C19
 cornu19,28.17735,59.73164,سراي شهر,Sarāy Šahr ?,Sarāy Shahr ?,Saray Shahr ?,temp,SARAYSHAHR_597N281E_C19
 cornu19,27.79777,61.88374,خواش,Ḫawāš,Khawāsh,Khawash,temp,KHAWASH_618N277E_C19
 cornu19,27.64173,62.64811,جالق,Ǧālq,Jālq,Jalq,temp,JALQ_626N276E_C19
@@ -2535,7 +2353,6 @@ cornu19,29.64265,67.65738,والشتان,Wālištān,Wālishtān,Walishtan,regio
 cornu19,29.53796,67.85288,سيوي,Sīwī,Sīwī,Siwi,temp,SIWI_678N295E_C19
 cornu19,27.65788,68.90569,الرور,al-Rūr,al-Rūr,al-Rur,temp,RUR_689N276E_C19
 cornu19,29.12094,70.87350,بسمد,Basmad ?,Basmad ?,Basmad ?,temp,BASMAD_708N291E_C19
-cornu19,31.53768,60.02489,نيه,Nīh,Nīh,Nih,temp,NIH_600N315E_C19
 cornu19,30.32501,61.20990,رامة شهرستان,Rāmaŧ Šahristān,Rāmat Shahristān,Ramat Shahristan,temp,RAMASHAHRISTAN_612N303E_C19
 cornu19,30.15265,62.37889,كش,Kišš,Kishsh,Kishsh,temp,KISHSH_623N301E_C19
 cornu19,30.47359,63.17371,نهر هلمند,Nahr Hilmand,Nahr Hilmand,Nahr Hilmand,river,NAHRHILMAND_631N304E_C19
@@ -2574,16 +2391,12 @@ cornu19,32.48440,67.33448,خايسار,Ḫāysār ?,Khāysār ?,Khaysar ?,temp,K
 cornu19,30.58971,67.02922,أسفبجاي,Asfabǧāy ?,Asfabjāy ?,Asfabjay ?,temp,ASFABJAY_670N305E_C19
 cornu19,30.17568,71.40071,المولتان,al-Mūltān,al-Mūltān,al-Multan,temp,MULTAN_714N301E_C19
 cornu19,32.14532,71.29976,نهر مهران,Nahr Mihrān,Nahr Mihrān,Nahr Mihran,river,NAHRMIHRAN_712N321E_C19
-cornu19,34.28542,62.16897,هراة,Harāŧ,Harā,Hara,temp,HARA_621N342E_C19
-cornu19,33.60547,62.22666,أدرسكر,Adraskar,Adraskar,Adraskar,temp,ADRASKAR_622N336E_C19
-cornu19,33.28523,62.07283,أسفزار,Asfuzār,Asfuzār,Asfuzar,temp,ASFUZAR_620N332E_C19
 cornu19,32.68170,64.81783,بشلنك,Bišlank,Bishlank,Bishlank,temp,BISHLANK_648N326E_C19
 cornu19,32.71541,65.00452,بغنين,Baġnīn,Baghnīn,Baghnin,temp,BAGHNIN_650N327E_C19
 cornu19,32.61829,65.38750,درغش,Darġaš,Darghash,Darghash,temp,DARGHASH_653N326E_C19
 cornu19,33.08810,68.03075,سغان,Saġān,Saghān,Saghan,temp,SAGHAN_680N330E_C19
 cornu19,33.56409,68.40733,غزنة,Ġaznaŧ,Ghazna,Ghazna,temp,GHAZNA_684N335E_C19
 cornu19,33.62249,69.15407,كرديز,Kardīz,Kardīz,Kardiz,temp,KARDIZ_691N336E_C19
-cornu19,34.47785,69.19413,كابل,Kābul,Kābul,Kabul,temp,KABUL_691N344E_C19
 cornu19,33.95277,69.86876,أوغ,Ūġ,Ūgh,Ugh,temp,UGH_698N339E_C19
 cornu19,33.90757,72.24681,ويهند,Wayhind,Wayhind,Wayhind,temp,WAYHIND_722N339E_C19
 cornu19,30.07040,70.63104,crossroads,RoutPoint1901,RoutPoint1901,RoutPoint1901,rPoint,ROUTPOINT_706N300E_C19
@@ -2609,19 +2422,7 @@ cornu20,7.60759,80.81976,سرنديب,Sarandīb,Sarandīb,Sarandib,island,SARAND
 cornu20,18.58187,73.04586,صيمور,Ṣaymūr,Ṣaymūr,Saymur,temp,SAYMUR_730N185E_C20
 cornu20,19.52404,72.95093,سوبارة,Sūbāraŧ,Sūbāra,Subara,temp,SUBARA_729N195E_C20
 cornu20,19.90633,73.01422,سندان,Sandān,Sandān,Sandan,temp,SANDAN_730N199E_C20
-cornu20,28.97711,66.44280,مستنج,Mastanǧ,Mastanj,Mastanj,temp,MASTANJ_664N289E_C20
-cornu20,27.78580,66.60102,قصدار,Quṣdār,Quṣdār,Qusdar,temp,QUSDAR_666N277E_C20
-cornu20,26.15128,66.30567,أرمابيل,Armābīl,Armābīl,Armabil,temp,ARMABIL_663N261E_C20
-cornu20,25.32585,66.70122,قنبلي,Qanbalī ?,Qanbalī ?,Qanbali ?,temp,QANBALI_667N253E_C20
-cornu20,24.13910,67.33938,الديبل,al-Daybul,al-Daybul,al-Daybul,temp,DAYBUL_673N241E_C20
-cornu20,25.34015,68.38891,النيرون,al-Nīrūn,al-Nīrūn,al-Nirun,temp,NIRUN_683N253E_C20
-cornu20,25.36875,69.62830,بانية,Bānyaŧ ?,Bānya ?,Banya ?,temp,BANYA_696N253E_C20
-cornu20,25.90129,68.94268,المنصورة,al-Manṣūraŧ,al-Manṣūra,al-Mansura,temp,MANSURA_689N259E_C20
-cornu20,26.46332,68.84247,قالري,Qāllarī ?,Qāllarī ?,Qallari ?,temp,QALLARI_688N264E_C20
-cornu20,27.70178,69.04816,الرور,al-Rūr,al-Rūr,al-Rur,temp,RUR_690N277E_C20
-cornu20,29.55107,67.81931,سيوي,Sīwī,Sīwī,Siwi,temp,SIWI_678N295E_C20
 cornu20,28.57493,70.02385,نهر مهران,Nahr Mihrān,Nahr Mihrān,Nahr Mihran,river,NAHRMIHRAN_700N285E_C20
-cornu20,28.82474,70.78331,بسمد,Basmad ?,Basmad ?,Basmad ?,temp,BASMAD_707N288E_C20
 cornu20,23.61826,71.72209,قامهل,Qāmuhul ?,Qāmuhul ?,Qamuhul ?,temp,QAMUHUL_717N236E_C20
 cornu20,22.35228,72.56065,كنباية,Kanbāyaŧ,Kanbāya,Kanbaya,temp,KANBAYA_725N223E_C20
 cornu20,23.20809,75.78308,وجين,Wuǧayn,Wujayn,Wujayn,temp,WUJAYN_757N232E_C20
@@ -2629,14 +2430,5 @@ cornu20,28.46951,78.21440,أبار,Abār ?,Abār ?,Abar ?,temp,ABAR_782N284E_C20
 cornu20,26.46686,79.59619,أورهة,Awrahaŧ ?,Awraha ?,Awraha ?,temp,AWRAHA_795N264E_C20
 cornu20,27.11654,80.03921,قنوج,Qannawǧ,Qannawj,Qannawj,temp,QANNAWJ_800N271E_C20
 cornu20,25.14934,83.42513,نهر جنجس,Nahr Ǧanǧas,Nahr Janjas,Nahr Janjas,river,NAHRJANJAS_834N251E_C20
-cornu20,31.62346,65.68334,قندهار,Qandahār,Qandahār,Qandahar,temp,QANDAHAR_656N316E_C20
-cornu20,33.55626,68.43637,غزنة,Ġaznaŧ,Ghazna,Ghazna,temp,GHAZNA_684N335E_C20
-cornu20,33.65729,69.15364,كرديز,Kardīz,Kardīz,Kardiz,temp,KARDIZ_691N336E_C20
-cornu20,34.51774,69.15891,كابل,Kābul,Kābul,Kabul,temp,KABUL_691N345E_C20
-cornu20,30.22096,71.46893,المولتان,al-Mūltān,al-Mūltān,al-Multan,temp,MULTAN_714N302E_C20
 cornu20,30.12521,73.67875,نهر سندروذ,Nahr Sindarūḏ,Nahr Sindarūdh,Nahr Sindarudh,river,NAHRSINDARUDH_736N301E_C20
 cornu20,31.80740,73.13025,نهر جندرور,Nahr Ǧandarūr,Nahr Jandarūr,Nahr Jandarur,river,NAHRJANDARUR_731N318E_C20
-cornu20,33.98591,72.26004,ويهند,Wayhind,Wayhind,Wayhind,temp,WAYHIND_722N339E_C20
-cornu20,24.44466,67.60873,crossroads,RoutPoint2001,RoutPoint2001,RoutPoint2001,rPoint,ROUTPOINT_676N244E_C20
-cornu20,30.21787,70.81672,crossroads,RoutPoint2002,RoutPoint2002,RoutPoint2002,rPoint,ROUTPOINT_708N302E_C20
-cornu20,33.71928,69.08762,crossroads,RoutPoint2003,RoutPoint2003,RoutPoint2003,rPoint,ROUTPOINT_690N337E_C20

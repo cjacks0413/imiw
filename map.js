@@ -5,7 +5,7 @@ var map = L.mapbox.map('map', 'cjacks04.jij42jel')
 var svg = d3.select(map.getPanes().overlayPane).append("svg"),
     g = svg.append("g").attr("class", "leaflet-zoom-hide");
 
-var iraq_routes = L.geoJson(iraqRoutes).addTo(map); 
+var allRoutes = L.geoJson(allRoutes).addTo(map); 
 
 function projectPoint(x, y) {
 		var point = map.latLngToLayerPoint(new L.LatLng(y, x));
