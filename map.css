@@ -1,3 +1,7 @@
+path,circle,rect,polygon,ellipse,line {
+    vector-effect: non-scaling-stroke;
+}
+
 #map { 
 	position:absolute; 
 	top:0; 
@@ -13,6 +17,12 @@
 path {
 	stroke: red;
 	stroke-width: 5px;
+}
+
+.node {
+    fill: blue;
+    stroke: black;
+    stroke-width: 1
 }
 
 .site-icon {
