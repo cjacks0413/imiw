@@ -14,15 +14,16 @@ path,circle,rect,polygon,ellipse,line {
 }
 
 
-path {
-	stroke: red;
-	stroke-width: 5px;
-}
-
 .node {
     fill: blue;
     stroke: black;
     stroke-width: 1
+}
+
+path {
+    stroke: brown;
+    stroke-width: 1px;
+    fill: none;
 }
 
 .site-icon {
