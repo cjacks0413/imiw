@@ -6,8 +6,9 @@ path,circle,rect,polygon,ellipse,line {
 	position:absolute; 
 	top:0; 
 	bottom:0; 
-	width:100%; 
+	width: 100%; 
 }
+
 
 .text {
 	font-size:7px;
