@@ -1,12 +1,25 @@
 path,circle,rect,polygon,ellipse,line {
     vector-effect: non-scaling-stroke;
 }
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgba(255, 255, 255, 0.75);
+  height: 100%;
+  width: 100%;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+}
 
 #map { 
 	position:absolute; 
 	top:0; 
 	bottom:0; 
 	width: 100%; 
+  height: 100%;
 }
 
 
@@ -34,13 +47,40 @@ div.tooltip {
     z-index: -9999;
 }
 
+.search-node {
+    fill: red;
+    stroke: black;
+    stroke-width: 5;
+    cursor: pointer;
+}
+
+#search-container {
+  z-index: 8888;
+  position: absolute;
+  top: 0;
+  left: 50px;
+  margin: 10px;
+}
+
+#search-container #search input {
+  padding: 5px;
+  width: 200px;
+}
+
+
+.pathfind-node {
+    fill: black;
+    stroke: black;
+    stroke-width: 1;
+}
+
 .circle {
   cursor: pointer;
 }
 
 path {
     stroke: brown;
-    stroke-width: 1px;
+    stroke-width: 2px;
     fill: none;
 }
 
