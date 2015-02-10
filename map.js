@@ -1,15 +1,19 @@
 $j = jQuery; 
 var debug = true; 
 
-/* Is this the best way to incorporate this? */ 
-var pathFind = false; 
+/* TODO: make this more efficient */ 
+
+var pathFind = false;
+var shortestPathCornu = true;
+var shortestPathMuqaddasi = false;
+var networkFlooding = false; 
 var hierarchy = false; 
 var start = true; 
 
 
 L.mapbox.accessToken = 'pk.eyJ1IjoiY2phY2tzMDQiLCJhIjoiVFNPTXNrOCJ9.k6TnctaSxIcFQJWZFg0CBA';
-var map = L.mapbox.map('map', 'cjacks04.jij42jel').setView([31, 35], 4);
-
+var map = L.mapbox.map('map', 'cjacks04.jij42jel', {zoomControl: false}).setView([31, 35], 6);
+new L.Control.Zoom( { position: 'bottomleft'}).addTo(map);
 
 /*------------------------------------------------------
  * SETUP SITES 
@@ -48,7 +52,9 @@ var svgSites = g.selectAll("circle")
 	.enter()
 	.append("circle")
 	.attr("class", "node")
-	.attr("r", 5)
+	.style("stroke", "black")
+	.style("stroke-width", 2)
+	.attr("r", 3)
 	.on("click", assign); 
 
 map.on("viewreset", update);
@@ -175,7 +181,6 @@ function drawPathFromSourceToTarget(sid, tid) {
 	t = graph.getNode(tid);
 	pathFromAToB = bfs(s, t); 
 	//pathFromAToB = shortestPath(s, t);
-	console.log(pathFromAToB);
 	topoPath = createTopoPath(); 
 	showPath(topoPath);
 	map.on("viewreset", resetMap);
@@ -235,6 +240,17 @@ function removeSitesWithoutRoutes() {
 			sitesWithRoutes.push(sitesByTopURI[r.sToponym]); 
 		}
 	})
+
+	sitesWithRoutes.sort( function(a, b) {
+		var element1 = a.eiSearch.toLowerCase(); 
+		var element2 = b.eiSearch.toLowerCase(); 
+		if (element1 < element2) {
+			return -1 
+		} if (element1 > element2 ) {
+			return 1 
+		} 
+		return 0; 
+	})
 }
 
 function exists(array, el) {
@@ -243,6 +259,80 @@ function exists(array, el) {
 	})	
 	return elementsFound.length > 0; 
 }
+
+/*-----------------------------------------------------
+ * UI  
+ *----------------------------------------------------*/ 
+
+/* Create select (dropdown) for pathfinding */
+var from, to, selectFrom, selectTo; 
+from = $j("#site-from")
+to = $j("#site-to");
+selectFrom = $j('<select>', {id: "select-from"}).appendTo(from);
+selectTo = $j('<select>', {id: "select-to"}).appendTo(to);
+
+for (var i = 0; i < sitesWithRoutes.length; i++) {
+	var option =  $j("<option>", { value: sitesWithRoutes[i].topURI, 
+								  text: sitesWithRoutes[i].eiSearch});
+	selectFrom.append(option.clone());
+	selectTo.append(option.clone())
+}
+
+function findPaths() {
+	if (shortestPathCornu) {
+		var form = $j("#pathfinding-select");
+		var fromSite = form[0][0]; 
+		var toSite = form[0][1];
+		fromID = fromSite.options[fromSite.selectedIndex].value;
+		toID = toSite.options[toSite.selectedIndex].value;
+		//g.selectAll("path").style("visibility", "hidden");
+		drawPathFromSourceToTarget(fromID, toID);
+	} else if (networkFlooding) {
+		console.log("sorry, this functionality has not yet been implemented"); 
+	} else if (shortestPathMuqaddasi) {
+		console.log("sorry, this functionality has not yet been implemented");
+	}
+}
+
+/* checkboxes */
+$j('#shortest-path-wrapper').on("click", function() {
+	resetOptions()
+	$j('#shortest-path').show(); 
+	shortestPathCornu = true;
+})
+$j('#network-flooding-wrapper').on("click", function() {
+	resetOptions();
+	$j('#network-flooding').show();
+	networkFlooding = true;
+}) 
+$j('#muqaddasi-path-wrapper').on("click", function() {
+	resetOptions();
+	$j('#muqaddasi-path').show();
+	shortestPathMuqaddasi = true;
+}) 
+
+
+function resetOptions() {
+	$j('#shortest-path').hide();
+	$j('#network-flooding').hide();
+	$j('#muqaddasi-path').hide();
+	shortestPathCornu = false;
+	shortestPathMuqaddasi = false;
+	networkFlooding = false;
+}
+
+/* SLIDE left and right */
+$j('#path-form-left').on("click", function() {
+	$j('#site-form').hide('slide', {direction: 'left'}, 1000);
+	$j( this ).hide();
+	$j('#path-form-right').show();
+})
+
+$j('#path-form-right').on("click", function() {
+	$j('#site-form').show('slide', {direction: 'left'}, 1000); 
+	$j( this ).hide();
+	$j('#path-form-left').show();
+})
 /*-----------------------------------------------------
  * LAYER GROUPS 
  *----------------------------------------------------*/ 
@@ -254,6 +344,7 @@ function exists(array, el) {
 $j('#search input').on('keyup', (function (e) {
 	if (e.which == 13) {
 		g.selectAll("circle.node").style("visibility", "hidden");
+		g.selectAll("path").style("visibility", "hidden");
 		//changed places.data to sites
 		var matchesIndex = filterPlaces( $j ( this ).val(), sites, ['translitTitle','translitSimpleTitle','arTitle','topURI','topType']);
 		for ( var i=0; i < matchesIndex.length; i++ ) {
@@ -261,7 +352,7 @@ $j('#search input').on('keyup', (function (e) {
 			g.selectAll("circle.node")
 			 		   .filter(function(d) { return d.topURI === s_id})
 			 		   .attr("class", "node")
-			 		   .attr("r", 5)
+			 		   .attr("r", 4)
 			 		   .style("visibility", "visible")
 			 		   .on("click", assign)
 		}
@@ -269,9 +360,11 @@ $j('#search input').on('keyup', (function (e) {
 	}
 	if ( $j (this).val() == "") {
 		g.selectAll("circle.node").style("visibility", "visible");
+		g.selectAll("path").style("visibility", "visible");
 	}
   })
 );
+
 
 function filterPlaces( _needle, _obj, _keys ) {
 	var matches = [];

@@ -10,11 +10,11 @@ for (var i = 0; i < routes.length; i++) {
 	s = routes[i].properties.sToponym;
 
 	graph.addNode(e);
-	graph.getNode(e).visited = false;
+	//graph.getNode(e).visited = false;
 	graph.getNode(e)._id = e;
 
 	graph.addNode(s)
-	graph.getNode(s).visited = false; 
+	//graph.getNode(s).visited = false; 
 	graph.getNode(s)._id = s; 
 
 	graph.addEdge(e, s); 
@@ -25,6 +25,13 @@ for (var i = 0; i < routes.length; i++) {
 	graph.getEdge(e, s)._id = routes[i].properties.id; 
 }
 
+resetNodes(graph);
+
+function resetNodes(G) {
+  graph.forEachNode( function(node) {
+    node.visited = false; 
+  })
+}
 
 /* queue */ 
 function Queue() {
@@ -49,6 +56,7 @@ function Queue() {
  */
 
 function bfs(s, t) {
+  resetNodes(graph);
 	var previous = {};
 	var queue = new Queue(); 
 	var target, u, v, edges; 
