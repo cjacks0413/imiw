@@ -40,11 +40,23 @@
 					<input class="button" id="go-path" type="submit" value="Go">
 				</form> 
 			</div> 
+			<div id="index-lookup-content">
+				<div id="close-index" class="close">[X]</div></br>
+				<div class="english">Exact matches in Arabic Sources:</div></br>
+				<div class="arabic"><ul class="match-list" id="exact" ></ul></div> 
+			</div>
+			<div class='arabic' id="index-lookup-match"> 
+				<div id="close-match" class="close">[X]</div></br>
+				<div class='arabic' id="match" ></div> 
+			</div>
 		<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
 		<script src="js/jquery-1.11.1.js"> </script> 
 		<script src="js/jquery-ui.min.js"></script>
+		<script src="js/tooltip.js"></script>
 		<script src="data/cornu_all.js" type="text/javascript"></script> 
 		<script src="data/all_routes.js" type="text/javascript"></script>
+		<script src="data/index.js" type="text/javascript"></script>
+		<script src="data/sources.js" type="text/javascript"></script>
 		<script src="graph.js" type="text/javascript"></script>  
 		<script src="map.js" type="text/javascript"></script> 		
 	</body>
