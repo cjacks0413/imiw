@@ -70,7 +70,7 @@ div.tooltip {
 .node {
     fill: rgba(0, 0, 255, 0.7);
     cursor: pointer;
-   z-index: -9999;
+    z-index: -9999;
 }
 
 .search-node {
@@ -104,6 +104,38 @@ div.tooltip {
   height: 70%;
   top: 10%;
   width: 1.8%;
+}
+
+#options {
+  position: absolute;
+  top: 0;
+  right: 2.3%;
+  height: 84%;
+  bottom: 10%;
+}
+
+#right-arrow-container{ 
+  position: absolute;
+  border-style: solid;
+  background-color: rgba(120, 135, 171, .8);
+  border-style: solid;
+  border-width: 3px;
+  border-color: rgb(22, 41, 85);
+  height: 70%;
+  top: 10%;
+  right: 0;
+  width: 1.8%; 
+}
+
+#options-left {
+
+}
+#options-right {
+
+}
+
+#go-options {
+
 }
 
 #site-form {
@@ -246,16 +278,15 @@ path {
   color: #d12c55;
 }
 
-#network-flooding {
+#network-flooding, #muqaddasi-path, 
+#voronoi, #hierarchy {
   color: #d12c55;
   display: none;
 }
 
-#muqaddasi-path {
-  color: #d12c55;
-  display: none;
-}
-.arrow-right {
+
+
+.left-arrow-right {
   position:relative;
   width: 0; 
   height: 0; 
@@ -265,6 +296,17 @@ path {
   border-bottom: 20px solid transparent;
   border-left: 20px solid black;
   display:none;
+}
+
+.right-arrow-right {
+  position:relative;
+  width: 0; 
+  height: 0; 
+  left: 1.5px;
+  top: 40%%;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 20px solid black;
 }
 
 /* from Mike Bostock's tooltip example */
@@ -280,7 +322,7 @@ path {
     border-radius:10px;
 }
 
-.arrow-left {
+.left-arrow-left {
   position:relative;
   left: 3px;
   top: 40%%;
@@ -289,9 +331,22 @@ path {
   height: 0; 
   border-top: 20px solid transparent;
   border-bottom: 20px solid transparent; 
-  
   border-right:20px solid black; 
 }
+
+.right-arrow-left {
+  position:relative;
+  left: 3px;
+  top: 40%%;
+  padding: 0;
+  width: 0; 
+  height: 0; 
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent; 
+  display:none;
+  border-right:20px solid black; 
+}
+
 
 /* For thurayya popup */
 #index-lookup-content {

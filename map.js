@@ -8,7 +8,7 @@ var shortestPathCornu = true;
 var shortestPathMuqaddasi = false;
 var networkFlooding = false; 
 var hierarchy = false; 
-var start = true; 
+var voronoi = false; 
 
 
 L.mapbox.accessToken = 'pk.eyJ1IjoiY2phY2tzMDQiLCJhIjoiVFNPTXNrOCJ9.k6TnctaSxIcFQJWZFg0CBA';
@@ -76,17 +76,6 @@ function update() {
 	)
 
 }
-
-/* TODO: TOOLTIP */
-
-function assign(d) {
-	if (start) {
-		console.log(d);
-	} else if (pathFind) {
-		identifySourceClick(d);
-	}
-}
-
 
 /*------------------------------------------------------
  * SETUP ROUTES
@@ -299,7 +288,8 @@ function findPaths() {
 	}
 }
 
-/* checkboxes */
+/* checkboxes 
+*  TODO; MAKE THIS MODULAR */
 $j('#shortest-path-wrapper').on("click", function() {
 	resetOptions()
 	$j('#shortest-path').show(); 
@@ -316,14 +306,31 @@ $j('#muqaddasi-path-wrapper').on("click", function() {
 	shortestPathMuqaddasi = true;
 }) 
 
+$j('#voronoi-wrapper').on("click", function() {
+	resetOptions();
+	$j('#voronoi').show();
+	voronoi = true;
+})
+
+$j('#hierarchy-wrapper').on("click", function() {
+	resetOptions();
+	$j('#hierarchy').show();
+	hierarchy = true; 
+})
+
 
 function resetOptions() {
 	$j('#shortest-path').hide();
 	$j('#network-flooding').hide();
 	$j('#muqaddasi-path').hide();
+	$j('#voronoi').hide();
+	$j('#hierarchy').hide()
 	shortestPathCornu = false;
 	shortestPathMuqaddasi = false;
 	networkFlooding = false;
+	voronoi = false;
+	hierarchy = false;
+
 }
 
 /* SLIDE left and right */
@@ -339,6 +346,22 @@ $j('#path-form-right').on("click", function() {
 	$j( this ).hide();
 	$j('#path-form-left').show();
 })
+
+$j('#options-right').on("click", function() {
+	$j('#options').hide('slide', {direction: 'right'}, 1000);
+	$j( this ).hide();
+	$j('#options-left').show();
+}) 
+
+$j('#options-left').on("click", function() {
+	$j('#options').show('slide', {direction: 'right'}, 1000);
+	$j( this ).hide();
+	$j('#options-right').show();
+})
+
+
+
+
 
 /* POPUP/TOOLTIP 
  TODO: make this less gross. */

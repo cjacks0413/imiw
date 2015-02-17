@@ -15,8 +15,8 @@
 	<body>
 		<div id="map"></div>
 		<div id="left-arrow-container"></div>
-			<div class="arrow-left" id="path-form-left"></div>
-			<div class="arrow-right" id="path-form-right"></div> 
+			<div class="left-arrow-left" id="path-form-left"></div>
+			<div class="left-arrow-right" id="path-form-right"></div> 
 			<div id="site-form" class="modal">
 				<div id="search-container">
 					<div id="search" class="english">Search:
@@ -40,15 +40,27 @@
 					<input class="button" id="go-path" type="submit" value="Go">
 				</form> 
 			</div> 
-			<div id="index-lookup-content">
-				<div id="close-index" class="close">[X]</div></br>
-				<div class="english">Exact matches in Arabic Sources:</div></br>
-				<div class="arabic"><ul class="match-list" id="exact" ></ul></div> 
+		<div id="right-arrow-container">
+			<div class="right-arrow-right" id="options-right"></div>
+			<div class="right-arrow-left" id="options-left"></div></div>
+			<div id="options" class="modal">
+				 <div class="english" id="voronoi-wrapper">
+				 	<div class="check-rect"><span id="voronoi">X</span></div>Voronoi Diagram
+				 </div>
+				 <div class="english" id="hierarchy-wrapper">
+				 	<div class="check-rect"><span id="hierarchy">X</span></div>Hierarchy Mapping
+				 </div>
+				 <input class="button" id="go-options" type="submit" value="Apply">
 			</div>
-			<div class='arabic' id="index-lookup-match"> 
-				<div id="close-match" class="close">[X]</div></br>
-				<div class='arabic' id="match" ></div> 
-			</div>
+		<div id="index-lookup-content">
+			<div id="close-index" class="close">[X]</div></br>
+			<div class="english">Exact matches in Arabic Sources:</div></br>
+			<div class="arabic"><ul class="match-list" id="exact" ></ul></div> 
+		</div>
+		<div class='arabic' id="index-lookup-match"> 
+			<div id="close-match" class="close">[X]</div></br>
+			<div class='arabic' id="match" ></div> 
+		</div>
 		<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
 		<script src="js/jquery-1.11.1.js"> </script> 
 		<script src="js/jquery-ui.min.js"></script>
