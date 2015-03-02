@@ -1,0 +1,417 @@
+path,circle,rect,polygon,ellipse,line {
+    vector-effect: non-scaling-stroke;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgba(255, 255, 255, 0.75);
+  height: 100%;
+  width: 100%;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+}
+
+#map { 
+	position:absolute; 
+	top:0; 
+	bottom:0; 
+	width: 100%; 
+  height: 100%;
+}
+
+
+div.tooltip {
+  color: #222; 
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: .5em; 
+  border-radius: 2px; 
+  opacity: 1; 
+  position: absolute;
+}
+
+
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+
+
+.text {
+	font-size:7px;
+}
+
+.node {
+    fill: rgba(0, 0, 255, 0.7);
+    cursor: pointer;
+    z-index: -9999;
+}
+
+.search-node {
+    fill: red;
+    stroke: black;
+    stroke-width: 5;
+    cursor: pointer;
+}
+
+.modal {
+  position: absolute;
+  font-size: 15px;
+  font-family: 'Brill', 'Gentium', Georgia, serif;
+  color: #000;
+  width: 35%;
+  padding: 10px;
+  background-color: rgba(120, 135, 171, .8);
+  overflow: scroll;
+  border-style: solid;
+  border-width: 3px;
+  border-color: rgb(22, 41, 85);
+}
+
+#left-arrow-container {
+  position:absolute;
+  border-style: solid;
+  background-color: rgba(120, 135, 171, .8);
+  border-style: solid;
+  border-width: 3px;
+  border-color: rgb(22, 41, 85);
+  height: 70%;
+  top: 10%;
+  width: 1.8%;
+}
+
+#options {
+  position: absolute;
+  top: 0;
+  right: 2.3%;
+  height: 84%;
+  bottom: 10%;
+}
+
+#right-arrow-container{ 
+  position: absolute;
+  border-style: solid;
+  background-color: rgba(120, 135, 171, .8);
+  border-style: solid;
+  border-width: 3px;
+  border-color: rgb(22, 41, 85);
+  height: 70%;
+  top: 10%;
+  right: 0;
+  width: 1.8%; 
+}
+
+#options-left {
+
+}
+#options-right {
+
+}
+
+#go-options {
+
+}
+
+#site-form {
+  position: absolute;
+  top: 0; 
+  left: 2.3%;
+  height: 84%;
+  bottom: 10%;
+}
+
+#search-container {
+  z-index: 8888;
+  position: relative;
+  top: 0;
+  left: 0;
+  margin: 10px;
+  float: left;
+}
+
+/* used to say #search-container #search input {*/ 
+#search input {
+  position: relative;
+  top: 0;
+  padding: 5px;
+  width: 268px;
+  line-height: 1;
+  height: 20px;
+}
+
+#site-from, #site-to {
+  position: relative;
+  margin: 10px;
+  left: 0;
+  padding: 5px;
+}
+
+#site-from select, #site-to select {
+  width: 200px;
+}
+
+#go-path {
+  position: relative;
+  top: 100px;
+  left: 25px;
+}
+
+.pathfind-node {
+    fill: black;
+    stroke: black;
+    stroke-width: 1;
+}
+
+/* consider making this a class */ 
+.styled-select {
+   width: 240px;
+   height: 34px;
+   overflow: hidden;
+   border: 1px solid #ccc;
+   }
+
+/*#pathfinding-select {
+  padding-top: 100px;
+}*/
+
+.button {
+  -webkit-border-radius: 15;
+  -moz-border-radius: 15;
+  border-radius: 15px;
+  font-family: Arial;
+  color: rgb(75, 4, 28);
+  font-size: 20px;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 10px 150px 10px 150px;
+  text-decoration: none;
+}
+
+
+.button:hover {
+  background: rgb(22, 41, 85);
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+}
+
+.english-form-title {
+  text-align: center;
+  font-size: 20px;
+  font-family: Brill, Gentium, Georgia, Arial, serif;
+  direction: ltr;
+}
+
+#pathfinding-select select {
+   width: 268px;
+   padding: 5px;
+   line-height: 1;
+   height: 34px;
+   -webkit-appearance: none;
+}
+
+.circle {
+  cursor: pointer;
+}
+
+path {
+    stroke: brown;
+    stroke-width: 2px;
+    fill: none;
+}
+
+.arabic {
+  font-size: 20px;
+  font-family: 'DroidArabicNaskhRegular', 'Lateef', 'Geeza Pro', serif;
+  padding: 0;
+  direction: rtl;
+}
+.english{
+  font-size: 20px;
+  font-family: Brill, Gentium, Georgia, Arial, serif;
+  direction: ltr;
+}
+
+.site-icon {
+  background: black;
+  border:5px solid rgba(255,255,255,0.5);
+  color: black;
+  font-weight:bold;
+  text-align:center;
+  border-radius:50%;
+  line-height:30px;
+}
+
+.check-rect {
+  height: 20px;
+  width: 20px;
+  background: 0;
+  border: 3px solid;
+  text-align: center;
+}
+
+#shortest-path {
+  color: #d12c55;
+}
+
+#network-flooding, #muqaddasi-path, 
+#voronoi, #hierarchy {
+  color: #d12c55;
+  display: none;
+}
+
+
+.left-arrow-right {
+  position:relative;
+  width: 0; 
+  height: 0; 
+  left: 4px;
+  top: 40%%;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 20px solid black;
+  display:none;
+}
+
+.right-arrow-right {
+  position:relative;
+  width: 0; 
+  height: 0; 
+  left: 1.5px;
+  top: 40%%;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 20px solid black;
+}
+
+/* from Mike Bostock's tooltip example */
+.tooltip{ 
+    background-color:rgba(68,136,187,0.5);;
+          margin: 10px;
+          height: 150px;
+          width: 200px;
+          padding-left: 10px; 
+          padding-top: 10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    border-radius:10px;
+}
+
+.left-arrow-left {
+  position:relative;
+  left: 3px;
+  top: 40%%;
+  padding: 0;
+  width: 0; 
+  height: 0; 
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent; 
+  border-right:20px solid black; 
+}
+
+.right-arrow-left {
+  position:relative;
+  left: 3px;
+  top: 40%%;
+  padding: 0;
+  width: 0; 
+  height: 0; 
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent; 
+  display:none;
+  border-right:20px solid black; 
+}
+
+
+/* For thurayya popup */
+#index-lookup-content {
+  display: none;
+  z-index: 9999;
+  position: absolute;
+  font-size: 15px;
+  font-family: 'Brill', 'Gentium', Georgia, serif;
+  color: #000;
+  width: 30%;
+  top: 10%; 
+  left: 5%;
+  height: 80%;
+  bottom: 10%;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  /*background-color: #FFF;*/
+  overflow: scroll;
+  float: left;
+}
+
+#index-lookup-match {
+  display: none;
+  z-index: 9999;
+  position: absolute;
+  font-size: 15px;
+  font-family: 'Brill', 'Gentium', Georgia, serif;
+  color: #000;
+  width: 55%;
+  top: 10%;
+  right: 5%;
+  bottom: 10%; 
+  height: 80%;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  /*background-color: #FFF;*/
+  overflow: scroll;
+  float: left;
+}
+
+
+.close {
+  z-index: 9999;
+  float: right;
+  color: #f00;
+  cursor : pointer;
+}
+
+#match {
+  direction: rtl;
+  font-family: 'DroidArabicNaskhRegular', 'Brill', 'Georgia', 'Lateef', 'Geeza Pro', serif;
+}
+
+.match-display {
+  display: none;
+  font-family: 'DroidArabicNaskhRegular', 'Brill', 'Georgia', 'Lateef', 'Geeza Pro', serif;
+}
+
+.match-display-reference {
+  display: none;
+  font-family: 'DroidArabicNaskhRegular', 'Brill', 'Georgia', 'Lateef', 'Geeza Pro', serif;
+}
+
+.match-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  direction: rtl;
+}
