@@ -3,26 +3,24 @@ var graph = new Graph();
 var sites = places.data; 
 var routes = allRoutes.features; 
 
-var e, s; 
+var e, s, edge;  
 
 for (var i = 0; i < routes.length; i++) {
 	e = routes[i].properties.eToponym;
 	s = routes[i].properties.sToponym;
-
 	graph.addNode(e);
-	//graph.getNode(e).visited = false;
 	graph.getNode(e)._id = e;
 
 	graph.addNode(s)
-	//graph.getNode(s).visited = false; 
 	graph.getNode(s)._id = s; 
 
 	graph.addEdge(e, s); 
-	graph.getEdge(e, s)._eid = e;
-	graph.getEdge(e, s)._sid = s; 
-  /* add this func if decide to use dijkstra 
-  / graph.getEdge(e, s).weight = calculateWeight(e, s)*/ 
-	graph.getEdge(e, s)._id = routes[i].properties.id; 
+	edge = graph.getEdge(e, s); 
+  edge._eid = e;
+	edge._sid = s; 
+
+	edge._id = routes[i].properties.id; 
+  edge.weight = routes[i].properties.Meter; 
 }
 
 resetNodes(graph);
@@ -33,87 +31,8 @@ function resetNodes(G) {
   })
 }
 
-/* queue */ 
-function Queue() {
-	this.q = new Array();
+/* DIJSKSTRA IMPLEMENTATION ADAPTED FROM: https://github.com/mburst/dijkstras-algorithm */
 
-	this.enqueue = function(item) {
-		this.q.unshift(item);
-	}
-	this.dequeue = function() {
-		return this.q.pop();
-	}
-
-	this.empty = function() {
-		return this.q.length === 0; 
-	}
-}
-
-/* BFS 
- * s = start vertex
- * t = target vertex
- * return path from s to t 
- */
-
-function bfs(s, t) {
-  resetNodes(graph);
-	var previous = {};
-	var queue = new Queue(); 
-	var target, u, v, edges; 
-	queue.enqueue(s);
-	previous[s._id] = null; 
-	s.visited = true; 
-	while(!queue.empty()) {
-		target = queue.dequeue();	
-		target.visited = true;
-		if (target._id === t._id) {
-			return extractPathFromPrevious(graph, previous, s, t);
-		}
-		var edges = graph.getAllEdgesOf(target._id);
-		for (var i = 0; i < edges.length; i++) {
-			enqueueIfNotVisited(graph, edges[i], queue, target, previous);
-		}
-	}
-	return false; 
-}
-
-
-
-/* Given previous array, return the path from s to t by node id*/
-/* TODO: Consider returning a list of route_ids */
-function extractPathFromPrevious(graph, previous, s, t) {
-	var path = new Array();
-	/* put target in path */
-	path.push(t._id);
-
-	var id = previous[t._id]._id; 
-	while(id != s._id) {
-		path.push(id);
-		id = previous[id]._id; 
-	}	
-	/* put source in path */
-	path.push(id);
-	return path; 
-}
-
-function enqueueIfNotVisited(G, edge, q, target, previous){
-	var u = G.getNode(edge._eid);
-	var v = G.getNode(edge._sid); 
-	if (u.visited === false) {
-		u.visited = true;
-		previous[u._id] = target; 
-		q.enqueue(u);
-	} if (v.visited === false) {
-		v.visited = true;
-		previous[v._id] = target;
-		q.enqueue(v);
-	}
-
-}
-
-/* DIJSKSTRA IMPLEMENTATION ADAPTED FROM: https://github.com/mburst/dijkstras-algorithm /
-
-ignoore for now, seems as tho bfs is more accurate r.e. pathfinding. 
 function PriorityQueue () {
   this._nodes = [];
 
@@ -148,54 +67,62 @@ function shortestPath(s, t) {
       nodes.enqueue(0, node._id);
     } else {
       distances[node._id] = INFINITY; 
-      nodes.enqueue(INFINITY, node._id);
+     // nodes.enqueue(INFINITY, node._id);
     } 
     previous[node._id] = null; 
   })
 
   while(!nodes.isEmpty()) {
     smallest = nodes.dequeue();
+    /* create return path */ 
     if(smallest == t._id) {
       path;
-
       while(previous[smallest]) {
+        //console.log(graph.getEdge(previous[smallest], smallest));
         path.push(smallest);
+        // edge = graph.getEdge(previous[smallest], smallest); 
+        // if (edge) {
+        //   path.push(edge._id);
+        // }
+        
         smallest = previous[smallest];
       }
-
       break;
     }
 
-
-    if(!smallest || distances[smallest] === INFINITY){
-      continue;
-    }
+    // if(!smallest || distances[smallest] === INFINITY){
+    //   continue;
+    // }
 
     var edges = graph.getAllEdgesOf(smallest);
+   // console.log(edges);
     
     for(var i = 0; i < edges.length; i++) {
       neighbor = edges[i];
-      console.log(neighbor, "exploring from: ", smallest);
+
+      //console.log("exploring from: ", smallest);
       alt = distances[smallest] + neighbor.weight; 
 
-
-      if (edges[i]._sid == smallest) {
+      if (neighbor._sid == smallest) {
         if (alt < distances[neighbor._eid]) {
           distances[neighbor._eid] = alt;
           previous[neighbor._eid] = smallest;
+       //   console.log("enqueueing: ", alt, neighbor._eid);
           nodes.enqueue(alt, neighbor._eid);
         }
       } else {
         if (alt < distances[neighbor._sid]) {
           distances[neighbor._sid] = alt;
           previous[neighbor._sid] = smallest;
-          nodes.enqueue(alt, neighbor.s_id)
+       //   console.log("yoyo enqueueing: ", alt, neighbor._sid)
+          nodes.enqueue(alt, neighbor._sid)
         }
-      }
+      }  
     }
   }
   return path.concat(s._id).reverse(); 
-} */ 
+  //return path.reverse();
+} 
 
 
 

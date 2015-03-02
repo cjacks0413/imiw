@@ -12,7 +12,7 @@ var voronoi = false;
 
 
 L.mapbox.accessToken = 'pk.eyJ1IjoiY2phY2tzMDQiLCJhIjoiVFNPTXNrOCJ9.k6TnctaSxIcFQJWZFg0CBA';
-var map = L.mapbox.map('map', 'cjacks04.jij42jel', {zoomControl: false}).setView([31, 35], 6);
+var map = L.mapbox.map('map', 'cjacks04.jij42jel', {zoomControl: false}).setView([31, 35], 5);
 new L.Control.Zoom( { position: 'bottomleft'}).addTo(map);
 
 /*------------------------------------------------------
@@ -29,9 +29,12 @@ map._initPathRoot()
 var svg = d3.select("#map").select("svg");
 g = svg.append("g")
 /* SITES */
+var sitesByTopURI = sortSitesByTopURI(); 
 
-var sites = places.data.filter(isRelevantTopType);
-
+//var sites = places.data.filter(isRelevantTopType);
+var sitesWithRoutes = new Array(); 
+removeSitesWithoutRoutes();
+var sites = sitesWithRoutes; 
 function isRelevantTopType(element, index, array) {
 	return ( element.topType == 'metropoles' || 
 		     element.topType == 'capitals'   || 
@@ -40,6 +43,7 @@ function isRelevantTopType(element, index, array) {
 		     element.topType == 'villages'   ) 
 	// could add sites or waystations
 }
+
 
 /* Add a LatLng object to each item in the dataset */
 sites.forEach(function(d) {
@@ -147,7 +151,8 @@ function resetMap() {
  * TODO: deal with the missing pieces ...
  * TODO: animate the path  
  * ----------------------------------------------------*/
-var routesByEID = {}, 
+var routesByEID = {},
+	routesByID = {}, 
     pathFromAToB, 
     pathSourceID; 
 var howManyTrue = 0; 
@@ -166,16 +171,21 @@ function identifyTargetClick(d) {
 
 /* Tester functions. TODO: add showAllPaths as a layer*/
 //drawPathFromSourceToTarget("MADINNAQIRA_415N255E_C07","YATHRIB_396N244E_C07" );
+//drawPathFromSourceToTarget("BAGHDAD_443N333E_C03", "MAKKA_398N213E_C07");
+//drawPathFromSourceToTarget("BAGHDAD_443N333E_C03", "AMMAN_359N319E_C01");
 //showAllPaths();
 
 function drawPathFromSourceToTarget(sid, tid) {
 	var s, t; 
 	sortRoutesByEID(); 
+	sortRoutesByRouteID();
 	s = graph.getNode(sid);
 	t = graph.getNode(tid);
-	pathFromAToB = bfs(s, t); 
-	//pathFromAToB = shortestPath(s, t);
+	//pathFromAToB = bfs(s, t); 
+	pathFromAToB = shortestPath(s, t);
+	console.log(pathFromAToB);
 	topoPath = createTopoPath(); 
+	console.log(topoPath);
 	showPath(topoPath);
 	map.on("viewreset", resetMap);
 }
@@ -185,7 +195,10 @@ function sortRoutesByEID() {
 	for (var i = 0; i < routes.length; i++) {
 		r = routes[i].properties.eToponym;
 		if (routesByEID[r] === undefined) {
-			routesByEID[r] = routes[i];
+			routesByEID[r] = new Array(); 
+			routesByEID[r].push(routes[i]);
+		} else {
+			routesByEID[r].push(routes[i]);
 		}
 	}
 }
@@ -193,12 +206,20 @@ function sortRoutesByEID() {
 function createTopoPath() {
 	var topoPath = []; 
 	var routeSection; 
-	for (var i = 0; i < pathFromAToB.length; i++ ) {
-		routeSection = routesByEID[pathFromAToB[i]];
-		topoPath.push(routeSection);
+	for (var i = 0; i < pathFromAToB.length - 1; i++) {
+		routeSections = routesByEID[pathFromAToB[i]];
+		addRoutesToPath(routeSections, topoPath);
 	}
 	topoPath = topoPath.filter(isPartOfRoute);
 	return topoPath; 
+}
+
+function addRoutesToPath(routes, path) {
+	if (routes) {
+		for (var i = 0; i < routes.length; i++) {
+			path.push(routes[i]);
+		}
+	}
 }
 
 function isPartOfRoute(element, index, array) {
@@ -206,10 +227,16 @@ function isPartOfRoute(element, index, array) {
 		   (pathFromAToB.indexOf(element.properties.sToponym) >= 0))
 }
 
+
+/*--------------------------------------------------------
+ * HIERARCHY
+ *-------------------------------------------------------*/
+var sitesBySource = sortSitesBySource();
+
+
 /*--------------------------------------------------------
  * UTIL 
  *-------------------------------------------------------*/
-var sitesByTopURI = sortSitesByTopURI(); 
 function sortSitesByTopURI() {
 	var sitesToAdd = places.data; 
 	var sortedSites = {}; 
@@ -221,9 +248,30 @@ function sortSitesByTopURI() {
 	return sortedSites; 
 }
 
+function sortRoutesByRouteID() {
+	var r; 
+	for (var i = 0; i < routes.length; i++) {
+		r = routes[i].properties.id;
+		if (routesByID[r] === undefined) {
+			routesByID[r] = routes[i];
+		}
+	}
+}
+
+function sortSitesBySource() {
+	var data = places.data; 
+	var sortedSites = {}; 
+	for (var i = 0; i < data.length; i++) {
+		if (sortedSites[data[i].source] == undefined) {
+			sortedSites[data[i].source] = new Array(); 
+			sortedSites[data[i].source].push(data[i]);
+		} else { 
+			sortedSites[data[i].source].push(data[i]); 
+		}
+	}
+	return sortedSites;
+}
 /* TODO: get rid of "trash" */ 
-var sitesWithRoutes = new Array(); 
-removeSitesWithoutRoutes();
 function removeSitesWithoutRoutes() {
 	var currentRoute; 
 	$j.each(allRoutes.features,function (id, route) {
@@ -360,11 +408,11 @@ $j('#options-left').on("click", function() {
 })
 
 
-
-
-
-/* POPUP/TOOLTIP 
- TODO: make this less gross. */
+/*-----------------------------------------------------
+ * POPUP / TOOLTIP 
+ * Todo: fix the tooltip "x" 
+ *----------------------------------------------------*/
+ /*TODO: make this less gross. */
 function createPopup(place) {
 	return('<center><span class="arabic">' + place.arTitle + 
 	'</span><br><br><span class="english">' + place.translitTitle + 
@@ -384,8 +432,9 @@ function openMatch() {
 
 	$j("#index-lookup-content").show();
 }
-/* ARABIC SOURCES */
- 
+
+
+/* ARABIC SOURCES */ 
 $j("#close-index").click(function(e){
 	$j("#index-lookup-content").hide();
 });
