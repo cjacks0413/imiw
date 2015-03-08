@@ -53,6 +53,60 @@ function PriorityQueue () {
   }
 }
 
+function findPaths(s, t) {
+  var shortest = shortestPath(s, t); 
+  /* second: get rid of longest edge weight */ 
+  var max = longestEdge(shortest); 
+  max.weight = INFINITY; 
+  //var secondShortest = shortestPath(s, t); 
+  console.log(secondShortest);
+  /* get rid of all edge weights over x weight*/ 
+  return shortest; 
+}
+
+function secondShortest(s, t, path) {
+  var max = longestEdge(path); 
+  max.weight = 1/0; 
+  var second = shortestPath(s, t); 
+  return second;
+}
+
+/* this doesn't work */ 
+function withinADay(s, t, path) {
+  var greater = greaterThanStage(path); 
+  greater.forEach(function(e) {
+    e.weight = 1/0; 
+  })
+  var withinADay = shortestPath(s, t);
+  return withinADay; 
+}
+
+function greaterThanStage(path) {
+  var stage = 10000;  // THIS SHOULD BE DETERMINED BY MUQADDASI/JUBAYR DATA. 
+  var edge; 
+  var invalids = new Array(); 
+  for (var i = 0; i < path.length - 1; i++) {
+    edge = graph.getEdge(path[i], path[i + 1]); 
+    if (edge && edge.weight > stage) {
+      invalids.push(edge); 
+    }
+  }
+  return invalids; 
+}
+
+function longestEdge(path) {
+  var max = 0; 
+  var edge; 
+  for(var i = 0; i < path.length - 1; i++) {
+    edge = graph.getEdge(path[i], path[i+1]); 
+    if (edge && edge.weight > max) {
+      max = edge; 
+    }
+  }
+  return max; 
+}
+
+
 function shortestPath(s, t) {
   var INFINITY = 1/0;
   var nodes = new PriorityQueue(),
@@ -78,50 +132,36 @@ function shortestPath(s, t) {
     if(smallest == t._id) {
       path;
       while(previous[smallest]) {
-        //console.log(graph.getEdge(previous[smallest], smallest));
-        path.push(smallest);
-        // edge = graph.getEdge(previous[smallest], smallest); 
-        // if (edge) {
-        //   path.push(edge._id);
-        // }
-        
+        path.push(smallest);     
         smallest = previous[smallest];
       }
       break;
     }
 
-    // if(!smallest || distances[smallest] === INFINITY){
-    //   continue;
-    // }
-
     var edges = graph.getAllEdgesOf(smallest);
-   // console.log(edges);
     
     for(var i = 0; i < edges.length; i++) {
       neighbor = edges[i];
-
-      //console.log("exploring from: ", smallest);
       alt = distances[smallest] + neighbor.weight; 
 
+      //thought: could the test go in here? as in, if WITHIN_A_DAY
+      // is tagged, REJECT any weights greater than 10000. ?? 
       if (neighbor._sid == smallest) {
         if (alt < distances[neighbor._eid]) {
           distances[neighbor._eid] = alt;
           previous[neighbor._eid] = smallest;
-       //   console.log("enqueueing: ", alt, neighbor._eid);
           nodes.enqueue(alt, neighbor._eid);
         }
       } else {
         if (alt < distances[neighbor._sid]) {
           distances[neighbor._sid] = alt;
           previous[neighbor._sid] = smallest;
-       //   console.log("yoyo enqueueing: ", alt, neighbor._sid)
           nodes.enqueue(alt, neighbor._sid)
         }
       }  
     }
   }
   return path.concat(s._id).reverse(); 
-  //return path.reverse();
 } 
 
 

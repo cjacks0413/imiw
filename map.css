@@ -112,6 +112,7 @@ div.tooltip {
   right: 2.3%;
   height: 84%;
   bottom: 10%;
+  display: none;
 }
 
 #right-arrow-container{ 

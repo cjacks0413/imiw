@@ -181,11 +181,8 @@ function drawPathFromSourceToTarget(sid, tid) {
 	sortRoutesByRouteID();
 	s = graph.getNode(sid);
 	t = graph.getNode(tid);
-	//pathFromAToB = bfs(s, t); 
 	pathFromAToB = shortestPath(s, t);
-	console.log(pathFromAToB);
 	topoPath = createTopoPath(); 
-	console.log(topoPath);
 	showPath(topoPath);
 	map.on("viewreset", resetMap);
 }
@@ -231,9 +228,16 @@ function isPartOfRoute(element, index, array) {
 /*--------------------------------------------------------
  * HIERARCHY
  *-------------------------------------------------------*/
-var sitesBySource = sortSitesBySource();
+var sitesBySource = sortSitesBySource(); 
+var metropoles = new Array();  
+$j.each(sitesBySource, function(id, source) {
+	metropoles.push(source.filter(isMetropole)); 
+})
 
-
+console.log("metropoles:" , metropoles);
+function isMetropole(element, index, array) {
+	return element.topType == "metropoles";
+}
 /*--------------------------------------------------------
  * UTIL 
  *-------------------------------------------------------*/
