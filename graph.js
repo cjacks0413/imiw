@@ -2,7 +2,7 @@ var Graph = require('data-structures').Graph;
 var graph = new Graph(); 
 var sites = places.data; 
 var routes = allRoutes.features; 
-
+var DAY = 120000; // will be determined using SCRIPT. 
 var e, s, edge;  
 
 for (var i = 0; i < routes.length; i++) {
@@ -53,8 +53,8 @@ function PriorityQueue () {
   }
 }
 
-function findPaths(s, t) {
-  var shortest = shortestPath(s, t); 
+function findPaths(s, t, withinADay) {
+  var shortest = shortestPath(s, t, withinADay); 
   /* second: get rid of longest edge weight */ 
   var max = longestEdge(shortest); 
   max.weight = INFINITY; 
@@ -67,11 +67,11 @@ function findPaths(s, t) {
 function secondShortest(s, t, path) {
   var max = longestEdge(path); 
   max.weight = 1/0; 
-  var second = shortestPath(s, t); 
+  var second = shortestPath(s, t, false); // not within a day.
   return second;
 }
 
-/* this doesn't work */ 
+/* this doesn't work  
 function withinADay(s, t, path) {
   var greater = greaterThanStage(path); 
   greater.forEach(function(e) {
@@ -92,7 +92,7 @@ function greaterThanStage(path) {
     }
   }
   return invalids; 
-}
+} */ 
 
 function longestEdge(path) {
   var max = 0; 
@@ -107,7 +107,7 @@ function longestEdge(path) {
 }
 
 
-function shortestPath(s, t) {
+function shortestPath(s, t, withinADay) {
   var INFINITY = 1/0;
   var nodes = new PriorityQueue(),
           distances = {},
@@ -142,23 +142,25 @@ function shortestPath(s, t) {
     
     for(var i = 0; i < edges.length; i++) {
       neighbor = edges[i];
-      alt = distances[smallest] + neighbor.weight; 
-
-      //thought: could the test go in here? as in, if WITHIN_A_DAY
-      // is tagged, REJECT any weights greater than 10000. ?? 
-      if (neighbor._sid == smallest) {
-        if (alt < distances[neighbor._eid]) {
-          distances[neighbor._eid] = alt;
-          previous[neighbor._eid] = smallest;
-          nodes.enqueue(alt, neighbor._eid);
-        }
+      if (withinADay && neighbor.weight > DAY) {
+        continue;  // within a day is tagged and the neighbor's weight is greater than a Day. 
       } else {
-        if (alt < distances[neighbor._sid]) {
-          distances[neighbor._sid] = alt;
-          previous[neighbor._sid] = smallest;
-          nodes.enqueue(alt, neighbor._sid)
-        }
-      }  
+          alt = distances[smallest] + neighbor.weight; 
+
+          if (neighbor._sid == smallest) {
+            if (alt < distances[neighbor._eid]) {
+              distances[neighbor._eid] = alt;
+              previous[neighbor._eid] = smallest;
+              nodes.enqueue(alt, neighbor._eid);
+            }
+          } else {
+            if (alt < distances[neighbor._sid]) {
+              distances[neighbor._sid] = alt;
+              previous[neighbor._sid] = smallest;
+              nodes.enqueue(alt, neighbor._sid)
+            }
+          } 
+      }
     }
   }
   return path.concat(s._id).reverse(); 

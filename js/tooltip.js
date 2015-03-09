@@ -11,6 +11,7 @@ d3.helper.tooltip = function(accessor){
             d3.select('body').selectAll('div.tooltip').remove();
             // Append tooltip
             tooltipDiv = d3.select('body').append('div').attr('class', 'tooltip');
+            //tooltipDiv.attr('class', 'tooltip');
             var absoluteMousePos = d3.mouse(bodyNode);
             tooltipDiv.style('left', (absoluteMousePos[0] + 10)+'px')
                 .style('top', (absoluteMousePos[1] - 15)+'px')
@@ -22,6 +23,8 @@ d3.helper.tooltip = function(accessor){
             tooltipDiv.style('width', function(d, i){return (tooltipText.length > 80) ? '300px' : null;})
                 .html(tooltipText);
         })
-
+        selection.on('mouseout', function() {
+            d3.select('body').selectAll('div.tooltip').remove();
+        })
     };
 };

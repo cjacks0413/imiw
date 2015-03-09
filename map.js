@@ -44,12 +44,11 @@ function isRelevantTopType(element, index, array) {
 	// could add sites or waystations
 }
 
-
 /* Add a LatLng object to each item in the dataset */
 sites.forEach(function(d) {
 	d.LatLng = new L.LatLng(d.lat, d.lon);
 })
-
+/*NOTE: make this function to later reset the map */ 
 var svgSites = g.selectAll("circle")
 	.data(sites)
 	.enter()
@@ -57,7 +56,7 @@ var svgSites = g.selectAll("circle")
 	.attr("class", "node")
 	.style("stroke", "black")
 	.style("stroke-width", 2)
-	.attr("r", 3)
+	.attr("r", 2)
 	.call(d3.helper.tooltip(
 		function(d, i){
 			generateContent(d);
@@ -141,6 +140,7 @@ function resetMap() {
 				map.latLngToLayerPoint(d.LatLng).x +","+
 				map.latLngToLayerPoint(d.LatLng).y +")";
 		});
+
  	}
 
 
@@ -181,7 +181,8 @@ function drawPathFromSourceToTarget(sid, tid) {
 	sortRoutesByRouteID();
 	s = graph.getNode(sid);
 	t = graph.getNode(tid);
-	pathFromAToB = shortestPath(s, t);
+	//var test = shortestPath(s, t);
+	pathFromAToB = shortestPath(s, t, true);
 	topoPath = createTopoPath(); 
 	showPath(topoPath);
 	map.on("viewreset", resetMap);
@@ -306,6 +307,41 @@ function exists(array, el) {
 	return elementsFound.length > 0; 
 }
 
+
+showHide = function(selector) {
+  d3.select(selector).select('.hide').on('click', function(){
+    d3.select(selector)
+      .classed('visible', false)
+      .classed('hidden', true);
+  });
+
+  d3.select(selector).select('.show').on('click', function(){
+    d3.select(selector)
+      .classed('visible', true)
+      .classed('hidden', false);
+  });
+}
+
+showTest = function(selector) {
+	$j(selector).on('click', function() {
+		resetOptions();
+		$j(selector).shortestPath; 
+	})
+}
+
+/*-----------------------------------------------------
+ * VORONOI 
+ *----------------------------------------------------*/ 
+/* UI. is a check list. so "sites" needs to change
+ * based on what is checked
+ * THEN i need to update svgSites to indicate the 
+ * changes, potentially adding different colors
+ * for each topType.
+ */
+if (voronoi) {
+	drawVoronoiCells(map, sites);
+}
+
 /*-----------------------------------------------------
  * UI  
  *----------------------------------------------------*/ 
@@ -347,11 +383,6 @@ $j('#shortest-path-wrapper').on("click", function() {
 	$j('#shortest-path').show(); 
 	shortestPathCornu = true;
 })
-$j('#network-flooding-wrapper').on("click", function() {
-	resetOptions();
-	$j('#network-flooding').show();
-	networkFlooding = true;
-}) 
 $j('#muqaddasi-path-wrapper').on("click", function() {
 	resetOptions();
 	$j('#muqaddasi-path').show();
@@ -364,12 +395,6 @@ $j('#voronoi-wrapper').on("click", function() {
 	voronoi = true;
 })
 
-$j('#hierarchy-wrapper').on("click", function() {
-	resetOptions();
-	$j('#hierarchy').show();
-	hierarchy = true; 
-})
-
 
 function resetOptions() {
 	$j('#shortest-path').hide();
@@ -379,10 +404,7 @@ function resetOptions() {
 	$j('#hierarchy').hide()
 	shortestPathCornu = false;
 	shortestPathMuqaddasi = false;
-	networkFlooding = false;
 	voronoi = false;
-	hierarchy = false;
-
 }
 
 /* SLIDE left and right */
@@ -416,7 +438,7 @@ $j('#options-left').on("click", function() {
  * POPUP / TOOLTIP 
  * Todo: fix the tooltip "x" 
  *----------------------------------------------------*/
- /*TODO: make this less gross. */
+ /*TODO: make this less gross. /
 function createPopup(place) {
 	return('<center><span class="arabic">' + place.arTitle + 
 	'</span><br><br><span class="english">' + place.translitTitle + 
@@ -425,8 +447,12 @@ function createPopup(place) {
 	'</div> <a href="http://referenceworks.brillonline.com/search?s.q='+place.eiSearch+'&s.f.s2_parent=s.f.cluster.Encyclopaedia+of+Islam&search-go=Search" target="_blank">' +
 	'Encylopaedia of Islam</a>;<br> <a href="http://pleiades.stoa.org/search?SearchableText='+place.translitSimpleTitle+'" target="_blank">' + 
 	'Pleiades</a>; <a href="https://en.wikipedia.org/wiki/Special:Search/'+place.translitSimpleTitle+'" target="_blank">Wikipedia</a></center>');
-}
+} */ 
 
+function createPopup(place) {
+	return('<center><span class="arabic">' + place.arTitle + 
+	'</span><br><br><span class="english">' + place.translitTitle); 
+} 
 function openMatch() {
     d3.select('body').selectAll('div.tooltip').remove();
     /* close left and right side panels */ 
