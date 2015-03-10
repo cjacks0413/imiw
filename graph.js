@@ -71,29 +71,6 @@ function secondShortest(s, t, path) {
   return second;
 }
 
-/* this doesn't work  
-function withinADay(s, t, path) {
-  var greater = greaterThanStage(path); 
-  greater.forEach(function(e) {
-    e.weight = 1/0; 
-  })
-  var withinADay = shortestPath(s, t);
-  return withinADay; 
-}
-
-function greaterThanStage(path) {
-  var stage = 10000;  // THIS SHOULD BE DETERMINED BY MUQADDASI/JUBAYR DATA. 
-  var edge; 
-  var invalids = new Array(); 
-  for (var i = 0; i < path.length - 1; i++) {
-    edge = graph.getEdge(path[i], path[i + 1]); 
-    if (edge && edge.weight > stage) {
-      invalids.push(edge); 
-    }
-  }
-  return invalids; 
-} */ 
-
 function longestEdge(path) {
   var max = 0; 
   var edge; 
