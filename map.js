@@ -34,7 +34,8 @@ var sitesByTopURI = sortSitesByTopURI();
 //var sites = places.data.filter(isRelevantTopType);
 var sitesWithRoutes = new Array(); 
 removeSitesWithoutRoutes();
-var sites = sitesWithRoutes; 
+//var sites = sitesWithRoutes; 
+var sites = places.data.filter(isRelevantTopType);
 function isRelevantTopType(element, index, array) {
 	return ( element.topType == 'metropoles' || 
 		     element.topType == 'capitals'   || 
@@ -48,9 +49,10 @@ function isRelevantTopType(element, index, array) {
 sites.forEach(function(d) {
 	d.LatLng = new L.LatLng(d.lat, d.lon);
 })
+
 /*NOTE: make this function to later reset the map */ 
 var svgSites = g.selectAll("circle")
-	.data(sites)
+	.data(sites) //change back to "sites"
 	.enter()
 	.append("circle")
 	.attr("class", "node")
@@ -241,7 +243,9 @@ function isMetropole(element, index, array) {
 }
 /*--------------------------------------------------------
  * UTIL 
+ * TODO make this modular! 
  *-------------------------------------------------------*/
+
 function sortSitesByTopURI() {
 	var sitesToAdd = places.data; 
 	var sortedSites = {}; 
@@ -276,6 +280,20 @@ function sortSitesBySource() {
 	}
 	return sortedSites;
 }
+
+function sortSitesByTopType() {
+	var data = places.data; 
+	var sortedSites = {}; 
+	for (var i = 0; i < data.length; i++) {
+		if (sortedSites[data[i].topType] == undefined) {
+			sortedSites[data[i].topType] = new Array(); 
+			sortedSites[data[i].topType].push(data[i]);
+		} else { 
+			sortedSites[data[i].topType].push(data[i]); 
+		}
+	}
+	return sortedSites;	
+}
 /* TODO: get rid of "trash" */ 
 function removeSitesWithoutRoutes() {
 	var currentRoute; 
@@ -308,26 +326,6 @@ function exists(array, el) {
 }
 
 
-showHide = function(selector) {
-  d3.select(selector).select('.hide').on('click', function(){
-    d3.select(selector)
-      .classed('visible', false)
-      .classed('hidden', true);
-  });
-
-  d3.select(selector).select('.show').on('click', function(){
-    d3.select(selector)
-      .classed('visible', true)
-      .classed('hidden', false);
-  });
-}
-
-showTest = function(selector) {
-	$j(selector).on('click', function() {
-		resetOptions();
-		$j(selector).shortestPath; 
-	})
-}
 
 /*-----------------------------------------------------
  * VORONOI 
@@ -338,9 +336,74 @@ showTest = function(selector) {
  * changes, potentially adding different colors
  * for each topType.
  */
-if (voronoi) {
-	drawVoronoiCells(map, sites);
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
 }
+
+var topTypeColors = {}; 
+var sitesByTopType = sortSitesByTopType();
+var topTypes = d3.set(Object.keys(sitesByTopType));
+var initialSelections = d3.set(['metropoles', 'capitals', 'villages']);
+topTypes.forEach(function(t) {
+	topTypeColors[t] = getRandomColor();
+})
+labels = d3.select('#voronoi-select').selectAll('input')
+  .data(topTypes.values())
+  .enter().append("label");
+
+labels.append("input")
+  .attr('type', 'checkbox')
+  .property('checked', function(d) {
+    return initialSelections === undefined || initialSelections.has(d)
+  })
+  .attr("value", function(d) { return d })
+  .on("change", renderVoronoi);
+
+labels.append("span")
+  .attr('class', 'key')
+  .style('background-color', function(d) { return topTypeColors[d] });
+  //.style('background-color', function(d) { return '#' + d.color; });
+
+labels.append("span")
+  .text(function(d) { return d });
+
+
+var selectedTypes = function() {
+	return d3.selectAll('#voronoi-select input[type=checkbox]')[0].filter(function(elem) {
+	  return elem.checked;
+	}).map(function(elem) {
+	  return elem.value;
+	})
+}
+renderVoronoi();
+
+function renderVoronoi() {
+	var selected = selectedTypes(); 
+	var pointsToDraw = new Array(); 
+	var mergedPoints = [];
+	g.selectAll("circle.node").style("visibility", "hidden");
+	selected.forEach(function(s) {
+		g.selectAll("circle.node")
+		 		   .filter(function(d) { return d.topType == s})
+		 		   .style("fill", topTypeColors[s])
+		 		   .attr("r", 3)
+		 		   .style("visibility", "visible")
+		pointsToDraw.push(sitesByTopType[s]);
+	})
+		//svgSites.selectAll("circle.node").style("stroke-width", "1px").style("stroke", "black");
+
+	mergedPoints = pointsToDraw.concat.apply(mergedPoints, pointsToDraw);
+	//console.log(mergedPoints);
+	drawVoronoiCells(map, mergedPoints);	
+}
+
+ 
 
 /*-----------------------------------------------------
  * UI  
@@ -453,6 +516,7 @@ function createPopup(place) {
 	return('<center><span class="arabic">' + place.arTitle + 
 	'</span><br><br><span class="english">' + place.translitTitle); 
 } 
+
 function openMatch() {
     d3.select('body').selectAll('div.tooltip').remove();
     /* close left and right side panels */ 
@@ -534,10 +598,6 @@ function generateContent(place) {
 	}); 
 
 } 
-
-/*-----------------------------------------------------
- * LAYER GROUPS 
- *----------------------------------------------------*/ 
 
 /*--------------------------------------------------------
  * SEARCH/FILTER 
