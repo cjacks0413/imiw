@@ -1,2 +1,2 @@
-#Interactive Map of the Ancient Islamic World
+#Interactive Map of the Classical Islamic World
 

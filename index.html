@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Interactive Map of the Ancient Islamic World</title>
+		<title>Interactive Map of Classical Islamic World</title>
 		<link rel="stylesheet" href="map.css">
 		<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 		<script src="http://d3js.org/topojson.v1.min.js"></script> 
@@ -14,15 +14,25 @@
 	</head> 
 	<body>
 		<div id="map"></div>
+		<div id="right-container">
+			<div id="search-container">
+				<div id="search" class="english">
+				<input type="text" autocomplete="off" placeholder="Search All Sites"/>
+				</div>
+			</div>
+			<div id="selections">					
+				<a href="#" id="toggle-voronoi">Toggle Voronoi</a>
+				<div id="options">
+					<div id="voronoi-select">
+					</div> 
+				</div>
+			</div>
+		</div>
 		<div id="left-arrow-container"></div>
 			<div class="left-arrow-left" id="path-form-left"></div>
 			<div class="left-arrow-right" id="path-form-right"></div> 
 			<div id="site-form" class="modal">
-				<div id="search-container">
-					<div id="search" class="english">Search:
-					<input type="text" autocomplete="off" placeholder="Search All Sites"/>
-				</div>
-				</div>
+				
 				<form id="pathfinding-select" action="javascript:findPaths()">
 					<div class="english-form-title"><strong>Analysis Between Sites</strong></div> 
 					<div class="english" id="site-from">From: </div> 
@@ -39,12 +49,8 @@
 					</div> 
 					<input class="button" id="go-path" type="submit" value="Go">
 				</form> 
+
 			</div> 
-			<div id="selections">
-				<div id="options">
-					<div id="voronoi-select"></div> 
-				</div>
-			</div>
 		<div id="index-lookup-content">
 			<div id="close-index" class="close">[X]</div></br>
 			<div class="english">Exact matches in Arabic Sources:</div></br>
