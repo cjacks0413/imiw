@@ -21,6 +21,13 @@
 		<script src="data/index.js" type="text/javascript"></script>
 		<script src="data/sources.js" type="text/javascript"></script>
 		<script> 
+
+			function project(point) {
+				var latlng = new L.LatLng(point[1], point[0]); 
+				var layerPoint = map.latLngToLayerPoint(latlng); 
+				return [layerPoint.x, layerPoint.y]; 
+			}
+
 			L.mapbox.accessToken = 'pk.eyJ1IjoiY2phY2tzMDQiLCJhIjoiVFNPTXNrOCJ9.k6TnctaSxIcFQJWZFg0CBA';
 			var map = L.mapbox.map('map', 'cjacks04.jij42jel', {zoomControl: false}).setView([31, 35], 5);
 			new L.Control.Zoom( { position: 'bottomleft'}).addTo(map);
@@ -36,11 +43,7 @@
 				.y(function(d) { return d.y; });
 
 			var draw = function() {
-				d3.select('#overlay').remove();
-
 				var bounds = map.getBounds(),
-					topLeft = map.latLngToLayerPoint(bounds.getNorthWest()),
-					bottomRight = map.latLngToLayerPoint(bounds.getSouthEast()),
 					existing = d3.set(),
 					drawLimit = bounds.pad(0.4);
 
@@ -59,28 +62,37 @@
 					d.y = point.y;
 					return true;
 				});
-			}
-			draw();
-	
-			var svgPoints = g.selectAll("circle")
-				.data(filteredPoints)
-				.enter()
-				.append("circle");
-			
 
-			svgPoints.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-				.attr("r", 2);
-			
-			var buildPathFromPoint = function(point) {
-				return "M" + point.join("L") + "Z";
-			}
-			var cells = voronoi(filteredPoints); 
-			var path = svg.append("g").selectAll("path"); 
+				var svgPoints = g.selectAll("circle")
+					.data(filteredPoints)
+					.enter()
+					.append("circle");
+		
+				
+				svgPoints.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+						 	.attr("r", 2);
 
-			path.data(cells, buildPathFromPoint)
-				.enter()
-				.append("path")
-				.attr("d", buildPathFromPoint);
+				var buildPathFromPoint = function(point) {
+					return "M" + point.join("L") + "Z";
+				}
+
+				var cells = voronoi(filteredPoints); 
+				var path = svg.append("g").selectAll("path"); 
+
+				path.data(cells, buildPathFromPoint)
+					.enter()
+					.append("path")
+					.attr("class", "point-cell")
+					.attr("d", buildPathFromPoint);
+			}
+
 			/* NEED TO ADD ON VIEWRESET */
+			map.on('viewreset moveend', resetMap);
+			resetMap(); 
+			function resetMap() {
+					d3.select("body").selectAll("path").remove();
+					draw();
+			 	}
+
 		</script> 
 	</body>  
