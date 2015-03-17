@@ -31,18 +31,21 @@ g = svg.append("g")
 /* SITES */
 var sitesByTopURI = sortSitesByTopURI(); 
 
-//var sites = places.data.filter(isRelevantTopType);
+
+/* INITIALIZE MAP: MAKE THIS A FUNC! */ 
+//var sites = places.data.filter(isDefaultTopType);
 var sitesWithRoutes = new Array(); 
 removeSitesWithoutRoutes();
-//var sites = sitesWithRoutes; 
-var sites = places.data.filter(isRelevantTopType);
-function isRelevantTopType(element, index, array) {
+var sites = sitesWithRoutes; 
+sites.concat(places.data.filter(isDefaultTopType));
+function isDefaultTopType(element, index, array) {
 	return ( element.topType == 'metropoles' || 
 		     element.topType == 'capitals'   || 
 		     element.topType == 'temp'       || 
 		     element.topType == 'towns'      ||
-		     element.topType == 'villages'   ) 
-	// could add sites or waystations
+		     element.topType == 'villages'   || 
+		     element.topType == 'waystations'||
+		     element.topType == 'sites') 
 }
 
 /* Add a LatLng object to each item in the dataset */
@@ -50,21 +53,32 @@ sites.forEach(function(d) {
 	d.LatLng = new L.LatLng(d.lat, d.lon);
 })
 
-/*NOTE: make this function to later reset the map */ 
-var svgSites = g.selectAll("circle")
-	.data(sites) //change back to "sites"
-	.enter()
-	.append("circle")
-	.attr("class", "node")
-	.style("stroke", "black")
-	.style("stroke-width", 2)
-	.attr("r", 2)
-	.call(d3.helper.tooltip(
-		function(d, i){
-			generateContent(d);
-			return createPopup(d);
-		})
-	);
+svgSites = g.selectAll("circle")
+		.data(sites) //change back to "sites"
+		.enter()
+		.append("circle")
+		.attr("class", "node")
+		.style("stroke", "black")
+		.style("stroke-width", 2)
+		.attr("r", 2)
+		.call(d3.helper.tooltip(
+			function(d, i){
+				generateContent(d);
+				return createPopup(d);
+			})
+		);
+
+showAllPaths(); 
+function restoreDefaultMap() {
+	g.selectAll("circle.node")
+ 		   .filter(function(d) { return isDefaultTopType(d)})
+ 		   .attr("class", "node")
+ 		   .style("stroke", "black")
+		   .style("stroke-width", 2)
+ 		   .attr("r", 2)
+ 		   .style("visibility", "visible"); 
+ 	showAllPaths(); 
+} 
 
 
 map.on("viewreset", update);
@@ -99,12 +113,16 @@ function project(point) {
 }
 
 /* show subset of allRoutes */
-function showPath(partial) {		
-	feature = g.selectAll("path")
-		.data(partial)
-		.enter()
-		.append("path");
-	
+var partial_feature; 
+function showPath(partial) {
+	partial.forEach(function(part) {
+		partial_feature = g.selectAll("path")
+		 .filter(function(d) {
+		 	return d.properties.id == part.properties.id; 
+		 })
+		 .attr("class", "path-shortest");
+	})
+	console.log(partial_feature);
 	resetMap();
 }
 
@@ -114,7 +132,8 @@ function showAllPaths() {
 		feature = g.selectAll("path")
 		   .data(routes.features)
 		   .enter()
-		   .append("path");
+		   .append("path")
+		   .attr("class", "path-all");
 
 	 	resetMap(); 
 	 	map.on("viewreset", resetMap); 
@@ -134,6 +153,7 @@ function resetMap() {
 	    group.attr("transform", "translate(" + -bottomLeft[0] + "," + -topRight[1] + ")");
 
 	    feature.attr("d", path);
+	    //partial_feature.attr("d", path);
 
 	    /* reposition sites*/
 	    svgSites.attr("transform",
@@ -155,7 +175,11 @@ function resetMap() {
  * ----------------------------------------------------*/
 var routesByEID = {},
 	routesByID = {}, 
-    pathFromAToB, 
+    pathFromAToB,
+    pathsToShow = new Array(), 
+    shortestPath, 
+    pathWithinADay,
+    pathThroughCenters,
     pathSourceID; 
 var howManyTrue = 0; 
 
@@ -177,16 +201,65 @@ function identifyTargetClick(d) {
 //drawPathFromSourceToTarget("BAGHDAD_443N333E_C03", "AMMAN_359N319E_C01");
 //showAllPaths();
 
-function drawPathFromSourceToTarget(sid, tid) {
+/* TODO: allRoutes + new route overlaid on top of it.  
+ * 
+*/ 
+
+var pathColors = {}; 
+var pathTypes = d3.set(['Shortest', 'Within A Day', 'Through Centers']);
+var initialSelections = d3.set(['Shortest', 'Within A Day']);
+pathTypes.forEach(function(t) {
+	pathColors[t] = getRandomColor();
+})
+
+path_labels = d3.select('#path-options').selectAll('input')
+  .data(pathTypes.values())
+  .enter().append("label");
+
+path_labels.append("input")
+  .attr('type', 'checkbox')
+  .property('checked', function(d) {
+    return initialSelections === undefined || initialSelections.has(d)
+  })
+  .attr("value", function(d) { return d }); 
+
+path_labels.append("span")
+  .attr('class', 'key')
+  .style('background-color', function(d) { return pathColors[d] });
+
+path_labels.append("span")
+  .text(function(d) { return d })
+  .attr("class", "english");
+
+
+var pathSelectedTypes = function() {
+	return d3.selectAll('#path-options input[type=checkbox]')[0].filter(function(elem) {
+	  return elem.checked;
+	}).map(function(elem) {
+	  return elem.value;
+	})
+}
+
+function drawPathFromSourceToTarget(sid, tid, pathSelections) {
 	var s, t; 
 	sortRoutesByEID(); 
 	sortRoutesByRouteID();
 	s = graph.getNode(sid);
 	t = graph.getNode(tid);
-	//var test = shortestPath(s, t);
-	pathFromAToB = shortestPath(s, t, true);
-	topoPath = createTopoPath(); 
-	showPath(topoPath);
+	// change this from case statement to map key -> function 
+	pathSelections.forEach(function(select) {
+		switch(select) {
+			case 'Shortest': 
+				pathsToShow.push(shortestPath(s, t, false)); 
+			case 'Within A Day': 
+				pathsToShow.push(shortestPath(s, t, true)); 
+			case 'Through Centers': 
+			break; 
+		}
+	})
+	pathsToShow.forEach(function(p) {
+		showPath(createTopoPath(p));
+	})
 	map.on("viewreset", resetMap);
 }
 
@@ -203,14 +276,17 @@ function sortRoutesByEID() {
 	}
 }
 
-function createTopoPath() {
+function createTopoPath(partialPath) {
 	var topoPath = []; 
 	var routeSection; 
-	for (var i = 0; i < pathFromAToB.length - 1; i++) {
-		routeSections = routesByEID[pathFromAToB[i]];
+	for (var i = 0; i < partialPath.length - 1; i++) {
+		routeSections = routesByEID[partialPath[i]];
 		addRoutesToPath(routeSections, topoPath);
 	}
-	topoPath = topoPath.filter(isPartOfRoute);
+	topoPath = topoPath.filter(function(element, index, array) {
+		return ((partialPath.indexOf(element.properties.eToponym) >= 0 ) && 
+		  (partialPath.indexOf(element.properties.sToponym) >= 0))
+	});
 	return topoPath; 
 }
 
@@ -220,11 +296,6 @@ function addRoutesToPath(routes, path) {
 			path.push(routes[i]);
 		}
 	}
-}
-
-function isPartOfRoute(element, index, array) {
-	return ((pathFromAToB.indexOf(element.properties.eToponym) >= 0 ) && 
-		   (pathFromAToB.indexOf(element.properties.sToponym) >= 0))
 }
 
 
@@ -330,12 +401,22 @@ function exists(array, el) {
 /*-----------------------------------------------------
  * VORONOI 
  *----------------------------------------------------*/ 
-/* UI. is a check list. so "sites" needs to change
- * based on what is checked
- * THEN i need to update svgSites to indicate the 
- * changes, potentially adding different colors
- * for each topType.
+/* from https://github.com/zetter/voronoi-maps 
  */
+
+$j('#toggle-voronoi').on("click", function() {
+	if (voronoi) {
+		$j("#options").hide();
+		d3.select("body").selectAll(".point-cell").remove();
+		g.selectAll("circle.node").style("fill", null).style("visibility", "hidden");
+		restoreDefaultMap();
+		voronoi = false;
+	} else if (!voronoi) {
+		$j("#options").show(); 
+		renderVoronoi();
+		voronoi = true; 
+	}
+})
 
 function getRandomColor() {
     var letters = '0123456789ABCDEF'.split('');
@@ -353,6 +434,7 @@ var initialSelections = d3.set(['metropoles', 'capitals', 'villages']);
 topTypes.forEach(function(t) {
 	topTypeColors[t] = getRandomColor();
 })
+
 labels = d3.select('#voronoi-select').selectAll('input')
   .data(topTypes.values())
   .enter().append("label");
@@ -368,7 +450,6 @@ labels.append("input")
 labels.append("span")
   .attr('class', 'key')
   .style('background-color', function(d) { return topTypeColors[d] });
-  //.style('background-color', function(d) { return '#' + d.color; });
 
 labels.append("span")
   .text(function(d) { return d });
@@ -381,7 +462,6 @@ var selectedTypes = function() {
 	  return elem.value;
 	})
 }
-renderVoronoi();
 
 function renderVoronoi() {
 	var selected = selectedTypes(); 
@@ -396,7 +476,6 @@ function renderVoronoi() {
 		 		   .style("visibility", "visible")
 		pointsToDraw.push(sitesByTopType[s]);
 	})
-		//svgSites.selectAll("circle.node").style("stroke-width", "1px").style("stroke", "black");
 
 	mergedPoints = pointsToDraw.concat.apply(mergedPoints, pointsToDraw);
 	//console.log(mergedPoints);
@@ -424,19 +503,14 @@ for (var i = 0; i < sitesWithRoutes.length; i++) {
 }
 
 function findPaths() {
-	if (shortestPathCornu) {
-		var form = $j("#pathfinding-select");
-		var fromSite = form[0][0]; 
-		var toSite = form[0][1];
-		fromID = fromSite.options[fromSite.selectedIndex].value;
-		toID = toSite.options[toSite.selectedIndex].value;
-		//g.selectAll("path").style("visibility", "hidden");
-		drawPathFromSourceToTarget(fromID, toID);
-	} else if (networkFlooding) {
-		console.log("sorry, this functionality has not yet been implemented"); 
-	} else if (shortestPathMuqaddasi) {
-		console.log("sorry, this functionality has not yet been implemented");
-	}
+	var pathSelections = pathSelectedTypes(); 
+
+	var form = $j("#pathfinding-select");
+	var fromSite = form[0][0]; 
+	var toSite = form[0][1];
+	fromID = fromSite.options[fromSite.selectedIndex].value;
+	toID = toSite.options[toSite.selectedIndex].value;
+	drawPathFromSourceToTarget(fromID, toID, pathSelections);
 }
 
 /* checkboxes 

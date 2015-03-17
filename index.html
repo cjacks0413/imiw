@@ -15,12 +15,7 @@
 	<body>
 		<div id="map"></div>
 		<div id="right-container">
-			<div id="search-container">
-				<div id="search" class="english">
-				<input type="text" autocomplete="off" placeholder="Search All Sites"/>
-				</div>
-			</div>
-			<div id="selections">					
+			<div class="selections">					
 				<a href="#" id="toggle-voronoi">Toggle Voronoi</a>
 				<div id="options">
 					<div id="voronoi-select">
@@ -29,27 +24,23 @@
 			</div>
 		</div>
 		<div id="left-arrow-container"></div>
+			<div id="search-container">
+				<div id="search" class="english">
+				<input type="text" autocomplete="off" placeholder="Search All Sites"/>
+				</div>
+			</div>
 			<div class="left-arrow-left" id="path-form-left"></div>
 			<div class="left-arrow-right" id="path-form-right"></div> 
-			<div id="site-form" class="modal">
-				
+			<div id="site-form" class="modal">	
 				<form id="pathfinding-select" action="javascript:findPaths()">
-					<div class="english-form-title"><strong>Analysis Between Sites</strong></div> 
+					<div class="english-form-title"><strong>PathFinding</strong></div> 
 					<div class="english" id="site-from">From: </div> 
 					<div class="english" id="site-to">To: </div>
-					<div class="english-form-title"><strong>Type of Analysis</strong></div>
-					<div class="english" id="shortest-path-wrapper">
-						<div class="check-rect"><span id="shortest-path">X</span></div>Shortest Path (Cornu)
-				    </div>
-					<div class="english" id="network-flooding-wrapper">
-						<div class="check-rect"><span id="network-flooding">X</span></div>Networking Flooding
-				    </div>
-				    <div class="english" id="muqaddasi-path-wrapper">
-					<div class="check-rect"><span id="muqaddasi-path">X</span></div>Shortest Path (Muqaddasi) 
+					<div class="selections">
+						<div id="path-options"></div>
 					</div> 
 					<input class="button" id="go-path" type="submit" value="Go">
 				</form> 
-
 			</div> 
 		<div id="index-lookup-content">
 			<div id="close-index" class="close">[X]</div></br>

@@ -80,6 +80,16 @@ div.tooltip {
     cursor: pointer;
 }
 
+#right-container {
+  position: absolute;
+  top: 3%;
+  right: 2.3%;
+  height: 80%;
+  bottom: 10%;
+  padding: 5px;
+  overflow: scroll;
+}
+
 .modal {
   position: absolute;
   font-size: 15px;
@@ -87,83 +97,40 @@ div.tooltip {
   color: #000;
   width: 35%;
   padding: 10px;
-  background-color: rgba(120, 135, 171, .8);
-  overflow: scroll;
-  border-style: solid;
-  border-width: 3px;
-  border-color: rgb(22, 41, 85);
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 #left-arrow-container {
   position:absolute;
-  border-style: solid;
-  background-color: rgba(120, 135, 171, .8);
-  border-style: solid;
-  border-width: 3px;
-  border-color: rgb(22, 41, 85);
-  height: 70%;
-  top: 10%;
-  width: 1.8%;
-}
-
-#options {
   background-color: rgba(255, 255, 255, 0.9);
-  position: absolute;
-  top: 5%;
-  right: 2.3%;
-  height: 84%;
-  bottom: 10%;
-  padding: 5px;
-  overflow: scroll;
-}
-
-#right-arrow-container{ 
-  position: absolute;
-  border-style: solid;
-  background-color: rgba(120, 135, 171, .8);
-  border-style: solid;
-  border-width: 3px;
-  border-color: rgb(22, 41, 85);
-  height: 70%;
-  top: 10%;
-  right: 0;
-  width: 1.8%; 
-}
-
-#options-left {
-
-}
-#options-right {
-
-}
-
-#go-options {
-
+  height: 40%;
+  top: 23%;
+  width: 2.9%;
 }
 
 #site-form {
   position: absolute;
-  top: 0; 
+  top: 10%; 
   left: 2.3%;
-  height: 84%;
+  height: 60%;
   bottom: 10%;
 }
 
 #search-container {
   z-index: 8888;
-  position: relative;
-  top: 0;
-  left: 0;
-  margin: 10px;
+  position: absolute;
+  top: 15px;
+  left: 2.3%;
+  padding-bottom: 10px;
   float: left;
 }
 
-/* used to say #search-container #search input {*/ 
+
 #search input {
   position: relative;
   top: 0;
   padding: 5px;
-  width: 268px;
+  width: 200px;
   line-height: 1;
   height: 20px;
 }
@@ -181,8 +148,8 @@ div.tooltip {
 
 #go-path {
   position: relative;
-  top: 100px;
-  left: 25px;
+  top: 15px;
+  left: 30%;
 }
 
 .pathfind-node {
@@ -204,23 +171,28 @@ div.tooltip {
 }*/
 
 .button {
-  -webkit-border-radius: 15;
-  -moz-border-radius: 15;
-  border-radius: 15px;
-  font-family: Arial;
-  color: rgb(75, 4, 28);
-  font-size: 20px;
-  background: rgba(255, 255, 255, 0.6);
-  padding: 10px 150px 10px 150px;
-  text-decoration: none;
+  background-color:#44c767;
+  border:1px solid #18ab29;
+  display:inline-block;
+  position:relative;
+  cursor:pointer;
+  color:#ffffff;
+  bottom: 20%;
+  font-family:arial;
+  font-size:17px;
+  padding:6px 54px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #2f6627;
 }
-
 
 .button:hover {
-  background: rgb(22, 41, 85);
-  color: rgb(255, 255, 255);
-  text-decoration: none;
+  background-color:#5cbf2a;
 }
+.button:active {
+  position:relative;
+  top:1px;
+}
+
 
 .english-form-title {
   text-align: center;
@@ -241,10 +213,16 @@ div.tooltip {
   cursor: pointer;
 }
 
-path {
-    stroke: brown;
+.path-all {
+    stroke: red;
     stroke-width: 2px;
     fill: none;
+}
+
+.path-shortest {
+  stroke: rgb(22, 41, 85);
+  stroke-width: 4px;
+  fill: none;
 }
 
 .arabic {
@@ -439,23 +417,23 @@ path {
 }
 
 
-#selections {
+.selections {
   right:10px;
   top:10px;
   width: 190px;
 }
 
-#selections label {
+.selections label {
   display: block;
   padding-bottom: 8px;
 }
 
-#selections input[type=checkbox] {
+.selections input[type=checkbox] {
   position: relative;
   top: -1px;
 }
 
-#selections .key {
+.selections .key {
   display: inline-block;
   width: 12px;
   height: 12px;
@@ -477,4 +455,22 @@ path {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+#options {
+  background-color: rgba(255, 255, 255, 0.9);
+  position: relative;
+  top: 8%;
+  right: 0;
+  height: 80%;
+  bottom: 10%;
+  padding: 5px;
+  overflow: scroll;
+  display: none;
+}
+
+#toggle-voronoi {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  text-align: center;
 }
