@@ -3,16 +3,19 @@ var debug = true;
 
 /* TODO: make this more efficient */ 
 
-var pathFind = false;
-var shortestPathCornu = true;
-var shortestPathMuqaddasi = false;
-var networkFlooding = false; 
 var hierarchy = false; 
 var voronoi = false; 
 
 
 L.mapbox.accessToken = 'pk.eyJ1IjoiY2phY2tzMDQiLCJhIjoiVFNPTXNrOCJ9.k6TnctaSxIcFQJWZFg0CBA';
-var map = L.mapbox.map('map', 'cjacks04.jij42jel', {zoomControl: false}).setView([31, 35], 5);
+var map = L.mapbox.map('map', 'cjacks04.jij42jel', { 
+					zoomControl: false, 
+					infoControl: false, 
+					attributionControl: true}).setView([31, 35], 5);
+
+var attribution = L.control.attribution().addTo(map);
+attribution.addAttribution('Tiles and Data &copy; 2013 <a href="http://www.awmc.unc.edu" target="_blank">AWMC</a> ' +
+				     '<a href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US" target="_blank">CC-BY-NC 3.0</a>');
 new L.Control.Zoom( { position: 'bottomleft'}).addTo(map);
 
 /*------------------------------------------------------
@@ -122,7 +125,6 @@ function showPath(partial) {
 		 })
 		 .attr("class", "path-shortest");
 	})
-	console.log(partial_feature);
 	resetMap();
 }
 
@@ -183,17 +185,6 @@ var routesByEID = {},
     pathSourceID; 
 var howManyTrue = 0; 
 
-function identifySourceClick(d) {
-	svgSites.selectAll("circle.node").style("stroke-width", "1px").style("stroke", "black");
-	pathSourceID = d.topURI; 
-	d3.selectAll("circle.node").on("click", identifyTargetClick); 
-}
-
-function identifyTargetClick(d) {
-	drawPathFromSourceToTarget(pathSourceID, d.topURI);
-	pathFind = false; 
-	d3.selectAll("circle.node").on("click", assign);
-}
 
 /* Tester functions. TODO: add showAllPaths as a layer*/
 //drawPathFromSourceToTarget("MADINNAQIRA_415N255E_C07","YATHRIB_396N244E_C07" );
@@ -308,7 +299,6 @@ $j.each(sitesBySource, function(id, source) {
 	metropoles.push(source.filter(isMetropole)); 
 })
 
-console.log("metropoles:" , metropoles);
 function isMetropole(element, index, array) {
 	return element.topType == "metropoles";
 }
@@ -478,7 +468,6 @@ function renderVoronoi() {
 	})
 
 	mergedPoints = pointsToDraw.concat.apply(mergedPoints, pointsToDraw);
-	//console.log(mergedPoints);
 	drawVoronoiCells(map, mergedPoints);	
 }
 
@@ -504,44 +493,12 @@ for (var i = 0; i < sitesWithRoutes.length; i++) {
 
 function findPaths() {
 	var pathSelections = pathSelectedTypes(); 
-
 	var form = $j("#pathfinding-select");
 	var fromSite = form[0][0]; 
 	var toSite = form[0][1];
 	fromID = fromSite.options[fromSite.selectedIndex].value;
 	toID = toSite.options[toSite.selectedIndex].value;
 	drawPathFromSourceToTarget(fromID, toID, pathSelections);
-}
-
-/* checkboxes 
-*  TODO; MAKE THIS MODULAR */
-$j('#shortest-path-wrapper').on("click", function() {
-	resetOptions()
-	$j('#shortest-path').show(); 
-	shortestPathCornu = true;
-})
-$j('#muqaddasi-path-wrapper').on("click", function() {
-	resetOptions();
-	$j('#muqaddasi-path').show();
-	shortestPathMuqaddasi = true;
-}) 
-
-$j('#voronoi-wrapper').on("click", function() {
-	resetOptions();
-	$j('#voronoi').show();
-	voronoi = true;
-})
-
-
-function resetOptions() {
-	$j('#shortest-path').hide();
-	$j('#network-flooding').hide();
-	$j('#muqaddasi-path').hide();
-	$j('#voronoi').hide();
-	$j('#hierarchy').hide()
-	shortestPathCornu = false;
-	shortestPathMuqaddasi = false;
-	voronoi = false;
 }
 
 /* SLIDE left and right */
