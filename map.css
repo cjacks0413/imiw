@@ -68,11 +68,11 @@ div.tooltip {
 }
 
 .node {
-    fill: rgba(0, 0, 255, 0.7);
+    fill: blue;
+    stroke: black;
     cursor: pointer;
-    z-index: -9999;
+    stroke-width: 1
 }
-
 .search-node {
     fill: red;
     stroke: black;
@@ -220,8 +220,7 @@ div.tooltip {
 }
 
 .path-shortest {
-  stroke: rgb(22, 41, 85);
-  stroke-width: 4px;
+  stroke-width: 3px;
   fill: none;
 }
 

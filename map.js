@@ -117,13 +117,15 @@ function project(point) {
 
 /* show subset of allRoutes */
 var partial_feature; 
-function showPath(partial) {
+function showPath(partial, color) {
 	partial.forEach(function(part) {
 		partial_feature = g.selectAll("path")
 		 .filter(function(d) {
 		 	return d.properties.id == part.properties.id; 
 		 })
-		 .attr("class", "path-shortest");
+		 .attr("class", "path-shortest")
+		 .attr("stroke", color)
+		 .attr("visibility", "visible");
 	})
 	resetMap();
 }
@@ -171,10 +173,9 @@ function resetMap() {
 
 /* ----------------------------------------------------
  * PATH FROM A TO B 
- * Given a start and end node ID, shows path on path
- * TODO: deal with the missing pieces ...
- * TODO: animate the path  
+ * Given a start and end node ID, shows path on map
  * ----------------------------------------------------*/
+
 var routesByEID = {},
 	routesByID = {}, 
     pathFromAToB,
@@ -231,25 +232,34 @@ var pathSelectedTypes = function() {
 	})
 }
 
+function initializePathMap() {
+	var path, 
+	    pathMap = d3.map(); 
+	pathMap.set("Shortest", function(s, t) {
+		return shortestPath(s, t, false); 
+		//showPath(createTopoPath(path)); 
+	})	
+	pathMap.set("Within A Day", function(s, t) {
+		return shortestPath(s, t, true); 
+		//showPath(createTopoPath(path));
+	})
+	pathMap.set("Through Centers", function(s, t) {
+		console.log("through centers");
+	})
+	return pathMap;
+}
+
 function drawPathFromSourceToTarget(sid, tid, pathSelections) {
-	var s, t; 
-	sortRoutesByEID(); 
-	sortRoutesByRouteID();
+	sortRoutesByEID();
+	var s, t, pathFunction, pathToShow; 
+	var pathMap = initializePathMap();
 	s = graph.getNode(sid);
 	t = graph.getNode(tid);
-	// change this from case statement to map key -> function 
+
 	pathSelections.forEach(function(select) {
-		switch(select) {
-			case 'Shortest': 
-				pathsToShow.push(shortestPath(s, t, false)); 
-			case 'Within A Day': 
-				pathsToShow.push(shortestPath(s, t, true)); 
-			case 'Through Centers': 
-			break; 
-		}
-	})
-	pathsToShow.forEach(function(p) {
-		showPath(createTopoPath(p));
+			pathFunction = pathMap.get(select); 
+			pathToShow = pathFunction(s, t); 
+			showPath(createTopoPath(pathToShow), pathColors[select]);
 	})
 	map.on("viewreset", resetMap);
 }
@@ -278,6 +288,7 @@ function createTopoPath(partialPath) {
 		return ((partialPath.indexOf(element.properties.eToponym) >= 0 ) && 
 		  (partialPath.indexOf(element.properties.sToponym) >= 0))
 	});
+
 	return topoPath; 
 }
 
@@ -289,7 +300,16 @@ function addRoutesToPath(routes, path) {
 	}
 }
 
-
+function findPaths() {
+	var pathSelections = pathSelectedTypes(); 
+	var form = $j("#pathfinding-select");
+	var fromSite = form[0][0]; 
+	var toSite = form[0][1];
+	fromID = fromSite.options[fromSite.selectedIndex].value;
+	toID = toSite.options[toSite.selectedIndex].value;
+	d3.selectAll('.path-shortest').attr("class", "path-all"); //change back to red 
+	drawPathFromSourceToTarget(fromID, toID, pathSelections);
+}
 /*--------------------------------------------------------
  * HIERARCHY
  *-------------------------------------------------------*/
@@ -491,15 +511,6 @@ for (var i = 0; i < sitesWithRoutes.length; i++) {
 	selectTo.append(option.clone())
 }
 
-function findPaths() {
-	var pathSelections = pathSelectedTypes(); 
-	var form = $j("#pathfinding-select");
-	var fromSite = form[0][0]; 
-	var toSite = form[0][1];
-	fromID = fromSite.options[fromSite.selectedIndex].value;
-	toID = toSite.options[toSite.selectedIndex].value;
-	drawPathFromSourceToTarget(fromID, toID, pathSelections);
-}
 
 /* SLIDE left and right */
 $j('#path-form-left').on("click", function() {
@@ -647,7 +658,6 @@ $j('#search input').on('keyup', (function (e) {
 			 		   .attr("class", "node")
 			 		   .attr("r", 4)
 			 		   .style("visibility", "visible")
-			 		   .on("click", assign)
 		}
 		update();
 	}
