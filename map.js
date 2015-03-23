@@ -246,7 +246,7 @@ function initializePathMap() {
 
 function drawPathFromSourceToTarget(sid, tid, pathSelections) {
 	sortRoutesByEID();
-	var s, t, pathFunction, pathToShow; 
+	var s, t, pathFunction, pathToShow, topoPath; 
 	var pathMap = initializePathMap();
 	
 	s = graph.getNode(sid);
@@ -255,7 +255,12 @@ function drawPathFromSourceToTarget(sid, tid, pathSelections) {
 	pathSelections.forEach(function(select) {
 			pathFunction = pathMap.get(select); 
 			pathToShow = pathFunction(s, t); 
-			showPath(createTopoPath(pathToShow), pathColors[select]);
+			topoPath = createTopoPath(pathToShow);
+			var distance = $j('<div />', {  
+				class : 'english', // change to format on screen 
+				html : " Distance Traveled on " + select + " Path: " + lengthInMeters(topoPath)
+			}).appendTo("#distance");  
+			showPath(topoPath, pathColors[select]);
 	})
 	map.on("viewreset", resetMap);
 }
@@ -307,7 +312,16 @@ function findPaths() {
 	fromID = fromSite.options[fromSite.selectedIndex].value;
 	toID = toSite.options[toSite.selectedIndex].value;
 	d3.selectAll('.path-shortest').attr("class", "path-all"); //change back to red 
+	$j("#distance").empty(); 
 	drawPathFromSourceToTarget(fromID, toID, pathSelections);
+}
+
+function lengthInMeters(path) {
+	var meters = 0; 
+	path.forEach(function(p) {
+		meters += p.properties.Meter; 
+	})
+	return meters; 
 }
 /*--------------------------------------------------------
  * ITINERARY : 
