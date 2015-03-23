@@ -66,7 +66,6 @@ svgSites = g.selectAll("circle")
 		.attr("r", 2)
 		.call(d3.helper.tooltip(
 			function(d, i){
-				generateContent(d);
 				return createPopup(d);
 			})
 		);
@@ -235,16 +234,15 @@ var pathSelectedTypes = function() {
 function initializePathMap() {
 	var path, 
 	    pathMap = d3.map(); 
+	// TODO: find way to put these into ONE object that I pull out of. 
 	pathMap.set("Shortest", function(s, t) {
-		return shortestPath(s, t, false); 
-		//showPath(createTopoPath(path)); 
+		return shortestPath(s, t, 's');  // s == shortest path 
 	})	
 	pathMap.set("Within A Day", function(s, t) {
-		return shortestPath(s, t, true); 
-		//showPath(createTopoPath(path));
+		return shortestPath(s, t, 'd'); // d == within a day 
 	})
 	pathMap.set("Through Centers", function(s, t) {
-		console.log("through centers");
+		return shortestPath(s, t, 'c'); // c == through centers. 
 	})
 	return pathMap;
 }
@@ -253,6 +251,7 @@ function drawPathFromSourceToTarget(sid, tid, pathSelections) {
 	sortRoutesByEID();
 	var s, t, pathFunction, pathToShow; 
 	var pathMap = initializePathMap();
+	
 	s = graph.getNode(sid);
 	t = graph.getNode(tid);
 
@@ -299,6 +298,9 @@ function addRoutesToPath(routes, path) {
 		}
 	}
 }
+// test itinerary 
+var testPlaces = ["FUSTAT_312N300E_C10" ,"MAKKA_398N213E_C07", "BAGHDAD_443N333E_C03", "AMMAN_359N319E_C01"]; 
+var testPathSelections = ["Shortest"]; 
 
 function findPaths() {
 	var pathSelections = pathSelectedTypes(); 
@@ -310,6 +312,23 @@ function findPaths() {
 	d3.selectAll('.path-shortest').attr("class", "path-all"); //change back to red 
 	drawPathFromSourceToTarget(fromID, toID, pathSelections);
 }
+/*--------------------------------------------------------
+ * ITINERARY : 
+ * given an array of places (topURIs), returns a complete
+ * path to display. 
+ * TODO: enlarge (or activate popup) for stopover between
+ * sites in the itinerary 
+ *-------------------------------------------------------*/
+function createItinerary(places, pathSelections) {
+	var s, t; 
+	for (var i = 0; i < places.length - 1; i++) {
+		s = places[i]; 
+		t = places[i+1]; 
+		drawPathFromSourceToTarget(s, t, pathSelections); 
+	}
+}
+
+
 /*--------------------------------------------------------
  * HIERARCHY
  *-------------------------------------------------------*/
@@ -384,9 +403,9 @@ function removeSitesWithoutRoutes() {
 			sitesWithRoutes.push(sitesByTopURI[r.eToponym]);
 		} if ((sitesByTopURI[r.sToponym]) && !(exists(sitesWithRoutes, r.sToponym))) {
 			sitesWithRoutes.push(sitesByTopURI[r.sToponym]); 
-		}
+		} 
 	})
-
+	sitesWithRoutes = places.data; 
 	sitesWithRoutes.sort( function(a, b) {
 		var element1 = a.eiSearch.toLowerCase(); 
 		var element2 = b.eiSearch.toLowerCase(); 
@@ -511,7 +530,22 @@ for (var i = 0; i < sitesWithRoutes.length; i++) {
 	selectTo.append(option.clone())
 }
 
+/* TABS 
+ * TODO: this is ugly af. 
+*/
+$j("#pathfinding-title").on("click", function() {
+	$j('#itinerary-content').hide();
+	$j('#itinerary-title').removeClass("tab-selected"); 
+	$j( this ).addClass("tab-selected"); 
+	$j('#pathfinding-content').show();
+})
 
+$j("#itinerary-title").on("click", function() {
+	$j("#pathfinding-title").removeClass("tab-selected"); 
+	$j('#pathfinding-content').hide();
+	$j( this ).addClass("tab-selected"); 
+	$j('#itinerary-content').show(); 
+})
 /* SLIDE left and right */
 $j('#path-form-left').on("click", function() {
 	$j('#site-form').hide('slide', {direction: 'left'}, 1000);

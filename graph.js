@@ -3,6 +3,7 @@ var graph = new Graph();
 var sites = places.data; 
 var routes = allRoutes.features; 
 var DAY = 120000; // will be determined using SCRIPT. 
+var MULTIPLIER = .10; 
 var e, s, edge;  
 
 for (var i = 0; i < routes.length; i++) {
@@ -84,7 +85,17 @@ function longestEdge(path) {
 }
 
 
-function shortestPath(s, t, withinADay) {
+/* THOUGHT for through center. What if instead of through 'centers' I say through 'X?' 
+ * As in, I want to go TO fustat and pass through makka. What's the fastest way to do so? 
+ * That's pretty easy to implement. Would it be worthwhile? 
+ * And if I want to do "major centers", I could have to have a list of the major centers, 
+ * then ask if it's a preference or a guarantee. Find the closest major center to the existing
+ * shortest path, then do pass through "X" on that center. 
+ */ 
+
+function shortestPath(s, t, searchType) {
+
+  console.log(s); 
   var INFINITY = 1/0;
   var nodes = new PriorityQueue(),
           distances = {},
@@ -119,11 +130,10 @@ function shortestPath(s, t, withinADay) {
     
     for(var i = 0; i < edges.length; i++) {
       neighbor = edges[i];
-      if (withinADay && neighbor.weight > DAY) {
+      if (searchType == 'd' && neighbor.weight > DAY) {
         continue;  // within a day is tagged and the neighbor's weight is greater than a Day. 
       } else {
           alt = distances[smallest] + neighbor.weight; 
-
           if (neighbor._sid == smallest) {
             if (alt < distances[neighbor._eid]) {
               distances[neighbor._eid] = alt;
@@ -143,6 +153,11 @@ function shortestPath(s, t, withinADay) {
   return path.concat(s._id).reverse(); 
 } 
 
+function isMajorCenter(site) {
+  return (site.topType == "metropoles" ||
+         site.topType == "capitals"   ||
+         site.topType == "towns")
+}
 
 
 

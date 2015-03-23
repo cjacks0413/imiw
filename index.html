@@ -23,6 +23,7 @@
 				</div>
 			</div>
 		</div>
+
 		<div id="left-arrow-container"></div>
 			<div id="search-container">
 				<div id="search" class="english">
@@ -31,26 +32,30 @@
 			</div>
 			<div class="left-arrow-left" id="path-form-left"></div>
 			<div class="left-arrow-right" id="path-form-right"></div> 
-			<div id="site-form" class="modal">	
-				<form id="pathfinding-select" action="javascript:findPaths()">
-					<div class="english-form-title"><strong>PathFinding</strong></div> 
-					<div class="english" id="site-from">From: </div> 
-					<div class="english" id="site-to">To: </div>
-					<div class="selections">
-						<div id="path-options"></div>
-					</div> 
-					<input class="button" id="go-path" type="submit" value="Go">
-				</form> 
-			</div> 
-		<div id="index-lookup-content">
-			<div id="close-index" class="close">[X]</div></br>
-			<div class="english">Exact matches in Arabic Sources:</div></br>
-			<div class="arabic"><ul class="match-list" id="exact" ></ul></div> 
-		</div>
-		<div class='arabic' id="index-lookup-match"> 
-			<div id="close-match" class="close">[X]</div></br>
-			<div class='arabic' id="match" ></div> 
-		</div>
+				<div id="site-form" class="modal">	
+						<div class="english-form-title" >
+					    	<div id="itinerary-title"><strong>Itinerary</strong> </div> 
+					    	<div id="pathfinding-title" class="tab-selected"><strong>Pathfinding</strong></div> 
+						</div>
+						<div id="pathfinding-content">
+							<form id="pathfinding-select" action="javascript:findPaths()">
+								<div class="english" id="site-from">From: </div> 
+								<div class="english" id="site-to">To: </div>
+								<div class="selections">
+									<div id="path-options"></div>
+								</div> 
+								<input class="button" id="go-path" type="submit" value="Go">
+							</form> 
+						</div>
+						<div id="itinerary-content">
+							<form id="itinerary-select" action="javascript:createItinerary()">
+								<div class="english">Itinerary Options Here! </div> 
+							</form>   
+						</div>  
+					</div>
+				</div> 
+			</div>
+
 		<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
 		<script src="js/jquery-1.11.1.js"> </script> 
 		<script src="js/jquery-ui.min.js"></script>

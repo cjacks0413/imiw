@@ -195,10 +195,23 @@ div.tooltip {
 
 
 .english-form-title {
-  text-align: center;
   font-size: 20px;
   font-family: Brill, Gentium, Georgia, Arial, serif;
   direction: ltr;
+}
+
+#itinerary-title {
+  float: right;
+  text-align: center;
+  width: 50%;
+  box-shadow: 2px 1px 5px #888888;
+} 
+
+#pathfinding-title {
+  overflow: auto;
+  width: 50%;
+  text-align: center;
+  box-shadow: 2px 1px 5px #888888;
 }
 
 #pathfinding-select select {
@@ -207,6 +220,14 @@ div.tooltip {
    line-height: 1;
    height: 34px;
    -webkit-appearance: none;
+}
+
+#itinerary-content {
+  display: none;
+}
+
+.tab-selected {
+  background-color: #a1d99b;
 }
 
 .circle {
