@@ -1,7 +1,4 @@
 $j = jQuery; 
-var debug = true; 
-
-/* TODO: make this more efficient */ 
 
 var hierarchy = false; 
 var voronoi = false; 
