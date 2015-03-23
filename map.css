@@ -112,7 +112,7 @@ div.tooltip {
   position: absolute;
   top: 10%; 
   left: 2.3%;
-  height: 60%;
+  height: 70%;
   bottom: 10%;
 }
 
@@ -193,7 +193,9 @@ div.tooltip {
   top:1px;
 }
 
-
+#distance {
+  padding: 25px;
+}
 .english-form-title {
   font-size: 20px;
   font-family: Brill, Gentium, Georgia, Arial, serif;

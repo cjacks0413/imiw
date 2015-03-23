@@ -258,7 +258,7 @@ function drawPathFromSourceToTarget(sid, tid, pathSelections) {
 			topoPath = createTopoPath(pathToShow);
 			var distance = $j('<div />', {  
 				class : 'english', // change to format on screen 
-				html : " Distance Traveled on " + select + " Path: " + lengthInMeters(topoPath)
+				html : " Distance Traveled on " + select + " Path: " + lengthInMeters(topoPath) + 'm'
 			}).appendTo("#distance");  
 			showPath(topoPath, pathColors[select]);
 	})
