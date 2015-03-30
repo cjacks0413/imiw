@@ -163,6 +163,11 @@ function resetMap() {
 				map.latLngToLayerPoint(d.LatLng).y +")";
 		});
 
+	    /* reposition voronoi */ 
+	    if (voronoi) {
+			d3.select("body").selectAll("path").remove();
+			drawVoronoiCells(map, mergedPoints);
+		}
  	}
 
 
@@ -502,11 +507,11 @@ var selectedTypes = function() {
 	  return elem.value;
 	})
 }
-
+var mergedPoints; 
 function renderVoronoi() {
 	var selected = selectedTypes(); 
 	var pointsToDraw = new Array(); 
-	var mergedPoints = [];
+	mergedPoints = [];
 	g.selectAll("circle.node").style("visibility", "hidden");
 	selected.forEach(function(s) {
 		g.selectAll("circle.node")

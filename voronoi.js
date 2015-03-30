@@ -39,10 +39,6 @@ function drawVoronoiCells(map, points) {
 			.attr("d", buildPathFromPoint);
 	}
 
-	map.on('viewreset moveend', redraw);
-	redraw(); 
-	function redraw() {
-			d3.select("body").selectAll("path").remove();
-			draw();
-	 	}
+	d3.select("body").selectAll("path").remove(); 
+	draw();
 }

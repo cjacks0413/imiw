@@ -19053,6 +19053,7 @@ var places = { data:[
     "topType": "temp",
     "topURI": "BASRA_058N348W_C12",
     },
+    
 {
     "source": "cornu12",
     "lat": 34.99380,
