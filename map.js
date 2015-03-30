@@ -589,104 +589,10 @@ $j('#options-left').on("click", function() {
 
 /*-----------------------------------------------------
  * POPUP / TOOLTIP 
- * Todo: fix the tooltip "x" 
  *----------------------------------------------------*/
- /*TODO: make this less gross. /
-function createPopup(place) {
-	return('<center><span class="arabic">' + place.arTitle + 
-	'</span><br><br><span class="english">' + place.translitTitle + 
-	'<br><i>Check in:</i><br></span><div id="index-lookup" class="basic">' +
-	' <a href="#' + place.topURI + '" onclick="openMatch()">Arabic Sources</a>;' + 
-	'</div> <a href="http://referenceworks.brillonline.com/search?s.q='+place.eiSearch+'&s.f.s2_parent=s.f.cluster.Encyclopaedia+of+Islam&search-go=Search" target="_blank">' +
-	'Encylopaedia of Islam</a>;<br> <a href="http://pleiades.stoa.org/search?SearchableText='+place.translitSimpleTitle+'" target="_blank">' + 
-	'Pleiades</a>; <a href="https://en.wikipedia.org/wiki/Special:Search/'+place.translitSimpleTitle+'" target="_blank">Wikipedia</a></center>');
-} */ 
-
 function createPopup(place) {
 	return('<center><span class="arabic">' + place.arTitle + 
 	'</span><br><br><span class="english">' + place.translitTitle); 
-} 
-
-function openMatch() {
-    d3.select('body').selectAll('div.tooltip').remove();
-    /* close left and right side panels */ 
-	$j('#site-form').hide();
-	$j('#path-form-left').hide();
-	$j('#path-form-right').show();
-
-	$j("#index-lookup-content").show();
-}
-
-
-/* ARABIC SOURCES */ 
-$j("#close-index").click(function(e){
-	$j("#index-lookup-content").hide();
-});
-$j("#close-match").click(function(e) {
-	$j("#index-lookup-match").hide(); 
-});
-
-function generateContent(place) {
-	/* bind click event*/
-	var id = place.arBW;
-	var lookup = matchIndex[id];
-	/* remove content already in div*/
-	$j("#exact").empty(); 
-	$j("#fuzzy").empty(); 
-	$j("#match").empty();
-	/* hack to turn string array into array of strings */ 
-	var exact_matches = lookup.exact.join().split(","); 
-	var fuzzy_matches = lookup.fuzzy.join().split(","); 
-	/* found vs not found */ 
-	$j.each(exact_matches, function(_id, exact) {
-		var has_exact_matches = gazetteers[exact] != undefined;
-		if (has_exact_matches) {
-			var link = $j('<a/>', {
-				href  : '#' + exact,  
-				class : 'arabic-link', 
-				html : "<li class=match-list>" + gazetteers[exact].title + " (" + gazetteers[exact].source + ")</li>",
-				click : function() { 
-					$j("#index-lookup-match").show();  
-					var id = $j(this).attr('href'); 
-					$j(".match-display-reference").hide(); 
-					$j(id).show();
-				}
-			}).appendTo("#exact"); 
-			var content = $j('<div/>', {
-				id : exact, 
-				/*  CHANGE CLASS FOR REFERENCE HERE! */
-				html : "<div class='english'>" + gazetteers[exact].reference + "</div>" + gazetteers[exact].text, 
-				class : 'match-display-reference'
-			}).appendTo("#match"); 
-		} else {
-			$j("#exact").append("لم يُعثر على أية نتائج");
-		}
-	}); 
-	$j.each(fuzzy_matches, function(_id, fuzzy) {
-		var has_fuzzy_matches = gazetteers[fuzzy] != undefined;  
-		if (has_fuzzy_matches) {
-			var link = $j('<a/>', {
-				href  : '#' + fuzzy,  
-				class : 'arabic-link', 
-				html : "<li class=match-list>" + gazetteers[fuzzy].title + " (" + gazetteers[fuzzy].source + ")</li>",
-				click : function() { 
-					displayMatch(); 
-					var id = $j(this).attr('href'); 
-					$j(".match-display").hide(); 
-					$j(id).show();
-				}
-			}).appendTo("#fuzzy"); 
-			var content = $j('<div/>', {
-				id : fuzzy, 
-				html : gazetteers[fuzzy].reference + gazetteers[fuzzy].text, 
-				class : 'match-display-reference'
-			}).appendTo("#match"); 
-		} else {
-			$j("#fuzzy").append("...");
-		}
-
-	}); 
-
 } 
 
 /*--------------------------------------------------------
