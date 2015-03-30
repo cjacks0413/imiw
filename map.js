@@ -1,6 +1,5 @@
 $j = jQuery; 
 
-var hierarchy = false; 
 var voronoi = false; 
 
 
@@ -153,7 +152,6 @@ function resetMap() {
 	    group.attr("transform", "translate(" + -bottomLeft[0] + "," + -topRight[1] + ")");
 
 	    feature.attr("d", path);
-	    //partial_feature.attr("d", path);
 
 	    /* reposition sites*/
 	    svgSites.attr("transform",
