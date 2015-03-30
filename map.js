@@ -247,23 +247,25 @@ function initializePathMap() {
 	return pathMap;
 }
 
+sortRoutesByEID();
+
 function drawPathFromSourceToTarget(sid, tid, pathSelections) {
-	sortRoutesByEID();
-	var s, t, pathFunction, pathToShow, topoPath; 
+	var s, t, pathFunction, pathToShow, topoPath, meters = 0; 
 	var pathMap = initializePathMap();
 	
 	s = graph.getNode(sid);
 	t = graph.getNode(tid);
 
 	pathSelections.forEach(function(select) {
-			pathFunction = pathMap.get(select); 
-			pathToShow = pathFunction(s, t); 
-			topoPath = createTopoPath(pathToShow);
-			var distance = $j('<div />', {  
-				class : 'english', // change to format on screen 
-				html : " Distance Traveled on " + select + " Path: " + lengthInMeters(topoPath) + 'm'
-			}).appendTo("#distance");  
-			showPath(topoPath, pathColors[select]);
+		pathFunction = pathMap.get(select); 
+		pathToShow = pathFunction(s, t); 
+		topoPath = createTopoPath(pathToShow);
+		meters = lengthInMeters(topoPath);
+		var distance = $j('<div />', {  
+			class : 'english', // change to format on screen 
+			html : " Distance Traveled on " + select + " Path: " + meters + 'm'
+		}).appendTo("#distance");  
+		showPath(topoPath, pathColors[select]);
 	})
 	map.on("viewreset", resetMap);
 }
@@ -282,11 +284,11 @@ function sortRoutesByEID() {
 }
 
 function createTopoPath(partialPath) {
-	var topoPath = []; 
-	var routeSection; 
+	var topoPath = new Array(); 
+	var routeSections = new Array();
 	for (var i = 0; i < partialPath.length - 1; i++) {
-		routeSections = routesByEID[partialPath[i]];
-		addRoutesToPath(routeSections, topoPath);
+			routeSections = routesByEID[partialPath[i]];
+			addRoutesToPath(routeSections, topoPath);
 	}
 	topoPath = topoPath.filter(function(element, index, array) {
 		return ((partialPath.indexOf(element.properties.eToponym) >= 0 ) && 
@@ -320,11 +322,11 @@ function findPaths() {
 }
 
 function lengthInMeters(path) {
-	var meters = 0; 
+	var m = 0; 
 	path.forEach(function(p) {
-		meters += p.properties.Meter; 
+		m += p.properties.Meter; 
 	})
-	return meters; 
+	return m; 
 }
 /*--------------------------------------------------------
  * ITINERARY : 
