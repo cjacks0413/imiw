@@ -24,6 +24,9 @@ for (var i = 0; i < routes.length; i++) {
   edge.weight = routes[i].properties.Meter; 
 }
 
+/* consider doing the routepoint thing in the definition of the graph. 
+ so if you run across a routepoint, all edges connecting to it equal 
+ weight of routepoint + current edge. maybe that will work? */ 
 resetNodes(graph);
 
 function resetNodes(G) {
@@ -133,6 +136,7 @@ function shortestPath(s, t, searchType) {
       if (searchType == 'd' && neighbor.weight > DAY) {
         continue;  // within a day is tagged and the neighbor's weight is greater than a Day. 
       } else {
+
           alt = distances[smallest] + neighbor.weight; 
           if (neighbor._sid == smallest) {
             if (alt < distances[neighbor._eid]) {

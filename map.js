@@ -1,6 +1,7 @@
 $j = jQuery; 
 
 var voronoi = false; 
+var MAX_FIELDS = 7; 
 
 
 L.mapbox.accessToken = 'pk.eyJ1IjoiY2phY2tzMDQiLCJhIjoiVFNPTXNrOCJ9.k6TnctaSxIcFQJWZFg0CBA';
@@ -335,7 +336,21 @@ function lengthInMeters(path) {
  * TODO: enlarge (or activate popup) for stopover between
  * sites in the itinerary 
  *-------------------------------------------------------*/
-function createItinerary(places, pathSelections) {
+ItineraryUI(); 
+var numFields = 1;  
+function createItinerary() {
+	console.log(numFields);
+	var stops = []; 
+	var formAnswers = $j('#itinerary-select')[0]; 
+	for (var i = 0; i < numFields; i++) {
+		var s = formAnswers[i]; 
+		stops.push(s.options[s.selectedIndex].value); 
+	}
+    d3.selectAll('.path-shortest').attr("class", "path-all"); //change back to red 
+	drawItinerary(stops, testPathSelections);
+}
+
+function drawItinerary(places, pathSelections) {
 	var s, t; 
 	for (var i = 0; i < places.length - 1; i++) {
 		s = places[i]; 
@@ -344,6 +359,61 @@ function createItinerary(places, pathSelections) {
 	}
 }
 
+// for now, just removes the last element. 
+function ItineraryUI() {
+	var wrapper = $(".input_fields_wrap"); 
+	var addFieldButton = $(".add_field_button"); 
+
+	var fieldSet = d3.set(); 
+
+	wrapItineraryField(wrapper, numFields, fieldSet);
+	fieldSet.add(1); 
+	$(addFieldButton).click(function(e) {
+		e.preventDefault();
+		if (numFields < MAX_FIELDS) {
+			numFields++; 
+			wrapItineraryField(wrapper, numFields, fieldSet);
+		}
+	})
+
+	$('#remove-last-field').click(function(e) {
+		// var id = $( this ).attr('href');
+		// $j(id).remove(); 
+		// fieldSet.remove(numFields); 
+		$j('.itinerary-dropdown').last().remove(); 
+		numFields--;  
+	})
+
+}
+
+
+function wrapItineraryField(wrapper, numFields, fset) {
+	// var idNum; 
+	// if (fset.has(numFields)) { // all this to deal with the case where i remove x but still need to 
+	// 	var values = fset.values();  // reuse the id#. can't repeat ids. 
+	// 	var i = 1; 
+	// 	for (var i = 1; i < values.length(); i++) {
+	// 		if (values[i].parseInt() != i) {
+	// 			idNum = i; 
+	// 			break;
+	// 		} 
+	// 	}
+	// } else {
+	// 	idNum = numFields; 
+	// }
+
+	$(wrapper).append('<div id=' + numFields + ' class="itinerary-dropdown"><select></div>'); //do i need an id? 
+	createDropDown($j('.input_fields_wrap > div > select')); 
+
+}
+
+function createDropDown(element) {
+	for (var i = 0; i < sitesWithRoutes.length; i++) {
+		var option =  $j("<option>", { value: sitesWithRoutes[i].topURI, 
+									  text: sitesWithRoutes[i].eiSearch});
+		element.append(option.clone());
+	}
+}
 
 /*--------------------------------------------------------
  * HIERARCHY
@@ -533,6 +603,7 @@ function renderVoronoi() {
  *----------------------------------------------------*/ 
 
 /* Create select (dropdown) for pathfinding */
+
 var from, to, selectFrom, selectTo; 
 from = $j("#site-from")
 to = $j("#site-to");
@@ -562,6 +633,7 @@ $j("#itinerary-title").on("click", function() {
 	$j( this ).addClass("tab-selected"); 
 	$j('#itinerary-content').show(); 
 })
+
 /* SLIDE left and right */
 $j('#path-form-left').on("click", function() {
 	$j('#site-form').hide('slide', {direction: 'left'}, 1000);

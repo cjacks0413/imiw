@@ -216,7 +216,7 @@ div.tooltip {
   box-shadow: 2px 1px 5px #888888;
 }
 
-#pathfinding-select select {
+#pathfinding-select select, .itinerary-dropdown select {
    width: 268px;
    padding: 5px;
    line-height: 1;
@@ -224,6 +224,13 @@ div.tooltip {
    -webkit-appearance: none;
 }
 
+.itinerary-dropdown {
+  padding: 7px;
+}
+
+.remove_field {
+  float: right;
+}
 #itinerary-content {
   display: none;
 }
