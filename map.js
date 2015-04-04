@@ -335,10 +335,8 @@ function lengthInMeters(path) {
 ItineraryUI(); 
 var numFields = 1;  
 function createItinerary() {
-	console.log(numFields);
 	var stops = []; 
 	var formAnswers = $j('#itinerary-select')[0]; 
-	console.log(formAnswers)
 	for (var i = 1; i <= numFields; i++) {
 		var s = formAnswers[i]; 
 		console.log(s, i); 
@@ -348,7 +346,6 @@ function createItinerary() {
 	}
     d3.selectAll('.path-shortest').attr("class", "path-all"); //change back to red 
     var selections = selectedTypes('itinerary-options');
-    console.log(stops);
 	drawItinerary(stops, selections);
 }
 
