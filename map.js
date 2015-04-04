@@ -1,7 +1,7 @@
 $j = jQuery; 
 
 var voronoi = false; 
-var MAX_FIELDS = 7; 
+var MAX_FIELDS = 6; 
 
 
 L.mapbox.accessToken = 'pk.eyJ1IjoiY2phY2tzMDQiLCJhIjoiVFNPTXNrOCJ9.k6TnctaSxIcFQJWZFg0CBA';
@@ -33,6 +33,11 @@ var sitesByTopURI = sortSitesByTopURI();
 
 
 /* INITIALIZE MAP: MAKE THIS A FUNC! */ 
+// init map: onLoad, do the following -- 
+// set up sites, set up paths 
+// initialize all the UTIL arrays
+
+
 //var sites = places.data.filter(isDefaultTopType);
 var sitesWithRoutes = new Array(); 
 removeSitesWithoutRoutes();
@@ -193,43 +198,35 @@ var howManyTrue = 0;
 //drawPathFromSourceToTarget("BAGHDAD_443N333E_C03", "AMMAN_359N319E_C01");
 //showAllPaths();
 
-/* TODO: allRoutes + new route overlaid on top of it.  
- * 
-*/ 
-
 var pathColors = {}; 
-var pathTypes = d3.set(['Shortest', 'Within A Day', 'Through Centers']);
+var pathTypes = d3.set(['Shortest', 'Within A Day']); // can add back 'Through Centers' eventually.. 
 var initialSelections = d3.set(['Shortest', 'Within A Day']);
 pathTypes.forEach(function(t) {
 	pathColors[t] = getRandomColor();
 })
 
-path_labels = d3.select('#path-options').selectAll('input')
-  .data(pathTypes.values())
-  .enter().append("label");
+selectionsUI('#path-options', initialSelections, pathColors); 
+selectionsUI('#itinerary-options', initialSelections, pathColors); 
 
-path_labels.append("input")
-  .attr('type', 'checkbox')
-  .property('checked', function(d) {
-    return initialSelections === undefined || initialSelections.has(d)
-  })
-  .attr("value", function(d) { return d }); 
+function selectionsUI(identifier, initialSelections, colors) {
+	var space = d3.select(identifier).selectAll('input')
+  			.data(pathTypes.values())
+  			.enter().append("label");
 
-path_labels.append("span")
-  .attr('class', 'key')
-  .style('background-color', function(d) { return pathColors[d] });
+	space.append("input")
+	  .attr('type', 'checkbox')
+	  .property('checked', function(d) {
+	    return initialSelections === undefined || initialSelections.has(d)
+	  })
+	  .attr("value", function(d) { return d }); 
 
-path_labels.append("span")
-  .text(function(d) { return d })
-  .attr("class", "english");
+	space.append("span")
+	  .attr('class', 'key')
+	  .style('background-color', function(d) { return colors[d] });
 
-
-var pathSelectedTypes = function() {
-	return d3.selectAll('#path-options input[type=checkbox]')[0].filter(function(elem) {
-	  return elem.checked;
-	}).map(function(elem) {
-	  return elem.value;
-	})
+	space.append("span")
+	  .text(function(d) { return d })
+	  .attr("class", "english"); 
 }
 
 function initializePathMap() {
@@ -308,10 +305,9 @@ function addRoutesToPath(routes, path) {
 }
 // test itinerary 
 var testPlaces = ["FUSTAT_312N300E_C10" ,"MAKKA_398N213E_C07", "BAGHDAD_443N333E_C03", "AMMAN_359N319E_C01"]; 
-var testPathSelections = ["Shortest"]; 
 
 function findPaths() {
-	var pathSelections = pathSelectedTypes(); 
+	var pathSelections = selectedTypes('path-options'); 
 	var form = $j("#pathfinding-select");
 	var fromSite = form[0][0]; 
 	var toSite = form[0][1];
@@ -342,12 +338,18 @@ function createItinerary() {
 	console.log(numFields);
 	var stops = []; 
 	var formAnswers = $j('#itinerary-select')[0]; 
-	for (var i = 0; i < numFields; i++) {
+	console.log(formAnswers)
+	for (var i = 1; i <= numFields; i++) {
 		var s = formAnswers[i]; 
-		stops.push(s.options[s.selectedIndex].value); 
+		console.log(s, i); 
+		if (s != undefined) {
+			stops.push(s.options[s.selectedIndex].value); 
+		}
 	}
     d3.selectAll('.path-shortest').attr("class", "path-all"); //change back to red 
-	drawItinerary(stops, testPathSelections);
+    var selections = selectedTypes('itinerary-options');
+    console.log(stops);
+	drawItinerary(stops, selections);
 }
 
 function drawItinerary(places, pathSelections) {
@@ -415,18 +417,6 @@ function createDropDown(element) {
 	}
 }
 
-/*--------------------------------------------------------
- * HIERARCHY
- *-------------------------------------------------------*/
-var sitesBySource = sortSitesBySource(); 
-var metropoles = new Array();  
-$j.each(sitesBySource, function(id, source) {
-	metropoles.push(source.filter(isMetropole)); 
-})
-
-function isMetropole(element, index, array) {
-	return element.topType == "metropoles";
-}
 /*--------------------------------------------------------
  * UTIL 
  * TODO make this modular! 
@@ -546,10 +536,12 @@ var topTypeColors = {};
 var sitesByTopType = sortSitesByTopType();
 var topTypes = d3.set(Object.keys(sitesByTopType));
 var initialSelections = d3.set(['metropoles', 'capitals', 'villages']);
+
 topTypes.forEach(function(t) {
 	topTypeColors[t] = getRandomColor();
 })
 
+/* call selectionUI func here, then set d3.*/ 
 labels = d3.select('#voronoi-select').selectAll('input')
   .data(topTypes.values())
   .enter().append("label");
@@ -569,17 +561,17 @@ labels.append("span")
 labels.append("span")
   .text(function(d) { return d });
 
-
-var selectedTypes = function() {
-	return d3.selectAll('#voronoi-select input[type=checkbox]')[0].filter(function(elem) {
+var selectedTypes = function(identifier) {
+	return d3.selectAll('#' + identifier + ' input[type=checkbox]')[0].filter(function(elem) {
 	  return elem.checked;
 	}).map(function(elem) {
 	  return elem.value;
 	})
 }
+
 var mergedPoints; 
 function renderVoronoi() {
-	var selected = selectedTypes(); 
+	var selected = selectedTypes('voronoi-select'); 
 	var pointsToDraw = new Array(); 
 	mergedPoints = [];
 	g.selectAll("circle.node").style("visibility", "hidden");

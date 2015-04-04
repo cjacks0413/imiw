@@ -185,13 +185,29 @@ div.tooltip {
   text-shadow:0px 1px 0px #2f6627;
 }
 
-.button:hover {
+.button:hover, .add_field_button:hover {
   background-color:#5cbf2a;
 }
-.button:active {
+.button:active, .add_field_button:active {
   position:relative;
   top:1px;
 }
+
+.add_field_button {
+  background-color:#44c767;
+  border:1px solid #18ab29;
+  display:inline-block;
+  position:relative;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:arial;
+  font-size:20px;
+  padding: 5px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #2f6627;
+  float: right;
+}
+
 
 #distance {
   padding: 25px;
@@ -236,7 +252,7 @@ div.tooltip {
 }
 
 .tab-selected {
-  background-color: #a1d99b;
+  background-color: #44c767;
 }
 
 .circle {

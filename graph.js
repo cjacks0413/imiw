@@ -97,8 +97,6 @@ function longestEdge(path) {
  */ 
 
 function shortestPath(s, t, searchType) {
-
-  console.log(s); 
   var INFINITY = 1/0;
   var nodes = new PriorityQueue(),
           distances = {},
