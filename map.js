@@ -62,10 +62,8 @@ svgSites = g.selectAll("circle")
 		.data(sites) //change back to "sites"
 		.enter()
 		.append("circle")
-		.attr("class", "node")
-		.style("stroke", "black")
-		.style("stroke-width", 2)
 		.attr("r", 2)
+		.classed('node', true) 
 		.call(d3.helper.tooltip(
 			function(d, i){
 				return createPopup(d);
@@ -76,29 +74,13 @@ showAllPaths();
 function restoreDefaultMap() {
 	g.selectAll("circle.node")
  		   .filter(function(d) { return isDefaultTopType(d)})
- 		   .attr("class", "node")
- 		   .style("stroke", "black")
-		   .style("stroke-width", 2)
+ 		   .classed('node', true) 
  		   .attr("r", 2)
  		   .style("visibility", "visible"); 
- 	showAllPaths(); 
+
+ 	g.selectAll("path").style("visibility", "visible"); //to restore after search 
+ 	showAllPaths(); // to restore after voronoi 
 } 
-
-
-map.on("viewreset", update);
-
-update();
-
-function update() {
-	svgSites.attr("transform",
-		function(d) {
-			return "translate("+
-			map.latLngToLayerPoint(d.LatLng).x +","+
-			map.latLngToLayerPoint(d.LatLng).y +")";
-		}
-	)
-
-}
 
 /*------------------------------------------------------
  * SETUP ROUTES
@@ -200,15 +182,16 @@ var howManyTrue = 0;
 
 var pathColors = {}; 
 var pathTypes = d3.set(['Shortest', 'Within A Day']); // can add back 'Through Centers' eventually.. 
-var initialSelections = d3.set(['Shortest', 'Within A Day']);
+var pathInitialSelections = d3.set(['Shortest', 'Within A Day']);
 pathTypes.forEach(function(t) {
 	pathColors[t] = getRandomColor();
 })
 
-selectionsUI('#path-options', initialSelections, pathColors); 
-selectionsUI('#itinerary-options', initialSelections, pathColors); 
+selectionsUI('#path-options', pathInitialSelections, pathColors); 
+selectionsUI('#itinerary-options', pathInitialSelections, pathColors); 
 
 function selectionsUI(identifier, initialSelections, colors) {
+	console.log('creating selections for', identifier);
 	var space = d3.select(identifier).selectAll('input')
   			.data(pathTypes.values())
   			.enter().append("label");
@@ -227,6 +210,8 @@ function selectionsUI(identifier, initialSelections, colors) {
 	space.append("span")
 	  .text(function(d) { return d })
 	  .attr("class", "english"); 
+
+	return space; 
 }
 
 function initializePathMap() {
@@ -467,7 +452,7 @@ function sortSitesByTopType() {
 	}
 	return sortedSites;	
 }
-/* TODO: get rid of "trash" */ 
+
 function removeSitesWithoutRoutes() {
 	var currentRoute; 
 	$j.each(allRoutes.features,function (id, route) {
@@ -532,7 +517,7 @@ function getRandomColor() {
 var topTypeColors = {}; 
 var sitesByTopType = sortSitesByTopType();
 var topTypes = d3.set(Object.keys(sitesByTopType));
-var initialSelections = d3.set(['metropoles', 'capitals', 'villages']);
+var voronoiInitialSelections = d3.set(['metropoles', 'capitals', 'villages']);
 
 topTypes.forEach(function(t) {
 	topTypeColors[t] = getRandomColor();
@@ -546,7 +531,7 @@ labels = d3.select('#voronoi-select').selectAll('input')
 labels.append("input")
   .attr('type', 'checkbox')
   .property('checked', function(d) {
-    return initialSelections === undefined || initialSelections.has(d)
+    return voronoiInitialSelections === undefined || voronoiInitialSelections.has(d)
   })
   .attr("value", function(d) { return d })
   .on("change", renderVoronoi);
@@ -557,6 +542,7 @@ labels.append("span")
 
 labels.append("span")
   .text(function(d) { return d });
+
 
 var selectedTypes = function(identifier) {
 	return d3.selectAll('#' + identifier + ' input[type=checkbox]')[0].filter(function(elem) {
@@ -667,19 +653,18 @@ $j('#search input').on('keyup', (function (e) {
 		g.selectAll("circle.node").style("visibility", "hidden");
 		g.selectAll("path").style("visibility", "hidden");
 		//changed places.data to sites
-		var matchesIndex = filterPlaces( $j ( this ).val(), sites, ['translitTitle','translitSimpleTitle','arTitle','topURI','topType']);
+		var matchesIndex = filterPlaces( $j ( this ).val(), sites, ['translitTitle','UStranslitTitle','arTitle','topURI','topType']);
 		for ( var i=0; i < matchesIndex.length; i++ ) {
 			s_id = sites[matchesIndex[i]].topURI;
 			g.selectAll("circle.node")
 			 		   .filter(function(d) { return d.topURI === s_id})
-			 		   .attr("class", "node")
+			 		   .classed('node', true) 
 			 		   .attr("r", 4)
 			 		   .style("visibility", "visible")
 		}
-		update();
 	}
 	if ( $j (this).val() == "") {
-		g.selectAll("circle.node").style("visibility", "visible");
+		restoreDefaultMap(); 
 		g.selectAll("path").style("visibility", "visible");
 	}
   })

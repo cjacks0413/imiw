@@ -68,11 +68,14 @@ div.tooltip {
 }
 
 .node {
-    fill: blue;
-    stroke: black;
-    cursor: pointer;
-    stroke-width: 1
+  stroke: #96190E;
+  stroke-width: 2;
+  fill: #fff;
+  opacity: 0.9;
+
 }
+
+
 .search-node {
     fill: red;
     stroke: black;
@@ -80,16 +83,6 @@ div.tooltip {
     cursor: pointer;
 }
 
-/*#right-container {
-  position: absolute;
-  top: 5%;
-  right: 2.3%;
-  height: 80%;
-  bottom: 10%;
-  padding: 5px;
-  display: none;
-}
-*/
 .modal {
   position: absolute;
   font-size: 15px;
@@ -166,9 +159,6 @@ div.tooltip {
    border: 1px solid #ccc;
    }
 
-/*#pathfinding-select {
-  padding-top: 100px;
-}*/
 
 .button {
   background-color:#44c767;
@@ -212,6 +202,7 @@ div.tooltip {
 #distance {
   padding: 25px;
 }
+
 .english-form-title {
   font-size: 20px;
   font-family: Brill, Gentium, Georgia, Arial, serif;
@@ -447,6 +438,7 @@ div.tooltip {
   pointer-events: all;
   stroke: #000;
   stroke-opacity: .2;
+  position: absolute;
 }
 
 .point-cell:hover, .point-cell.selected {

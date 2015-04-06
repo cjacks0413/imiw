@@ -36,9 +36,16 @@ function drawVoronoiCells(map, points) {
 			.enter()
 			.append("path")
 			.attr("class", "point-cell")
-			.attr("d", buildPathFromPoint);
+			.attr("d", buildPathFromPoint)
+			.call(d3.helper.tooltip(
+			function(d, i){
+				return createPopup(d.point);
+			})
+		);;
 	}
 
 	d3.select("body").selectAll("path").remove(); 
 	draw();
 }
+
+
