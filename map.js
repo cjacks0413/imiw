@@ -2,7 +2,7 @@ $j = jQuery;
 
 var voronoi = false; 
 var MAX_FIELDS = 6; 
-
+var CROSS_OCEAN_URI = "SPAINTOAFRICA";
 
 L.mapbox.accessToken = 'pk.eyJ1IjoiY2phY2tzMDQiLCJhIjoiVFNPTXNrOCJ9.k6TnctaSxIcFQJWZFg0CBA';
 var map = L.mapbox.map('map', 'cjacks04.jij42jel', { 
@@ -232,7 +232,7 @@ function initializePathMap() {
 
 sortRoutesByEID();
 
-function drawPathFromSourceToTarget(sid, tid, pathSelections) {
+function drawPathFromSourceToTarget(sid, tid, pathSelections, isItinerary) {
 	var s, t, pathFunction, pathToShow, topoPath, meters = 0; 
 	var pathMap = initializePathMap();
 	
@@ -244,10 +244,12 @@ function drawPathFromSourceToTarget(sid, tid, pathSelections) {
 		pathToShow = pathFunction(s, t); 
 		topoPath = createTopoPath(pathToShow);
 		meters = lengthInMeters(topoPath);
-		var distance = $j('<div />', {  
-			class : 'english', // change to format on screen 
-			html : " Distance Traveled on " + select + " Path: " + meters + 'm'
-		}).appendTo("#distance");  
+		if(!isItinerary) {
+			var distance = $j('<div />', {  
+				class : 'english', // change to format on screen 
+				html : " Distance Traveled on " + select + " Path: " + meters + 'm'
+			}).appendTo("#distance");  
+		}
 		showPath(topoPath, pathColors[select]);
 	})
 	map.on("viewreset", resetMap);
@@ -300,7 +302,7 @@ function findPaths() {
 	toID = toSite.options[toSite.selectedIndex].value;
 	d3.selectAll('.path-shortest').attr("class", "path-all"); //change back to red 
 	$j("#distance").empty(); 
-	drawPathFromSourceToTarget(fromID, toID, pathSelections);
+	drawPathFromSourceToTarget(fromID, toID, pathSelections, false);
 }
 
 function lengthInMeters(path) {
@@ -324,7 +326,6 @@ function createItinerary() {
 	var formAnswers = $j('#itinerary-select')[0]; 
 	for (var i = 1; i <= numFields; i++) {
 		var s = formAnswers[i]; 
-		console.log(s, i); 
 		if (s != undefined) {
 			stops.push(s.options[s.selectedIndex].value); 
 		}
@@ -336,13 +337,29 @@ function createItinerary() {
 
 function drawItinerary(places, pathSelections) {
 	var s, t; 
+	var places = replaceOceanWithPath(places); 
 	for (var i = 0; i < places.length - 1; i++) {
 		s = places[i]; 
 		t = places[i+1]; 
-		drawPathFromSourceToTarget(s, t, pathSelections); 
+		drawPathFromSourceToTarget(s, t, pathSelections, true); 
 	}
-}
 
+}
+// to deal with crossing the ocean, add two new sites to the place array: 
+// Qadis -> Tangat (according to Orbis)
+function replaceOceanWithPath(places) {
+	var new_places = []; 
+	var length = places.length; 
+	for(var i = 0; i < length; i++) {
+		new_places.push(places[i]); 
+		if (places[i] == CROSS_OCEAN_URI) { 
+			new_places[i] = "QADIS_061N365W_C14"; // replace places with qadis -> tangat
+			new_places[i+1] = "TANJA_058N357W_C12"; 
+			length += 1; //add an extra iteration to get the last place. 
+		}
+	}
+	return new_places; 
+}
 // for now, just removes the last element. 
 function ItineraryUI() {
 	var wrapper = $(".input_fields_wrap"); 
@@ -396,7 +413,14 @@ function createDropDown(element) {
 		var option =  $j("<option>", { value: sitesWithRoutes[i].topURI, 
 									  text: sitesWithRoutes[i].eiSearch});
 		element.append(option.clone());
-	}
+	} 
+	// cross ocean 
+	element.append(
+		$j("<option>", {
+			value: CROSS_OCEAN_URI,
+			text: 'Travel between Spain and North Africa'
+		}) 
+	)
 }
 
 /*--------------------------------------------------------
