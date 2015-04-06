@@ -496,10 +496,12 @@ $j('#toggle-voronoi').on("click", function() {
 		$j("#options").hide();
 		d3.select("body").selectAll(".point-cell").remove();
 		g.selectAll("circle.node").style("fill", null).style("visibility", "hidden");
+		slideRight('#path-form-right');
 		restoreDefaultMap();
 		voronoi = false;
 	} else if (!voronoi) {
 		$j("#options").show(); 
+		slideLeft('#path-form-left'); 
 		renderVoronoi();
 		voronoi = true; 
 	}
@@ -611,29 +613,25 @@ $j("#itinerary-title").on("click", function() {
 
 /* SLIDE left and right */
 $j('#path-form-left').on("click", function() {
-	$j('#site-form').hide('slide', {direction: 'left'}, 1000);
-	$j( this ).hide();
-	$j('#path-form-right').show();
+	slideLeft(this); 
 })
-
 
 $j('#path-form-right').on("click", function() {
+	slideRight(this);
+})
+
+function slideLeft(identifier) {
+	$j('#site-form').hide('slide', {direction: 'left'}, 1000);
+	$j( identifier ).hide();
+	$j('#path-form-right').show();
+}
+
+function slideRight(identifier) {
 	$j('#site-form').show('slide', {direction: 'left'}, 1000); 
-	$j( this ).hide();
+	$j( identifier ).hide();
 	$j('#path-form-left').show();
-})
+}
 
-$j('#options-right').on("click", function() {
-	$j('#options').hide('slide', {direction: 'right'}, 1000);
-	$j( this ).hide();
-	$j('#options-left').show();
-}) 
-
-$j('#options-left').on("click", function() {
-	$j('#options').show('slide', {direction: 'right'}, 1000);
-	$j( this ).hide();
-	$j('#options-right').show();
-})
 
 
 /*-----------------------------------------------------
