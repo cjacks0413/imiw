@@ -174,12 +174,6 @@ var routesByEID = {},
 var howManyTrue = 0; 
 
 
-/* Tester functions. TODO: add showAllPaths as a layer*/
-//drawPathFromSourceToTarget("MADINNAQIRA_415N255E_C07","YATHRIB_396N244E_C07" );
-//drawPathFromSourceToTarget("BAGHDAD_443N333E_C03", "MAKKA_398N213E_C07");
-//drawPathFromSourceToTarget("BAGHDAD_443N333E_C03", "AMMAN_359N319E_C01");
-//showAllPaths();
-
 var pathColors = {}; 
 var pathTypes = d3.set(['Shortest', 'Within A Day']); // can add back 'Through Centers' eventually.. 
 var pathInitialSelections = d3.set(['Shortest', 'Within A Day']);
@@ -191,7 +185,6 @@ selectionsUI('#path-options', pathInitialSelections, pathColors);
 selectionsUI('#itinerary-options', pathInitialSelections, pathColors); 
 
 function selectionsUI(identifier, initialSelections, colors) {
-	console.log('creating selections for', identifier);
 	var space = d3.select(identifier).selectAll('input')
   			.data(pathTypes.values())
   			.enter().append("label");
@@ -210,8 +203,6 @@ function selectionsUI(identifier, initialSelections, colors) {
 	space.append("span")
 	  .text(function(d) { return d })
 	  .attr("class", "english"); 
-
-	return space; 
 }
 
 function initializePathMap() {
@@ -238,8 +229,6 @@ function drawPathFromSourceToTarget(sid, tid, pathSelections, isItinerary) {
 	
 	s = graph.getNode(sid);
 	t = graph.getNode(tid);
-	console.log(sid);
-	console.log(s, t);
 
 	pathSelections.forEach(function(select) {
 		pathFunction = pathMap.get(select); 
@@ -335,33 +324,29 @@ function createItinerary() {
 	}
     d3.selectAll('.path-shortest').attr("class", "path-all"); //change back to red 
     var selections = selectedTypes('itinerary-options');
-	drawItinerary(stops, selections);
+	var places = replaceOceanWithPath(stops); 
+	drawItinerary(places[0], selections);
+	drawItinerary(places[1], selections);
 }
 
 function drawItinerary(places, pathSelections) {
 	var s, t; 
-	var places = replaceOceanWithPath(places); 
 	for (var i = 0; i < places.length - 1; i++) {
 		s = places[i]; 
 		t = places[i+1]; 
 		drawPathFromSourceToTarget(s, t, pathSelections, true); 
 	}
-
 }
-// to deal with crossing the ocean, add two new sites to the place array: 
-// Qadis -> Tangat (according to Orbis)
+
+// to deal with crossing the ocean, 
 function replaceOceanWithPath(places) {
-	var new_places = []; 
-	var length = places.length; 
-	for(var i = 0; i < length; i++) {
-		new_places.push(places[i]); 
-		if (places[i] == CROSS_OCEAN_URI) { 
-			new_places[i] = "QADIS_061N365W_C14"; // replace places with qadis -> tangat
-			new_places[i+1] = "TANJA_058N357W_C12"; 
-			length += 1; //add an extra iteration to get the last place. 
-		}
+	var split = places.indexOf(CROSS_OCEAN_URI); 
+	var part1, part2;
+	if (split >= 0) {
+		part1 = places.slice(0, split); 
+		part2 = places.slice(split + 1); //to get rid of URI 
 	}
-	return new_places; 
+	return [part1, part2]; 
 }
 // for now, just removes the last element. 
 function ItineraryUI() {
@@ -421,7 +406,7 @@ function createDropDown(element) {
 	element.append(
 		$j("<option>", {
 			value: CROSS_OCEAN_URI,
-			text: 'Travel between Spain and North Africa'
+			text: 'Travel via ocean or sea'
 		}) 
 	)
 }
