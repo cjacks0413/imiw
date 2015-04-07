@@ -76,6 +76,7 @@ div.tooltip {
 }
 
 
+
 .search-node {
     fill: red;
     stroke: black;
@@ -259,6 +260,11 @@ div.tooltip {
 .path-shortest {
   stroke-width: 3px;
   fill: none;
+}
+
+.path-background {
+  stroke: rgba(115, 106, 106, 0.9);
+  stroke-width: 1px;
 }
 
 .arabic {

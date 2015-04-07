@@ -27,6 +27,7 @@ for (var i = 0; i < routes.length; i++) {
 /* consider doing the routepoint thing in the definition of the graph. 
  so if you run across a routepoint, all edges connecting to it equal 
  weight of routepoint + current edge. maybe that will work? */ 
+
 resetNodes(graph);
 
 function resetNodes(G) {
@@ -162,5 +163,7 @@ function isMajorCenter(site) {
 }
 
 
-
+/* if a site is a routepoint. 
+ * 
+*/ 
 

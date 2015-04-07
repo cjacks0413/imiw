@@ -1,6 +1,6 @@
 var places = { data:[
   {
-    "source":"cornu1",
+    "source":"cornu1", 
     "lat":31.86252,
     "lon":34.80861,
     "arTitle":"عاقر",

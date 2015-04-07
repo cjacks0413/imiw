@@ -238,6 +238,8 @@ function drawPathFromSourceToTarget(sid, tid, pathSelections, isItinerary) {
 	
 	s = graph.getNode(sid);
 	t = graph.getNode(tid);
+	console.log(sid);
+	console.log(s, t);
 
 	pathSelections.forEach(function(select) {
 		pathFunction = pathMap.get(select); 
@@ -250,6 +252,7 @@ function drawPathFromSourceToTarget(sid, tid, pathSelections, isItinerary) {
 				html : " Distance Traveled on " + select + " Path: " + meters + 'm'
 			}).appendTo("#distance");  
 		}
+		d3.selectAll('.path-all').classed('path-background', true); 
 		showPath(topoPath, pathColors[select]);
 	})
 	map.on("viewreset", resetMap);
