@@ -252,7 +252,7 @@ div.tooltip {
 }
 
 .path-all {
-    stroke: red;
+    stroke: rgba(115, 106, 106, 0.9); /* used to be stroke: red */ 
     stroke-width: 1px;
     fill: none;
 }
@@ -265,6 +265,7 @@ div.tooltip {
 .path-background {
   stroke: rgba(115, 106, 106, 0.9);
   stroke-width: 1px;
+  fill: none;
 }
 
 .arabic {

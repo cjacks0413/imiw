@@ -241,7 +241,7 @@ function drawPathFromSourceToTarget(sid, tid, pathSelections, isItinerary) {
 				html : " Distance Traveled on " + select + " Path: " + meters + 'm'
 			}).appendTo("#distance");  
 		}
-		d3.selectAll('.path-all').classed('path-background', true); 
+		//d3.selectAll('.path-all').classed('path-background', true); 
 		showPath(topoPath, pathColors[select]);
 	})
 	map.on("viewreset", resetMap);
@@ -282,8 +282,6 @@ function addRoutesToPath(routes, path) {
 		}
 	}
 }
-// test itinerary 
-var testPlaces = ["FUSTAT_312N300E_C10" ,"MAKKA_398N213E_C07", "BAGHDAD_443N333E_C03", "AMMAN_359N319E_C01"]; 
 
 function findPaths() {
 	var pathSelections = selectedTypes('path-options'); 
@@ -410,6 +408,20 @@ function createDropDown(element) {
 		}) 
 	)
 }
+
+/*--------------------------------------------------------
+ * NETWORK FLOODING
+ *-------------------------------------------------------*/
+ 
+
+function makeNetwork(source) {
+	var s = graph.getNode(source);
+    var distances = shortestPath(s, s, 'n');
+    console.log("got back distances", distances); 
+	var network = getNetwork(distances);
+	console.log(network);
+}
+
 
 /*--------------------------------------------------------
  * UTIL 

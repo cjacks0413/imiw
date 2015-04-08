@@ -97,6 +97,8 @@ function longestEdge(path) {
  * shortest path, then do pass through "X" on that center. 
  */ 
 
+//var distances = {}; // eek global 
+
 function shortestPath(s, t, searchType) {
   var INFINITY = 1/0;
   var nodes = new PriorityQueue(),
@@ -119,23 +121,24 @@ function shortestPath(s, t, searchType) {
   while(!nodes.isEmpty()) {
     smallest = nodes.dequeue();
     /* create return path */ 
-    if(smallest == t._id) {
-      path;
-      while(previous[smallest]) {
-        path.push(smallest);     
-        smallest = previous[smallest];
+    if (searchType != 'n') {
+      if(smallest == t._id) {
+        path;
+        while(previous[smallest]) {
+          path.push(smallest);     
+          smallest = previous[smallest];
+        }
+        break;
       }
-      break;
     }
 
     var edges = graph.getAllEdgesOf(smallest);
-    
+    console.log(edges);
     for(var i = 0; i < edges.length; i++) {
       neighbor = edges[i];
       if (searchType == 'd' && neighbor.weight > DAY) {
         continue;  // within a day is tagged and the neighbor's weight is greater than a Day. 
       } else {
-
           alt = distances[smallest] + neighbor.weight; 
           if (neighbor._sid == smallest) {
             if (alt < distances[neighbor._eid]) {
@@ -153,17 +156,51 @@ function shortestPath(s, t, searchType) {
       }
     }
   }
-  return path.concat(s._id).reverse(); 
+  return searchType == 'n' ? distances : path.concat(s._id).reverse(); 
 } 
 
-function isMajorCenter(site) {
-  return (site.topType == "metropoles" ||
-         site.topType == "capitals"   ||
-         site.topType == "towns")
+
+// function getNetworkFromGraph(source) {
+//   var distances = shortestPath(source, source, 'n');
+//   console.log("in get network from graph, got back", distances);
+//   return getNetwork(distances);
+// }
+
+function getNetwork(distances) {
+  var network = d3.map(); //d3.map()? 
+  var zones = d3.map(); 
+
+  //init 
+  zones.set(DAY, 'Zone 1'); 
+  zones.set(DAY * 2, 'Zone 2'); 
+  zones.set(DAY * 3, 'Zone 3');
+  zones.set(DAY * 4, 'Zone 4'); 
+  zones.set(Infinity, 'Zone 5');
+
+  //init
+  zones.values().forEach(function(z) {
+    network.set(z, new Array());
+  }); 
+
+  $j.each(distances, function(id, meters) {
+    zone = placeDistanceInZone(meters, zones); 
+    network.get(zone).push(id); 
+  })
+
+  return network; 
+}
+
+// set adds in numerical order. then we get the index 
+// of the added meter to determine which zone it belongs to. (i + 1)
+function placeDistanceInZone(meters, zones) {
+  var values = zones.keys(); 
+  values.push(meters);
+  values.sort();
+
+  var index = values.indexOf(meters); 
+  index = (index == values.length - 1) ? index : (index + 1);   
+  return zones.get(values[index]);
 }
 
 
-/* if a site is a routepoint. 
- * 
-*/ 
 
