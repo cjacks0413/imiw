@@ -133,7 +133,6 @@ function shortestPath(s, t, searchType) {
     }
 
     var edges = graph.getAllEdgesOf(smallest);
-    console.log(edges);
     for(var i = 0; i < edges.length; i++) {
       neighbor = edges[i];
       if (searchType == 'd' && neighbor.weight > DAY) {

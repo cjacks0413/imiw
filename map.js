@@ -226,7 +226,7 @@ sortRoutesByEID();
 function drawPathFromSourceToTarget(sid, tid, pathSelections, isItinerary) {
 	var s, t, pathFunction, pathToShow, topoPath, meters = 0; 
 	var pathMap = initializePathMap();
-	
+
 	s = graph.getNode(sid);
 	t = graph.getNode(tid);
 
@@ -284,12 +284,16 @@ function addRoutesToPath(routes, path) {
 }
 
 function findPaths() {
+	var sitesByEiSearch = sortSitesByeiSearch(); 
 	var pathSelections = selectedTypes('path-options'); 
-	var form = $j("#pathfinding-select");
-	var fromSite = form[0][0]; 
-	var toSite = form[0][1];
-	fromID = fromSite.options[fromSite.selectedIndex].value;
-	toID = toSite.options[toSite.selectedIndex].value;
+	// var form = $j("#pathfinding-select");
+	// var fromSite = form[0][0]; 
+	// var toSite = form[0][1];
+	var fromID = $j("#site-from-value").val();
+	var toID = $j('#site-to-value').val();
+	// fromID = fromSite.options[fromSite.selectedIndex].value;
+	// toID = toSite.options[toSite.selectedIndex].value;
+	console.log(fromID, toID);
 	d3.selectAll('.path-shortest').attr("class", "path-all"); //change back to red 
 	$j("#distance").empty(); 
 	drawPathFromSourceToTarget(fromID, toID, pathSelections, false);
@@ -310,7 +314,7 @@ function lengthInMeters(path) {
  * sites in the itinerary 
  *-------------------------------------------------------*/
 ItineraryUI(); 
-var numFields = 1;  
+var numFields = 0; 
 function createItinerary() {
 	var stops = []; 
 	var formAnswers = $j('#itinerary-select')[0]; 
@@ -352,21 +356,17 @@ function ItineraryUI() {
 	var addFieldButton = $(".add_field_button"); 
 
 	var fieldSet = d3.set(); 
-
+	numFields = 1; 
 	wrapItineraryField(wrapper, numFields, fieldSet);
-	fieldSet.add(1); 
 	$(addFieldButton).click(function(e) {
 		e.preventDefault();
 		if (numFields < MAX_FIELDS) {
 			numFields++; 
-			wrapItineraryField(wrapper, numFields, fieldSet);
+			wrapItineraryField(wrapper, numFields);
 		}
 	})
 
 	$('#remove-last-field').click(function(e) {
-		// var id = $( this ).attr('href');
-		// $j(id).remove(); 
-		// fieldSet.remove(numFields); 
 		$j('.itinerary-dropdown').last().remove(); 
 		numFields--;  
 	})
@@ -374,24 +374,10 @@ function ItineraryUI() {
 }
 
 
-function wrapItineraryField(wrapper, numFields, fset) {
-	// var idNum; 
-	// if (fset.has(numFields)) { // all this to deal with the case where i remove x but still need to 
-	// 	var values = fset.values();  // reuse the id#. can't repeat ids. 
-	// 	var i = 1; 
-	// 	for (var i = 1; i < values.length(); i++) {
-	// 		if (values[i].parseInt() != i) {
-	// 			idNum = i; 
-	// 			break;
-	// 		} 
-	// 	}
-	// } else {
-	// 	idNum = numFields; 
-	// }
+function wrapItineraryField(wrapper, numFields) {
 
 	$(wrapper).append('<div id=' + numFields + ' class="itinerary-dropdown"><select></div>'); //do i need an id? 
 	createDropDown($j('.input_fields_wrap > div > select')); 
-
 }
 
 function createDropDown(element) {
@@ -427,6 +413,17 @@ function makeNetwork(source) {
  * UTIL 
  * TODO make this modular! 
  *-------------------------------------------------------*/
+
+function sortSitesByeiSearch() {
+	var sitesToAdd = places.data; 
+	var sortedSites = {};
+	for (var i = 0; i < sitesToAdd.length; i++) {
+		if (sortedSites[sitesToAdd[i].eiSearch] === undefined) {
+			sortedSites[sitesToAdd[i].eiSearch] = sitesToAdd[i]; 
+		}
+	}
+	return sortedSites; 
+}
 
 function sortSitesByTopURI() {
 	var sitesToAdd = places.data; 
@@ -605,17 +602,33 @@ function renderVoronoi() {
 
 /* Create select (dropdown) for pathfinding */
 
-var from, to, selectFrom, selectTo; 
-from = $j("#site-from")
-to = $j("#site-to");
-selectFrom = $j('<select>', {id: "select-from"}).appendTo(from);
-selectTo = $j('<select>', {id: "select-to"}).appendTo(to);
+var sitesOnly = new Array();
+sitesWithRoutes.forEach(function(s) {
+	sitesOnly.push({value: s.topURI, label: s.eiSearch}); 
+})
 
-for (var i = 0; i < sitesWithRoutes.length; i++) {
-	var option =  $j("<option>", { value: sitesWithRoutes[i].topURI, 
-								  text: sitesWithRoutes[i].eiSearch});
-	selectFrom.append(option.clone());
-	selectTo.append(option.clone())
+// cross ocean
+sitesOnly.push({value : CROSS_OCEAN_URI, label: "Cross Ocean or Sea"}); 
+addAutocompleteToElement('#site-from', '#site-from-value');
+addAutocompleteToElement('#site-to', '#site-to-value');
+
+function addAutocompleteToElement(identifier, hiddenField) {
+	$j( identifier ).autocomplete({
+		source: sitesOnly, 
+		focus: function(event, ui) {
+						// prevent autocomplete from updating the textbox
+						event.preventDefault();
+						// manually update the textbox
+						$(this).val(ui.item.label);
+					},
+		select: function(event, ui) {
+					// prevent autocomplete from updating the textbox
+					event.preventDefault();
+					// manually update the textbox and hidden field
+					$(this).val(ui.item.label);
+					$( hiddenField ).val(ui.item.value);
+				}
+	})
 }
 
 /* TABS 

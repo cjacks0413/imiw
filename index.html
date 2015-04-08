@@ -36,8 +36,15 @@
 						</div>
 						<div id="pathfinding-content">
 							<form id="pathfinding-select" action="javascript:findPaths()">
-								<div class="english" id="site-from">From: </div> 
-								<div class="english" id="site-to">To: </div>
+								<div class="english">
+									From: <input id="site-from" type="text" name="code"> 
+										  <input type="hidden" id="site-from-value" type="text"> 
+								</div> 
+								<div class="english" >
+									To:  <input id="site-to" type="text" name="code"> 
+										 <input type="hidden" id="site-to-value" type="text"> 
+
+								</div>
 								<div class="selections">
 									<div id="path-options"></div>
 								</div> 
