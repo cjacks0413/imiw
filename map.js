@@ -74,6 +74,7 @@ svgSites = g.selectAll("circle")
 
 showAllPaths(); 
 function restoreDefaultMap() {
+	g.selectAll('circle.node').style("visibility", "hidden");
 	g.selectAll("circle.node")
  		   .filter(function(d) { return isDefaultTopType(d)})
  		   .classed('node', true) 
@@ -82,6 +83,7 @@ function restoreDefaultMap() {
 
  	g.selectAll("path").style("visibility", "visible"); //to restore after search 
  	showAllPaths(); // to restore after voronoi 
+ 	removeZoneClasses(); 
 } 
 
 /*------------------------------------------------------
@@ -151,7 +153,6 @@ function resetMap() {
 				map.latLngToLayerPoint(d.LatLng).y +")";
 		});
 
-	    console.log('in reset map');
 	    /* reposition voronoi */ 
 	    if (voronoi) {
 			d3.select("body").selectAll("path").remove();
@@ -288,11 +289,10 @@ function addRoutesToPath(routes, path) {
 }
 
 function findPaths() {
-	//var sitesByEiSearch = sortSitesByeiSearch(); 
+	restoreDefaultMap();
 	var pathSelections = selectedTypes('path-options'); 
 	var fromID = $j("#site-from-value").val();
 	var toID = $j('#site-to-value').val();
-	console.log(fromID, toID);
 	d3.selectAll('.path-shortest').attr("class", "path-all"); //change back to red 
 	$j("#distance").empty(); 
 	drawPathFromSourceToTarget(fromID, toID, pathSelections, false);
