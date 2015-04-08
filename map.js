@@ -289,7 +289,8 @@ function addRoutesToPath(routes, path) {
 }
 
 function findPaths() {
-	restoreDefaultMap();
+	g.selectAll('circle.node').attr("r", "2"); 
+	removeZoneClasses();
 	var pathSelections = selectedTypes('path-options'); 
 	var fromID = $j("#site-from-value").val();
 	var toID = $j('#site-to-value').val();
