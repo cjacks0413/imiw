@@ -3,7 +3,8 @@ var graph = new Graph();
 var sites = places.data; 
 var routes = allRoutes.features; 
 var DAY = 120000; // will be determined using SCRIPT. 
-var MULTIPLIER = .10; 
+var MULTIPLIER = 6;
+var NUM_ZONES = 5;
 var e, s, edge;  
 
 for (var i = 0; i < routes.length; i++) {
@@ -170,11 +171,11 @@ function getNetwork(distances) {
   var zones = d3.map(); 
 
   //init 
-  zones.set(DAY, 'Zone 1'); 
-  zones.set(DAY * 2, 'Zone 2'); 
-  zones.set(DAY * 3, 'Zone 3');
-  zones.set(DAY * 4, 'Zone 4'); 
-  zones.set(Infinity, 'Zone 5');
+  for (var i = 1; i < NUM_ZONES; i++) {
+    zones.set(DAY * MULTIPLIER * i, 'Zone ' + i);
+  }
+  zones.set(Infinity, 'Zone 5'); 
+
 
   //init
   zones.values().forEach(function(z) {
@@ -192,13 +193,22 @@ function getNetwork(distances) {
 // set adds in numerical order. then we get the index 
 // of the added meter to determine which zone it belongs to. (i + 1)
 function placeDistanceInZone(meters, zones) {
-  var values = zones.keys(); 
-  values.push(meters);
-  values.sort();
+  var values = zones.keys().map(function(z) { return parseInt(z)}); // turn into ints
+  values.pop() // Infinity doesn't parse to int. 
+  if (meters == Infinity) {
+   // console.log('should be infinity', meters);
+    return 'Zone 5';
+  } else {
+    values.push(meters);
+    values.sort(function(a, b) {
+      return a - b; 
+    });
 
-  var index = values.indexOf(meters); 
-  index = (index == values.length - 1) ? index : (index + 1);   
-  return zones.get(values[index]);
+   // console.log(values);
+    var index = values.indexOf(meters); 
+    index = (index == values.length - 1) ? index - 1 : (index + 1);   
+    return zones.get(values[index]);
+  }
 }
 
 

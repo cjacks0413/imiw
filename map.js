@@ -1,8 +1,10 @@
 $j = jQuery; 
 
 var voronoi = false; 
+var networkFlooding = true;
 var MAX_FIELDS = 6; 
 var CROSS_OCEAN_URI = "SPAINTOAFRICA";
+var sitesByEiSearch = sortSitesByeiSearch();
 
 L.mapbox.accessToken = 'pk.eyJ1IjoiY2phY2tzMDQiLCJhIjoiVFNPTXNrOCJ9.k6TnctaSxIcFQJWZFg0CBA';
 var map = L.mapbox.map('map', 'cjacks04.jij42jel', { 
@@ -149,11 +151,13 @@ function resetMap() {
 				map.latLngToLayerPoint(d.LatLng).y +")";
 		});
 
+	    console.log('in reset map');
 	    /* reposition voronoi */ 
 	    if (voronoi) {
 			d3.select("body").selectAll("path").remove();
 			drawVoronoiCells(map, mergedPoints);
 		}
+
  	}
 
 
@@ -284,15 +288,10 @@ function addRoutesToPath(routes, path) {
 }
 
 function findPaths() {
-	var sitesByEiSearch = sortSitesByeiSearch(); 
+	//var sitesByEiSearch = sortSitesByeiSearch(); 
 	var pathSelections = selectedTypes('path-options'); 
-	// var form = $j("#pathfinding-select");
-	// var fromSite = form[0][0]; 
-	// var toSite = form[0][1];
 	var fromID = $j("#site-from-value").val();
 	var toID = $j('#site-to-value').val();
-	// fromID = fromSite.options[fromSite.selectedIndex].value;
-	// toID = toSite.options[toSite.selectedIndex].value;
 	console.log(fromID, toID);
 	d3.selectAll('.path-shortest').attr("class", "path-all"); //change back to red 
 	$j("#distance").empty(); 
@@ -399,15 +398,59 @@ function createDropDown(element) {
  * NETWORK FLOODING
  *-------------------------------------------------------*/
  
+ $j('#toggle-network').on("click", function() {
+ 	if (networkFlooding) {
+ 		$j('#network-flooding-select').hide();
+ 		networkFlooding = false;
+ 	} else {
+  		$j('#network-flooding-select').show();
+  		networkFlooding = true;
+ 	} 
+ })
 
-function makeNetwork(source) {
-	var s = graph.getNode(source);
+$j('#network-hide').on("click", function() {
+	console.log('clicked');
+	$j('#network-flooding-select').hide();
+})
+
+function makeNetwork() {
+	removeZoneClasses();
+	var sourceID = $j('#site-network-flooding-value').val();
+	var s = graph.getNode(sourceID);
     var distances = shortestPath(s, s, 'n');
-    console.log("got back distances", distances); 
 	var network = getNetwork(distances);
-	console.log(network);
+	networkToFlood = network;
+	flood(network, sourceID);
 }
 
+function flood(network, source) {
+	g.selectAll("circle.node").classed('zone5-node', true).attr("r", 3); // make default unreachable
+	var sitesByZone = network.values(); 
+	var siteClass, pathClass, zone; 
+	//TODO: make this faster by doing a map over all circle.node just once. 
+	for(var i = 0; i < sitesByZone.length - 1; i++) { // don't need last zone, default unreachable
+		zone = sitesByZone[i];
+		siteClass = 'zone' + ( i+1) + '-node';
+		zone.forEach(function(s) {
+			g.selectAll("circle.node")
+			   .filter(function(d) { return d.topURI == s})
+			   .classed('zone5-node', false)
+			   .classed(siteClass, true) 
+			   .attr("r", 4)
+			   .style("visibility", "visible");
+		})
+	}
+	g.selectAll('circle.node').filter(function(d) {return d.topURI == source}).attr("r", 10);
+	map.on("viewreset", resetMap);
+
+}
+
+function removeZoneClasses() {
+	for (var i = 1; i < 6; i++) {
+		g.selectAll("circle.node")
+			.classed('zone' + i + '-node', false);
+	}
+}
 
 /*--------------------------------------------------------
  * UTIL 
@@ -515,6 +558,8 @@ function exists(array, el) {
 $j('#toggle-voronoi').on("click", function() {
 	if (voronoi) {
 		$j("#options").hide();
+		$j("#network-flooding-title").hide();
+		$j("#network-flooding-select").hide();
 		d3.select("body").selectAll(".point-cell").remove();
 		g.selectAll("circle.node").style("fill", null).style("visibility", "hidden");
 		slideRight('#path-form-right');
@@ -590,7 +635,7 @@ function renderVoronoi() {
 		pointsToDraw.push(sitesByTopType[s]);
 	})
 
-	mergedPoints = pointsToDraw.concat.apply(mergedPoints, pointsToDraw);
+	mergedPoints = pointsToDraw.concat.apply(mergedPoints, pointsToDraw); //flatten array
 	drawVoronoiCells(map, mergedPoints);	
 }
 
@@ -611,6 +656,7 @@ sitesWithRoutes.forEach(function(s) {
 sitesOnly.push({value : CROSS_OCEAN_URI, label: "Cross Ocean or Sea"}); 
 addAutocompleteToElement('#site-from', '#site-from-value');
 addAutocompleteToElement('#site-to', '#site-to-value');
+addAutocompleteToElement('#site-network-flooding', '#site-network-flooding-value');
 
 function addAutocompleteToElement(identifier, hiddenField) {
 	$j( identifier ).autocomplete({

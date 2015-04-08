@@ -15,6 +15,15 @@
 	<body>
 		<div id="map"></div>
 		<a href="#" id="toggle-voronoi">Toggle Voronoi</a>
+		<a href="#" id="toggle-network">Toggle Network</a>
+		<form id="network-flooding-select" action="javascript:makeNetwork()">
+			<div class="english">
+				<div id="network-flooding-title">Network Flooding</div>
+				Start From: <input id="site-network-flooding" type="text" name="code"> 
+				<input type="hidden" id="site-network-flooding-value" type="text"> 
+			</div>
+			<input class="button" id="go-network-flooding" type="submit" value="Go">
+		</form> 
 		<div class="selections">					
 			<div id="options">
 				<div id="voronoi-select"></div> 
