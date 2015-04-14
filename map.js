@@ -182,9 +182,11 @@ var howManyTrue = 0;
 var pathColors = {}; 
 var pathTypes = d3.set(['Shortest', 'Within A Day']); // can add back 'Through Centers' eventually.. 
 var pathInitialSelections = d3.set(['Shortest', 'Within A Day']);
-pathTypes.forEach(function(t) {
-	pathColors[t] = getRandomColor();
-})
+pathColors['Shortest'] = '#451D5C'; 
+pathColors['Within A Day'] = '#345C1D';
+// pathTypes.forEach(function(t) {
+// 	pathColors[t] = getRandomColor();
+// })
 
 selectionsUI('#path-options', pathInitialSelections, pathColors); 
 selectionsUI('#itinerary-options', pathInitialSelections, pathColors); 
@@ -239,6 +241,7 @@ function drawPathFromSourceToTarget(sid, tid, pathSelections, isItinerary) {
 		pathFunction = pathMap.get(select); 
 		pathToShow = pathFunction(s, t); 
 		topoPath = createTopoPath(pathToShow);
+		console.log(topoPath);
 		meters = lengthInMeters(topoPath);
 		if(!isItinerary) {
 			var distance = $j('<div />', {  
@@ -266,23 +269,35 @@ function sortRoutesByEID() {
 }
 
 function createTopoPath(partialPath) {
+	// init
 	var topoPath = new Array(); 
 	var routeSections = new Array();
-	for (var i = 0; i < partialPath.length - 1; i++) {
-			routeSections = routesByEID[partialPath[i]];
-			addRoutesToPath(routeSections, topoPath);
-	}
-	topoPath = topoPath.filter(function(element, index, array) {
-		return ((partialPath.indexOf(element.properties.eToponym) >= 0 ) && 
-		  (partialPath.indexOf(element.properties.sToponym) >= 0))
-	});
 
+	var last = partialPath[partialPath.length - 1];
+
+	//iterate over path. find the route in the geojson
+	for (var i = 0; i < partialPath.length; i++) {
+			routeSections = routesByEID[partialPath[i]];
+			addRelevantRoutes(routeSections, topoPath, partialPath);
+	}
 	return topoPath; 
 }
 
+// filter for route sections that are only in our path. 
+function addRelevantRoutes(routes, path, pathIDs) {
+	if (routes) {
+		routes.forEach(function(r) {
+			if ((pathIDs.indexOf(r.properties.eToponym) >= 0 ) && 
+		  		(pathIDs.indexOf(r.properties.sToponym) >= 0)) {
+				path.push(r);
+			}
+		})
+	}
+}
 function addRoutesToPath(routes, path) {
 	if (routes) {
 		for (var i = 0; i < routes.length; i++) {
+
 			path.push(routes[i]);
 		}
 	}
@@ -300,7 +315,7 @@ function findPaths() {
 }
 
 function lengthInMeters(path) {
-	var m = 0; 
+	var m = 0;
 	path.forEach(function(p) {
 		m += p.properties.Meter; 
 	})
@@ -314,18 +329,22 @@ function lengthInMeters(path) {
  * sites in the itinerary 
  *-------------------------------------------------------*/
 ItineraryUI(); 
-var numFields = 0; 
+var numFields; 
 function createItinerary() {
 	var stops = []; 
 	var formAnswers = $j('#itinerary-select')[0]; 
+	console.log(numFields);
 	for (var i = 1; i <= numFields; i++) {
 		var s = formAnswers[i]; 
 		if (s != undefined) {
+			console.log(s.options[s.selectedIndex].value);
 			stops.push(s.options[s.selectedIndex].value); 
 		}
 	}
+	console.log(stops);
     d3.selectAll('.path-shortest').attr("class", "path-all"); //change back to red 
     var selections = selectedTypes('itinerary-options');
+
 	var places = replaceOceanWithPath(stops); 
 	drawItinerary(places[0], selections);
 	drawItinerary(places[1], selections);
@@ -343,7 +362,8 @@ function drawItinerary(places, pathSelections) {
 // to deal with crossing the ocean, 
 function replaceOceanWithPath(places) {
 	var split = places.indexOf(CROSS_OCEAN_URI); 
-	var part1, part2;
+	var part1 = places; 
+	var part2 = [];
 	if (split >= 0) {
 		part1 = places.slice(0, split); 
 		part2 = places.slice(split + 1); //to get rid of URI 
@@ -426,10 +446,11 @@ function makeNetwork() {
 
 function flood(network, source) {
 	g.selectAll("circle.node").classed('zone5-node', true).attr("r", 3); // make default unreachable
+	g.selectAll("circle.node").attr("visibility", "hidden"); // make default unreachable
 	var sitesByZone = network.values(); 
 	var siteClass, pathClass, zone; 
 	//TODO: make this faster by doing a map over all circle.node just once. 
-	for(var i = 0; i < sitesByZone.length - 1; i++) { // don't need last zone, default unreachable
+	for(var i = 0; i < sitesByZone.length; i++) { // don't need last zone, default unreachable
 		zone = sitesByZone[i];
 		siteClass = 'zone' + ( i+1) + '-node';
 		zone.forEach(function(s) {

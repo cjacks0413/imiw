@@ -2,8 +2,9 @@ var Graph = require('data-structures').Graph;
 var graph = new Graph(); 
 var sites = places.data; 
 var routes = allRoutes.features; 
-var DAY = 120000; // will be determined using SCRIPT. 
-var MULTIPLIER = 6;
+//var DAY = 120000;  
+var DAY  = 39702 * 3; 
+var MULTIPLIER = 3;
 var NUM_ZONES = 5;
 var e, s, edge;  
 
@@ -160,12 +161,6 @@ function shortestPath(s, t, searchType) {
 } 
 
 
-// function getNetworkFromGraph(source) {
-//   var distances = shortestPath(source, source, 'n');
-//   console.log("in get network from graph, got back", distances);
-//   return getNetwork(distances);
-// }
-
 function getNetwork(distances) {
   var network = d3.map(); //d3.map()? 
   var zones = d3.map(); 
@@ -174,8 +169,7 @@ function getNetwork(distances) {
   for (var i = 1; i < NUM_ZONES; i++) {
     zones.set(DAY * MULTIPLIER * i, 'Zone ' + i);
   }
-  zones.set(Infinity, 'Zone 5'); 
-
+  zones.set(Infinity, 'Zone ' + NUM_ZONES); 
 
   //init
   zones.values().forEach(function(z) {
@@ -191,20 +185,18 @@ function getNetwork(distances) {
 }
 
 // set adds in numerical order. then we get the index 
-// of the added meter to determine which zone it belongs to. (i + 1)
+// of the added meter to determine which zone it belongs to. (i - 1)
 function placeDistanceInZone(meters, zones) {
   var values = zones.keys().map(function(z) { return parseInt(z)}); // turn into ints
   values.pop() // Infinity doesn't parse to int. 
   if (meters == Infinity) {
-   // console.log('should be infinity', meters);
-    return 'Zone 5';
+    return 'Zone ' + NUM_ZONES;
   } else {
     values.push(meters);
     values.sort(function(a, b) {
       return a - b; 
     });
 
-   // console.log(values);
     var index = values.indexOf(meters); 
     index = (index == values.length - 1) ? index - 1 : (index + 1);   
     return zones.get(values[index]);
