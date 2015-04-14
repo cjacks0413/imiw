@@ -72,6 +72,14 @@ svgSites = g.selectAll("circle")
 			})
 		);
 
+var text = g.selectAll("text")
+	.data(sites)
+	.enter()
+	.append("text")
+	.text(function(d) { return d.arTitle})
+	.classed('arabic', true)
+	.style("visibility", "hidden");
+
 showAllPaths(); 
 function restoreDefaultMap() {
 	g.selectAll('circle.node').style("visibility", "hidden");
@@ -145,7 +153,7 @@ function resetMap() {
 
 	    feature.attr("d", path);
 
-	    /* reposition sites*/
+	    /* reposition sites and labels*/
 	    svgSites.attr("transform",
 			function(d) {
 				return "translate("+
@@ -153,6 +161,12 @@ function resetMap() {
 				map.latLngToLayerPoint(d.LatLng).y +")";
 		});
 
+	    text.attr("transform",
+			function(d) {
+				return "translate("+
+				map.latLngToLayerPoint(d.LatLng).x +","+
+				map.latLngToLayerPoint(d.LatLng).y +")";
+		});
 	    /* reposition voronoi */ 
 	    if (voronoi) {
 			d3.select("body").selectAll("path").remove();
@@ -241,7 +255,6 @@ function drawPathFromSourceToTarget(sid, tid, pathSelections, isItinerary) {
 		pathFunction = pathMap.get(select); 
 		pathToShow = pathFunction(s, t); 
 		topoPath = createTopoPath(pathToShow);
-		console.log(topoPath);
 		meters = lengthInMeters(topoPath);
 		if(!isItinerary) {
 			var distance = $j('<div />', {  
@@ -249,7 +262,6 @@ function drawPathFromSourceToTarget(sid, tid, pathSelections, isItinerary) {
 				html : " Distance Traveled on " + select + " Path: " + meters + 'm'
 			}).appendTo("#distance");  
 		}
-		//d3.selectAll('.path-all').classed('path-background', true); 
 		showPath(topoPath, pathColors[select]);
 	})
 	map.on("viewreset", resetMap);
@@ -418,35 +430,57 @@ function createDropDown(element) {
 /*--------------------------------------------------------
  * NETWORK FLOODING
  *-------------------------------------------------------*/
- 
- $j('#toggle-network').on("click", function() {
- 	if (networkFlooding) {
- 		$j('#network-flooding-select').hide();
- 		networkFlooding = false;
- 	} else {
-  		$j('#network-flooding-select').show();
-  		networkFlooding = true;
- 	} 
- })
 
-$j('#network-hide').on("click", function() {
-	console.log('clicked');
-	$j('#network-flooding-select').hide();
-})
+networkUI();
+function networkUI() {
+	$j('#toggle-network').on("click", function() {
+	 	if (networkFlooding) {
+	 		$j('#network-flooding-select').hide();
+	 		networkFlooding = false;
+	 	} else {
+	  		$j('#network-flooding-select').show();
+	  		networkFlooding = true;
+	 	} 
+	 })
+
+	$j('#network-hide').on("click", function() {
+		console.log('clicked');
+		$j('#network-flooding-select').hide();
+	})
+
+	var numMultipliers = 10; 
+	for (var i = 1; i <= numMultipliers; i++) {
+		var option = $j("<option>", { value: i, text: i}); 
+		$j('#multiplier-select').append(option.clone());
+	}
+	$j('#multiplier-select').val(3);
+}
+
 
 function makeNetwork() {
+	//clean up old floods 
 	removeZoneClasses();
+	slideLeft('#path-form-left');  // get rid of pathfinding / itinerary 
+	
+	//get values from form 
 	var sourceID = $j('#site-network-flooding-value').val();
+	var multiplier = $j('#multiplier-select').val(); // get multiplier from from 
+	if ($('#network-show-unreachable').is(':checked')) {
+		g.selectAll("circle.node").classed('zone5-node', true).attr("r", 3); // make default unreachable
+	} else {
+		g.selectAll("circle.node").attr("visibility", "hidden"); // hide everything before we start flooding
+	}
+
+	// get info grom graph.js
 	var s = graph.getNode(sourceID);
     var distances = shortestPath(s, s, 'n');
-	var network = getNetwork(distances);
+	var network = getNetwork(distances, multiplier);
 	networkToFlood = network;
 	flood(network, sourceID);
 }
 
 function flood(network, source) {
-	g.selectAll("circle.node").classed('zone5-node', true).attr("r", 3); // make default unreachable
-	g.selectAll("circle.node").attr("visibility", "hidden"); // make default unreachable
+ // make default unreachable
 	var sitesByZone = network.values(); 
 	var siteClass, pathClass, zone; 
 	//TODO: make this faster by doing a map over all circle.node just once. 

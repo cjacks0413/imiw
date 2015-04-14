@@ -161,13 +161,13 @@ function shortestPath(s, t, searchType) {
 } 
 
 
-function getNetwork(distances) {
+function getNetwork(distances, multiplier) {
   var network = d3.map(); //d3.map()? 
   var zones = d3.map(); 
 
   //init 
   for (var i = 1; i < NUM_ZONES; i++) {
-    zones.set(DAY * MULTIPLIER * i, 'Zone ' + i);
+    zones.set(DAY * multiplier * i, 'Zone ' + i);
   }
   zones.set(Infinity, 'Zone ' + NUM_ZONES); 
 

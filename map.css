@@ -361,6 +361,12 @@ div.tooltip {
     border-radius:10px;
 }
 
+.label {
+  background-color:rgba(68,136,187,0.5); 
+  height: 100px;
+  width: 150px;
+}
+
 .left-arrow-left {
   position:relative;
   left: 3px;
@@ -565,7 +571,9 @@ div.tooltip {
 
 #go-network-flooding {
   position: relative;
+  padding-top: 15px;
   left: 25%;
+
 }
 
 #toggle-network {
@@ -577,3 +585,10 @@ div.tooltip {
   text-align: center;
 }
 
+#multiplier-select{
+  padding-bottom: 15px;
+}
+
+#network-show-unreachable {
+  padding: 20px;
+}

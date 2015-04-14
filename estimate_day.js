@@ -23,9 +23,8 @@ var length = proportion.length;
 var sum = proportion.reduce(function(previousValue, currentValue, index, array) {
 	return previousValue + currentValue; 
 }); 
-
 return sum / length;  // average
 
 }
 
-//var day = estimateDay(routesByEID, muq_all); 
+var day = estimateDay(routesByEID, muq_all); 
