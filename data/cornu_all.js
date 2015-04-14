@@ -9320,7 +9320,7 @@ var places = { data:[
     "UStranslitTitle":"Zaranj",
     "eiSearch":"Zaranj",
     "topType":"capitals",
-    "topURI":"ZARANJ_616N307E_C06",
+    "topURI":"ZARANJ_616N307E_C19",
     "arBW":"zrnj"
   },
   {
