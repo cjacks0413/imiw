@@ -460,6 +460,7 @@ function networkUI() {
 function makeNetwork() {
 	//clean up old floods 
 	removeZoneClasses();
+	g.selectAll("circle.node").attr("visibility", "visible");
 	slideLeft('#path-form-left');  // get rid of pathfinding / itinerary 
 	
 	//get values from form 
