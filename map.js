@@ -77,7 +77,7 @@ var text = g.selectAll("text")
 	.enter()
 	.append("text")
 	.text(function(d) { return d.arTitle})
-	.classed('arabic', true)
+	.classed('arabic label', true)
 	.style("visibility", "hidden");
 
 showAllPaths(); 
@@ -251,10 +251,19 @@ function drawPathFromSourceToTarget(sid, tid, pathSelections, isItinerary) {
 	s = graph.getNode(sid);
 	t = graph.getNode(tid);
 
+	// labels?! 
+	var labels = d3.selectAll('text')
+		.filter(function(d) { 
+			console.log(d.topURI == sid);
+			return d.topURI == sid || d.topURI == tid; })
+		.style("visibility", "visible");
+	labels.moveToFront(); 
+
+	d3.selectAll('circle.node').attr("z-index", -9999);
 	pathSelections.forEach(function(select) {
 		pathFunction = pathMap.get(select); 
 		pathToShow = pathFunction(s, t); 
-		topoPath = createTopoPath(pathToShow);
+		topoPath = createTopoPath(pathToShow); 
 		meters = lengthInMeters(topoPath);
 		if(!isItinerary) {
 			var distance = $j('<div />', {  
@@ -266,6 +275,12 @@ function drawPathFromSourceToTarget(sid, tid, pathSelections, isItinerary) {
 	})
 	map.on("viewreset", resetMap);
 }
+
+d3.selection.prototype.moveToFront = function() {
+  return this.each(function(){
+    this.parentNode.appendChild(this);
+  });
+};
 
 function sortRoutesByEID() {
 	var r; 
@@ -317,6 +332,7 @@ function addRoutesToPath(routes, path) {
 
 function findPaths() {
 	g.selectAll('circle.node').attr("r", "2"); 
+	d3.selectAll('text').style('visibility', 'hidden');
 	removeZoneClasses();
 	var pathSelections = selectedTypes('path-options'); 
 	var fromID = $j("#site-from-value").val();

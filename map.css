@@ -362,9 +362,12 @@ div.tooltip {
 }
 
 .label {
-  background-color:rgba(68,136,187,0.5); 
-  height: 100px;
-  width: 150px;
+  font-family: 'DroidArabicNaskhRegular', 'Lateef', 'Geeza Pro', serif; 
+  font-size: 30px;
+  stroke: #000;
+  stroke-width: .1px;
+  fill: #000080;
+
 }
 
 .left-arrow-left {
