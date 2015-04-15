@@ -38,14 +38,25 @@ function drawVoronoiCells(map, points) {
 			.attr("class", "point-cell")
 			.attr("d", buildPathFromPoint)
 			.call(d3.helper.tooltip(
-			function(d, i){
-				return createPopup(d.point);
-			})
-		);;
+				function(d, i){
+					return createPopup(d.point);
+				}))
+			.on("click", removePoint);
+
+
 	}
 
 	d3.select("body").selectAll("path").remove(); 
 	draw();
+	// something here weird going on with draw. 
+	function removePoint(d) {
+		console.log(d); 
+		console.log(points);
+		points = points.filter(function(p) {
+			return d.point.topURI != p.topURI; 
+		})
+		// draw(); 
+	}
 }
 
 

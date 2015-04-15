@@ -480,6 +480,7 @@ function makeNetwork() {
 	flood(network, sourceID);
 }
 
+
 function flood(network, source) {
  // make default unreachable
 	var sitesByZone = network.values(); 
@@ -693,7 +694,7 @@ function renderVoronoi() {
 	})
 
 	mergedPoints = pointsToDraw.concat.apply(mergedPoints, pointsToDraw); //flatten array
-	drawVoronoiCells(map, mergedPoints);	
+	drawVoronoiCells(map, mergedPoints);
 }
 
  
