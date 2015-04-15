@@ -796,7 +796,14 @@ function slideRight(identifier) {
 // top toolbar 
 $j('#restore-default').on("click", function() {
 	restoreFromVoronoi();
-	restoreDefaultMap(); 
+	g.selectAll("circle.node")
+ 		   .filter(function(d) { return isDefaultTopType(d)})
+ 		   .classed('node', true) 
+ 		   .attr("r", 2)
+ 		   .style("visibility", "visible"); 
+
+ 	d3.selectAll('path').classed('path-all', true);
+ 	removeZoneClasses(); 	
 })
 
 
