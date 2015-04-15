@@ -40,7 +40,7 @@ var sitesByTopURI = sortSitesByTopURI();
 // initialize all the UTIL arrays
 
 
-//var sites = places.data.filter(isDefaultTopType);
+// DEAL WITH SITES VS. SITES WITH ROUTES. 
 var sitesWithRoutes = new Array(); 
 removeSitesWithoutRoutes();
 var sites = sitesWithRoutes; 
@@ -127,7 +127,7 @@ function showPath(partial, color) {
 
 /* Show all paths */
 function showAllPaths() {
-	d3.json("data/all_routes.json", function(routes) {
+	d3.json("data/all_routes_new.json", function(routes) {
 		feature = g.selectAll("path")
 		   .data(routes.features)
 		   .enter()
@@ -254,7 +254,6 @@ function drawPathFromSourceToTarget(sid, tid, pathSelections, isItinerary) {
 	// labels?! 
 	var labels = d3.selectAll('text')
 		.filter(function(d) { 
-			console.log(d.topURI == sid);
 			return d.topURI == sid || d.topURI == tid; })
 		.style("visibility", "visible");
 	labels.moveToFront(); 
@@ -644,7 +643,8 @@ $j('#toggle-voronoi').on("click", function() {
 		restoreFromVoronoi();
 		restoreDefaultMap();
 	} else if (!voronoi) {
-		$j("#options").show(); 
+		$j("#options").show();
+		d3.selectAll('text').style('visibility', 'hidden'); 
 		slideLeft('#path-form-left'); 
 		renderVoronoi();
 		voronoi = true; 
