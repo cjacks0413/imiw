@@ -535,14 +535,6 @@ div.tooltip {
   display: none;
 }
 
-#toggle-voronoi {
-  position: absolute;
-  top: 2%;
-  right: 2.3%;
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 15px;
-  text-align: center;
-}
 
 #network-flooding-title {
   position: relative;
@@ -580,6 +572,24 @@ div.tooltip {
   position: absolute;
   top: 2%;
   right: 15%;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 15px;
+  text-align: center;
+}
+
+#restore-default {
+  position: absolute;
+  top: 2%;
+  right: 27%;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 15px;
+  text-align: center;
+}
+
+#toggle-voronoi {
+  position: absolute;
+  top: 2%;
+  right: 2.3%;
   background-color: rgba(255, 255, 255, 0.9);
   padding: 15px;
   text-align: center;

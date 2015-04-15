@@ -613,16 +613,20 @@ function exists(array, el) {
 /* from https://github.com/zetter/voronoi-maps 
  */
 
+function restoreFromVoronoi() {
+	$j("#options").hide();
+	$j("#network-flooding-title").hide();
+	$j("#network-flooding-select").hide();
+	d3.select("body").selectAll(".point-cell").remove();
+	g.selectAll("circle.node").style("fill", null).style("visibility", "hidden");
+	slideRight('#path-form-right');
+	voronoi = false;
+}
+
 $j('#toggle-voronoi').on("click", function() {
 	if (voronoi) {
-		$j("#options").hide();
-		$j("#network-flooding-title").hide();
-		$j("#network-flooding-select").hide();
-		d3.select("body").selectAll(".point-cell").remove();
-		g.selectAll("circle.node").style("fill", null).style("visibility", "hidden");
-		slideRight('#path-form-right');
+		restoreFromVoronoi();
 		restoreDefaultMap();
-		voronoi = false;
 	} else if (!voronoi) {
 		$j("#options").show(); 
 		slideLeft('#path-form-left'); 
@@ -773,6 +777,11 @@ function slideRight(identifier) {
 	$j('#path-form-left').show();
 }
 
+// top toolbar 
+$j('#restore-default').on("click", function() {
+	restoreFromVoronoi();
+	restoreDefaultMap(); 
+})
 
 
 /*-----------------------------------------------------
