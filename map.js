@@ -508,7 +508,6 @@ function makeNetwork() {
 	flood(network, sourceID);
 }
 
-
 function flood(network, source) {
  // make default unreachable
 	var sitesByZone = network.values(); 
