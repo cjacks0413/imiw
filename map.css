@@ -551,6 +551,7 @@ div.tooltip {
   height: 30%;
   background-color: rgba(255, 255, 255, 0.9);
   padding: 15px; 
+  display:none;
 }
 
 #site-network-flooding {
@@ -605,3 +606,22 @@ div.tooltip {
 #network-show-unreachable {
   padding: 20px;
 }
+
+.hull {
+  fill: none;
+  pointer-events: all;
+  stroke: #000;
+  stroke-width: 5px;
+  position: absolute;
+}
+
+#toggle-regions {
+  position: absolute;
+  left: 5%;
+  bottom: 2%;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 15px;
+  text-align: center;
+}
+
+

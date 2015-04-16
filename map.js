@@ -597,7 +597,7 @@ function drawHull() {
 		.y(function(d) { return d.y; });
 
 	var vertices; 
-	
+
 	$j.each(sitesByProvince, (function(name, sites) {
 		if ((sites.length > 3) && (name != 'noData')) {
 			vertices = sites; 
@@ -620,18 +620,36 @@ function drawHull() {
 			}));
 		}
 	}))
+	// color based on region
+	var regionColorMap = d3.map();  
+	var regionNames = d3.set(Object.keys(sitesByProvince));
+	regionNames.forEach(function(t) {
+		regionColorMap.set(t, getRandomColor()); 
+	})
+
+	d3.selectAll('circle.node')
+	  .style("fill", function(d) { return regionColorMap.get(d.region)})
+	  .attr("r", 4); 
 
 }
 
 $j('#toggle-regions').on("click", function() {
 	if (regions) {
 		d3.selectAll('.hull').remove();
+		d3.selectAll('circle.node')
+			.style('fill', null)
+			.classed('node', true)
+			.attr('r', 2);
 		regions = false; 
 	} else {
 		drawHull();
 		regions = true;
 	}
 })
+
+
+
+
 
 
 /*-----------------------------------------------------
