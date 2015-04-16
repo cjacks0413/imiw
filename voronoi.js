@@ -40,14 +40,14 @@ function drawVoronoiCells(map, points) {
 			.call(d3.helper.tooltip(
 				function(d, i){
 					return createPopup(d.point);
-				}))
-			.on("click", removePoint);
+			}));
 
 
 	}
 
 	d3.select("body").selectAll("path").remove(); 
 	draw();
+
 	// something here weird going on with draw. 
 	function removePoint(d) {
 		console.log(d); 

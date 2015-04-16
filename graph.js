@@ -3,8 +3,9 @@ var graph = new Graph();
 var sites = places.data; 
 var routes = allRoutes.features; 
 //var DAY = 120000;  
-var DAY  = 39702 * 3; 
-var MULTIPLIER = 3;
+var DAY  = 39702; 
+var WITHIN_A_DAY = DAY * 3; 
+//var MULTIPLIER = 3;
 var NUM_ZONES = 5;
 var e, s, edge;  
 
@@ -137,7 +138,7 @@ function shortestPath(s, t, searchType) {
     var edges = graph.getAllEdgesOf(smallest);
     for(var i = 0; i < edges.length; i++) {
       neighbor = edges[i];
-      if (searchType == 'd' && neighbor.weight > DAY) {
+      if (searchType == 'd' && neighbor.weight > WITHIN_A_DAY) {
         continue;  // within a day is tagged and the neighbor's weight is greater than a Day. 
       } else {
           alt = distances[smallest] + neighbor.weight; 

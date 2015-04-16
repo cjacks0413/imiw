@@ -2,10 +2,14 @@ $j = jQuery;
 
 var voronoi = false; 
 var networkFlooding = true;
+var regions = false; 
 var MAX_FIELDS = 6; 
 var CROSS_OCEAN_URI = "SPAINTOAFRICA";
-var sitesByEiSearch = sortSitesByeiSearch();
+var sitesByTopURI = sortSitesByField(places.data, 'topURI');
 
+var sitesWithRoutes = new Array(); 
+removeSitesWithoutRoutes();
+var sitesByEiSearch = sortSitesByField(sitesWithRoutes, 'eiSearch');
 L.mapbox.accessToken = 'pk.eyJ1IjoiY2phY2tzMDQiLCJhIjoiVFNPTXNrOCJ9.k6TnctaSxIcFQJWZFg0CBA';
 var map = L.mapbox.map('map', 'cjacks04.jij42jel', { 
 					zoomControl: false, 
@@ -31,7 +35,6 @@ map._initPathRoot()
 var svg = d3.select("#map").select("svg");
 g = svg.append("g")
 /* SITES */
-var sitesByTopURI = sortSitesByTopURI(); 
 
 
 /* INITIALIZE MAP: MAKE THIS A FUNC! */ 
@@ -41,14 +44,12 @@ var sitesByTopURI = sortSitesByTopURI();
 
 
 // DEAL WITH SITES VS. SITES WITH ROUTES. 
-var sitesWithRoutes = new Array(); 
-removeSitesWithoutRoutes();
-var sites = sitesWithRoutes; 
-sites.concat(places.data.filter(isDefaultTopType));
+
+//var sites = sitesWithRoutes; 
+var sites = sitesWithRoutes.filter(isDefaultTopType); 
 function isDefaultTopType(element, index, array) {
 	return ( element.topType == 'metropoles' || 
 		     element.topType == 'capitals'   || 
-		     element.topType == 'temp'       || 
 		     element.topType == 'towns'      ||
 		     element.topType == 'villages'   || 
 		     element.topType == 'waystations'||
@@ -79,6 +80,13 @@ var text = g.selectAll("text")
 	.text(function(d) { return d.arTitle})
 	.classed('arabic label', true)
 	.style("visibility", "hidden");
+
+// show metropole labels 
+var metropoles = d3.selectAll('text')
+	.filter(function(d) {
+		d.topType == 'metropoles';}); 
+
+
 
 showAllPaths(); 
 function restoreDefaultMap() {
@@ -172,6 +180,11 @@ function resetMap() {
 			d3.select("body").selectAll("path").remove();
 			drawVoronoiCells(map, mergedPoints);
 		}
+		/* reposition regions */
+		if (regions) {
+			d3.selectAll('.hull').remove();
+			drawHull();
+		}  
 
  	}
 
@@ -251,14 +264,13 @@ function drawPathFromSourceToTarget(sid, tid, pathSelections, isItinerary) {
 	s = graph.getNode(sid);
 	t = graph.getNode(tid);
 
-	// labels?! 
+	/*
 	var labels = d3.selectAll('text')
 		.filter(function(d) { 
 			return d.topURI == sid || d.topURI == tid; })
 		.style("visibility", "visible");
-	labels.moveToFront(); 
+	labels.moveToFront(); */
 
-	d3.selectAll('circle.node').attr("z-index", -9999);
 	pathSelections.forEach(function(select) {
 		pathFunction = pathMap.get(select); 
 		pathToShow = pathFunction(s, t); 
@@ -475,6 +487,7 @@ function networkUI() {
 function makeNetwork() {
 	//clean up old floods 
 	removeZoneClasses();
+	g.selectAll('path').classed('path-all', true);
 	g.selectAll("circle.node").attr("visibility", "visible");
 	slideLeft('#path-form-left');  // get rid of pathfinding / itinerary 
 	
@@ -530,77 +543,30 @@ function removeZoneClasses() {
  * TODO make this modular! 
  *-------------------------------------------------------*/
 
-function sortSitesByeiSearch() {
-	var sitesToAdd = places.data; 
-	var sortedSites = {};
-	for (var i = 0; i < sitesToAdd.length; i++) {
-		if (sortedSites[sitesToAdd[i].eiSearch] === undefined) {
-			sortedSites[sitesToAdd[i].eiSearch] = sitesToAdd[i]; 
-		}
+function sortSitesByField(sites, field) {
+	var data = sites; 
+	var sortedSites = {}; 
+	for (var i = 0; i < data.length; i++) {
+		if (sortedSites[data[i][field]] == undefined) {
+			sortedSites[data[i][field]] = new Array(); 
+			sortedSites[data[i][field]].push(data[i]);
+		} else { 
+			sortedSites[data[i][field]].push(data[i]); 
+		}		
 	}
 	return sortedSites; 
 }
-
-function sortSitesByTopURI() {
-	var sitesToAdd = places.data; 
-	var sortedSites = {}; 
-	for (var i = 0; i < sitesToAdd.length; i++) {
-		if (sortedSites[sitesToAdd[i].topURI] === undefined) {
-			sortedSites[sitesToAdd[i].topURI] = sitesToAdd[i]; 
-		}
-	}
-	return sortedSites; 
-}
-
-function sortRoutesByRouteID() {
-	var r; 
-	for (var i = 0; i < routes.length; i++) {
-		r = routes[i].properties.id;
-		if (routesByID[r] === undefined) {
-			routesByID[r] = routes[i];
-		}
-	}
-}
-
-function sortSitesBySource() {
-	var data = places.data; 
-	var sortedSites = {}; 
-	for (var i = 0; i < data.length; i++) {
-		if (sortedSites[data[i].source] == undefined) {
-			sortedSites[data[i].source] = new Array(); 
-			sortedSites[data[i].source].push(data[i]);
-		} else { 
-			sortedSites[data[i].source].push(data[i]); 
-		}
-	}
-	return sortedSites;
-}
-
-function sortSitesByTopType() {
-	var data = places.data; 
-	var sortedSites = {}; 
-	for (var i = 0; i < data.length; i++) {
-		if (sortedSites[data[i].topType] == undefined) {
-			sortedSites[data[i].topType] = new Array(); 
-			sortedSites[data[i].topType].push(data[i]);
-		} else { 
-			sortedSites[data[i].topType].push(data[i]); 
-		}
-	}
-	return sortedSites;	
-}
-
 function removeSitesWithoutRoutes() {
 	var currentRoute; 
 	$j.each(allRoutes.features,function (id, route) {
 		r = route.properties;
 		if ((sitesByTopURI[r.eToponym]) && !(exists(sitesWithRoutes, r.eToponym))) {
-			sitesWithRoutes.push(sitesByTopURI[r.eToponym]);
+			sitesWithRoutes.push(sitesByTopURI[r.eToponym][0]);
 		} if ((sitesByTopURI[r.sToponym]) && !(exists(sitesWithRoutes, r.sToponym))) {
-			sitesWithRoutes.push(sitesByTopURI[r.sToponym]); 
+			sitesWithRoutes.push(sitesByTopURI[r.sToponym][0]); 
 		} 
 	})
-	sitesWithRoutes = places.data; 
+	//sitesWithRoutes = places.data; 
 	sitesWithRoutes.sort( function(a, b) {
 		var element1 = a.eiSearch.toLowerCase(); 
 		var element2 = b.eiSearch.toLowerCase(); 
@@ -620,6 +586,52 @@ function exists(array, el) {
 	return elementsFound.length > 0; 
 }
 
+/*-----------------------------------------------------
+ * REGIONS / CONVEX HULL
+ *----------------------------------------------------*/ 
+var sitesByProvince = sortSitesByField(places.data, 'region');
+
+function drawHull() {
+	var hull = d3.geom.hull()
+		.x(function(d) { return d.x; })
+		.y(function(d) { return d.y; });
+
+	var vertices; 
+	
+	$j.each(sitesByProvince, (function(name, sites) {
+		if ((sites.length > 3) && (name != 'noData')) {
+			vertices = sites; 
+			vertices.forEach(function(v){
+				var latlng = new L.LatLng(v.lat, v.lon);
+				var point = map.latLngToLayerPoint(latlng);
+				v.x = point.x; 
+				v.y = point.y; 
+			})
+
+			svgHull = svg.append("path")
+					.classed('hull', true);
+
+			svgHull.datum(hull(vertices)).attr("d", function(d) { 
+				return "M" + d.map(function(n) { return [n.x, n.y];}).join("L") + "Z"; 
+			})
+			.call(d3.helper.tooltip(
+				function(d, i){
+					return('<center><br/><br/><span class="arabic">' + d[0].region + '</span></center>'); 
+			}));
+		}
+	}))
+
+}
+
+$j('#toggle-regions').on("click", function() {
+	if (regions) {
+		d3.selectAll('.hull').remove();
+		regions = false; 
+	} else {
+		drawHull();
+		regions = true;
+	}
+})
 
 
 /*-----------------------------------------------------
@@ -661,7 +673,7 @@ function getRandomColor() {
 }
 
 var topTypeColors = {}; 
-var sitesByTopType = sortSitesByTopType();
+var sitesByTopType = sortSitesByField(sitesWithRoutes, 'topType');
 var topTypes = d3.set(Object.keys(sitesByTopType));
 var voronoiInitialSelections = d3.set(['metropoles', 'capitals', 'villages']);
 
@@ -740,13 +752,11 @@ function addAutocompleteToElement(identifier, hiddenField) {
 	$j( identifier ).autocomplete({
 		source: sitesOnly, 
 		focus: function(event, ui) {
-						// prevent autocomplete from updating the textbox
 						event.preventDefault();
 						// manually update the textbox
 						$(this).val(ui.item.label);
 					},
 		select: function(event, ui) {
-					// prevent autocomplete from updating the textbox
 					event.preventDefault();
 					// manually update the textbox and hidden field
 					$(this).val(ui.item.label);
@@ -801,7 +811,7 @@ $j('#restore-default').on("click", function() {
  		   .classed('node', true) 
  		   .attr("r", 2)
  		   .style("visibility", "visible"); 
-
+ 	d3.selectAll('.hull').remove();
  	d3.selectAll('path').classed('path-all', true);
  	removeZoneClasses(); 	
 })
