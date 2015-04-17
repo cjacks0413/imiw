@@ -15,19 +15,8 @@
 	<body>
 		<div id="map"></div>
 		<a href="#" id="toggle-voronoi">Toggle Voronoi</a>
-		<a href="#" id="toggle-network">Toggle Network</a>
 		<a href='#' id="restore-default">Restore Default Map</a>
 		<a href="#" id="toggle-regions">Regions</a>
-		<form id="network-flooding-select" action="javascript:makeNetwork()">
-			<div class="english">
-				<div id="network-flooding-title">Network Flooding</div>
-				Start From: <input id="site-network-flooding" type="text" name="code"> 
-				<input type="hidden" id="site-network-flooding-value" type="text"> </br>
-				Multiplier: <select id="multiplier-select"></select> </br>
-				Show Unreachable Sites: <input type="checkbox" id="network-show-unreachable"></input> 
-			</div>
-			<input class="button" id="go-network-flooding" type="submit" value="Go">
-		</form> 
 		<div class="selections">					
 			<div id="options">
 				<div id="voronoi-select"></div> 
@@ -44,39 +33,34 @@
 			<div class="left-arrow-right" id="path-form-right"></div> 
 				<div id="site-form" class="modal">	
 						<div class="english-form-title" >
-					    	<div id="itinerary-title"><strong>Itinerary</strong> </div> 
+					    	<div id="network-title"><strong>Network</strong> </div> 
 					    	<div id="pathfinding-title" class="tab-selected"><strong>Pathfinding</strong></div> 
 						</div>
 						<div id="pathfinding-content">
-							<form id="pathfinding-select" action="javascript:findPaths()">
-								<div class="english">
-									From: <input id="site-from" type="text" name="code"> 
-										  <input type="hidden" id="site-from-value" type="text"> 
-								</div> 
-								<div class="english" >
-									To:  <input id="site-to" type="text" name="code"> 
-										 <input type="hidden" id="site-to-value" type="text"> 
-
-								</div>
-								<div class="selections">
-									<div id="path-options"></div>
-								</div> 
-								<input class="button" id="go-path" type="submit" value="Go">
-							</form> 
-							<div class="english" id="distance"></div> 
-						</div>
-						<div id="itinerary-content">
 							<form id="itinerary-select" action="javascript:createItinerary()">
+								<button class="add_field_button">Add Place</button>
+
 								<div class="input_fields_wrap">
 								    <div class="english"></div>
-								    <button class="add_field_button">+</button>
 								</div>
 								<a href="#" id="remove-last-field">Remove</a> 
 								<div class="selections">
 									<div id="itinerary-options"></div>
 								</div>  
 								<input class="button" id="go-itinerary" type="submit" value="Go">
-							</form>   
+							</form> 
+							<div class="english" id="distance"></div> 
+						</div>
+						<div id="network-content">
+							<form id="network-flooding-select" action="javascript:makeNetwork()">
+								<div class="english">
+									Start From: <input id="site-network-flooding" type="text"> 
+									<input type="hidden" id="site-network-flooding-value" type="text"> </br>
+									Multiplier: <select id="multiplier-select"></select> </br>
+									Show Unreachable Sites: <input type="checkbox" id="network-show-unreachable"></input> 
+								</div>
+								<input class="button" id="go-network-flooding" type="submit" value="Go">
+							</form> 	
 						</div>  
 					</div>
 				</div> 

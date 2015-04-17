@@ -4,7 +4,7 @@ var voronoi = false;
 var networkFlooding = true;
 var regions = false; 
 var MAX_FIELDS = 6; 
-var CROSS_OCEAN_URI = "SPAINTOAFRICA";
+var CROSS_OCEAN_URI = "WATER";
 var sitesByTopURI = sortSitesByField(places.data, 'topURI');
 
 var sitesWithRoutes = new Array(); 
@@ -361,100 +361,6 @@ function lengthInMeters(path) {
 	return m; 
 }
 /*--------------------------------------------------------
- * ITINERARY : 
- * given an array of places (topURIs), returns a complete
- * path to display. 
- * TODO: enlarge (or activate popup) for stopover between
- * sites in the itinerary 
- *-------------------------------------------------------*/
-ItineraryUI(); 
-var numFields; 
-function createItinerary() {
-	var stops = []; 
-	var formAnswers = $j('#itinerary-select')[0]; 
-	console.log(numFields);
-	for (var i = 1; i <= numFields; i++) {
-		var s = formAnswers[i]; 
-		if (s != undefined) {
-			console.log(s.options[s.selectedIndex].value);
-			stops.push(s.options[s.selectedIndex].value); 
-		}
-	}
-	console.log(stops);
-    d3.selectAll('.path-shortest').attr("class", "path-all"); //change back to red 
-    var selections = selectedTypes('itinerary-options');
-
-	var places = replaceOceanWithPath(stops); 
-	drawItinerary(places[0], selections);
-	drawItinerary(places[1], selections);
-}
-
-function drawItinerary(places, pathSelections) {
-	var s, t; 
-	for (var i = 0; i < places.length - 1; i++) {
-		s = places[i]; 
-		t = places[i+1]; 
-		drawPathFromSourceToTarget(s, t, pathSelections, true); 
-	}
-}
-
-// to deal with crossing the ocean, 
-function replaceOceanWithPath(places) {
-	var split = places.indexOf(CROSS_OCEAN_URI); 
-	var part1 = places; 
-	var part2 = [];
-	if (split >= 0) {
-		part1 = places.slice(0, split); 
-		part2 = places.slice(split + 1); //to get rid of URI 
-	}
-	return [part1, part2]; 
-}
-// for now, just removes the last element. 
-function ItineraryUI() {
-	var wrapper = $(".input_fields_wrap"); 
-	var addFieldButton = $(".add_field_button"); 
-
-	var fieldSet = d3.set(); 
-	numFields = 1; 
-	wrapItineraryField(wrapper, numFields, fieldSet);
-	$(addFieldButton).click(function(e) {
-		e.preventDefault();
-		if (numFields < MAX_FIELDS) {
-			numFields++; 
-			wrapItineraryField(wrapper, numFields);
-		}
-	})
-
-	$('#remove-last-field').click(function(e) {
-		$j('.itinerary-dropdown').last().remove(); 
-		numFields--;  
-	})
-
-}
-
-
-function wrapItineraryField(wrapper, numFields) {
-
-	$(wrapper).append('<div id=' + numFields + ' class="itinerary-dropdown"><select></div>'); //do i need an id? 
-	createDropDown($j('.input_fields_wrap > div > select')); 
-}
-
-function createDropDown(element) {
-	for (var i = 0; i < sitesWithRoutes.length; i++) {
-		var option =  $j("<option>", { value: sitesWithRoutes[i].topURI, 
-									  text: sitesWithRoutes[i].eiSearch});
-		element.append(option.clone());
-	} 
-	// cross ocean 
-	element.append(
-		$j("<option>", {
-			value: CROSS_OCEAN_URI,
-			text: 'Travel via ocean or sea'
-		}) 
-	)
-}
-
-/*--------------------------------------------------------
  * NETWORK FLOODING
  *-------------------------------------------------------*/
 
@@ -488,9 +394,7 @@ function makeNetwork() {
 	//clean up old floods 
 	removeZoneClasses();
 	g.selectAll('path').classed('path-all', true);
-	g.selectAll("circle.node").attr("visibility", "visible");
-	slideLeft('#path-form-left');  // get rid of pathfinding / itinerary 
-	
+	g.selectAll("circle.node").attr("visibility", "visible");	
 	//get values from form 
 	var sourceID = $j('#site-network-flooding-value').val();
 	var multiplier = $j('#multiplier-select').val(); // get multiplier from from 
@@ -626,9 +530,9 @@ function drawHull() {
 		regionColorMap.set(t, getRandomColor()); 
 	})
 
-	d3.selectAll('circle.node')
-	  .style("fill", function(d) { return regionColorMap.get(d.region)})
-	  .attr("r", 4); 
+	// d3.selectAll('circle.node')
+	//   .style("fill", function(d) { return regionColorMap.get(d.region)})
+	//   .attr("r", 4); 
 
 }
 
@@ -786,17 +690,17 @@ function addAutocompleteToElement(identifier, hiddenField) {
  * TODO: this is ugly af. 
 */
 $j("#pathfinding-title").on("click", function() {
-	$j('#itinerary-content').hide();
-	$j('#itinerary-title').removeClass("tab-selected"); 
+	$j('#network-content').hide();
+	$j('#network-title').removeClass("tab-selected"); 
 	$j( this ).addClass("tab-selected"); 
 	$j('#pathfinding-content').show();
 })
 
-$j("#itinerary-title").on("click", function() {
+$j("#network-title").on("click", function() {
 	$j("#pathfinding-title").removeClass("tab-selected"); 
 	$j('#pathfinding-content').hide();
 	$j( this ).addClass("tab-selected"); 
-	$j('#itinerary-content').show(); 
+	$j('#network-content').show(); 
 })
 
 /* SLIDE left and right */
@@ -832,6 +736,101 @@ $j('#restore-default').on("click", function() {
  	d3.selectAll('path').classed('path-all', true);
  	removeZoneClasses(); 	
 })
+
+/*--------------------------------------------------------
+ * ITINERARY / PATHFINDING 
+ *-------------------------------------------------------*/
+ItineraryUI(); 
+var numFields; 
+function createItinerary() {
+	console.log('called itinerary!');
+	$j("#distance").empty(); 
+	var stops = []; 
+
+	for (var i = 1; i <= numFields; i++) {
+		var s = $j('#' + i + '-value').val();
+		if (s != undefined) {
+			stops.push(s);
+		}
+	}
+    d3.selectAll('.path-shortest').attr("class", "path-all"); //change back to red 
+    var selections = selectedTypes('itinerary-options');
+
+	var places = replaceOceanWithPath(stops); 
+	drawItinerary(places[0], selections);
+	drawItinerary(places[1], selections);
+}
+
+function drawItinerary(places, pathSelections) {
+	var s, t; 
+	for (var i = 0; i < places.length - 1; i++) {
+		s = places[i]; 
+		t = places[i+1]; 
+		drawPathFromSourceToTarget(s, t, pathSelections, numFields > 2 ? true : false); 
+			// for now only show meters for two places 
+	}
+}
+
+function replaceOceanWithPath(places) {
+	var split = places.indexOf(CROSS_OCEAN_URI); 
+	var part1 = places; 
+	var part2 = [];
+	if (split >= 0) {
+		part1 = places.slice(0, split); 
+		part2 = places.slice(split + 1); //to get rid of URI 
+	}
+	return [part1, part2]; 
+}
+
+// for now, just removes the last element. 
+function ItineraryUI() {
+	var wrapper = $(".input_fields_wrap"); 
+	var addFieldButton = $(".add_field_button"); 
+
+	var fieldSet = d3.set(); 
+	numFields = 2; 
+	// init 
+	for (var i = 1; i <= numFields; i++) {
+		wrapItineraryField(wrapper, i);
+	}
+	$(addFieldButton).click(function(e) {
+		e.preventDefault();
+		if (numFields < MAX_FIELDS) {
+			numFields++; 
+			wrapItineraryField(wrapper, numFields);
+		}
+	})
+
+
+	$('#remove-last-field').click(function(e) {
+		$j('.new-field').last().remove();
+		numFields--;  
+	})
+
+}
+
+
+function wrapItineraryField(wrapper, numFields) {
+	$( wrapper ).append('<div class="new-field"><span>' + 
+						 numFields + '.</span><input id=' + numFields + ' class="itinerary-dropdown"></input>' +
+						'<input class="itinerary-hidden" type="hidden" id=' + numFields + '-value></input></div>');
+	addAutocompleteToElement('#' + numFields, '#' + numFields + '-value');
+}
+
+function createDropDown(element) {
+	for (var i = 0; i < sitesWithRoutes.length; i++) {
+		var option =  $j("<option>", { value: sitesWithRoutes[i].topURI, 
+									  text: sitesWithRoutes[i].eiSearch});
+		element.append(option.clone());
+	} 
+	// cross ocean 
+	element.append(
+		$j("<option>", {
+			value: CROSS_OCEAN_URI,
+			text: 'Travel via ocean or sea'
+		}) 
+	)
+}
 
 
 /*-----------------------------------------------------
