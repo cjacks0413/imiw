@@ -10,6 +10,8 @@ var sitesByTopURI = sortSitesByField(places.data, 'topURI');
 var sitesWithRoutes = new Array(); 
 removeSitesWithoutRoutes();
 var sitesByEiSearch = sortSitesByField(sitesWithRoutes, 'eiSearch');
+var sitesByTopType = sortSitesByField(sitesWithRoutes, 'topType');
+
 L.mapbox.accessToken = 'pk.eyJ1IjoiY2phY2tzMDQiLCJhIjoiVFNPTXNrOCJ9.k6TnctaSxIcFQJWZFg0CBA';
 var map = L.mapbox.map('map', 'cjacks04.jij42jel', { 
 					zoomControl: false, 
@@ -43,58 +45,83 @@ g = svg.append("g")
 // initialize all the UTIL arrays
 
 
-// DEAL WITH SITES VS. SITES WITH ROUTES. 
+var sites, 
+    svgSites, 
+    text, 
+    metropoleLabels; 
 
-//var sites = sitesWithRoutes; 
-var sites = sitesWithRoutes.filter(isDefaultTopType); 
+// to set radius sizes for different toptypes 
+var topTypeSizes = d3.map(); 
+topTypeSizes.set('metropoles', 6);
+topTypeSizes.set('capitals', 3); 
+topTypeSizes.set('towns', 2);
+topTypeSizes.set('villages', 2);
+topTypeSizes.set('sites', 1);
+
 function isDefaultTopType(element, index, array) {
 	return ( element.topType == 'metropoles' || 
 		     element.topType == 'capitals'   || 
 		     element.topType == 'towns'      ||
 		     element.topType == 'villages'   || 
-		     element.topType == 'waystations'||
 		     element.topType == 'sites') 
 }
+initializeMap();
 
-/* Add a LatLng object to each item in the dataset */
-sites.forEach(function(d) {
-	d.LatLng = new L.LatLng(d.lat, d.lon);
-})
+function initializeMap() {
+	sites = sitesWithRoutes.filter(isDefaultTopType); 
 
-svgSites = g.selectAll("circle")
-		.data(sites) //change back to "sites"
+
+	/* Add a LatLng object to each item in the dataset */
+	sites.forEach(function(d) {
+		d.LatLng = new L.LatLng(d.lat, d.lon);
+	})
+
+	/* sites */ 
+	svgSites = g.selectAll("circle")
+			.data(sites) //change back to "sites"
+			.enter()
+			.append("circle")
+			.attr("r", function(d) { return topTypeSizes.get(d.topType)})
+			.classed('node', true) 
+			.call(d3.helper.tooltip(
+				function(d, i){
+					return createPopup(d);
+				})
+			);
+
+	/* labels */ 
+	text = g.selectAll("text")
+		.data(sites)
 		.enter()
-		.append("circle")
-		.attr("r", 2)
-		.classed('node', true) 
-		.call(d3.helper.tooltip(
-			function(d, i){
-				return createPopup(d);
-			})
-		);
+		.append("text")
+		.text(function(d) { return d.translitTitle})
+		.classed('arabic label', true)
+		.style("visibility", "hidden");
 
-var text = g.selectAll("text")
-	.data(sites)
-	.enter()
-	.append("text")
-	.text(function(d) { return d.arTitle})
-	.classed('arabic label', true)
-	.style("visibility", "hidden");
+	// limit metropoles
+	metropoleLabels = d3.selectAll('text')
+		.filter(function(d) {
+			return d.topType == 'metropoles';
+		})
+		.style('visibility', 'visible');
 
-// show metropole labels 
-var metropoles = d3.selectAll('text')
-	.filter(function(d) {
-		d.topType == 'metropoles';}); 
+	metropoleLabels.moveToFront;
 
+	// paths between metropoles only
+	showAllPaths(); 
 
+}
 
-showAllPaths(); 
+// DEAL WITH SITES VS. SITES WITH ROUTES. 
+
+//var sites = sitesWithRoutes; 
+
 function restoreDefaultMap() {
-	g.selectAll('circle.node').style("visibility", "hidden");
+	//g.selectAll('circle.node').style("visibility", "hidden");
 	g.selectAll("circle.node")
  		   .filter(function(d) { return isDefaultTopType(d)})
  		   .classed('node', true) 
- 		   .attr("r", 2)
+		   .attr("r", function(d) { return topTypeSizes.get(d.topType)})
  		   .style("visibility", "visible"); 
 
  	g.selectAll("path").style("visibility", "visible"); //to restore after search 
@@ -264,13 +291,6 @@ function drawPathFromSourceToTarget(sid, tid, pathSelections, isItinerary) {
 	s = graph.getNode(sid);
 	t = graph.getNode(tid);
 
-	/*
-	var labels = d3.selectAll('text')
-		.filter(function(d) { 
-			return d.topURI == sid || d.topURI == tid; })
-		.style("visibility", "visible");
-	labels.moveToFront(); */
-
 	pathSelections.forEach(function(select) {
 		pathFunction = pathMap.get(select); 
 		pathToShow = pathFunction(s, t); 
@@ -404,6 +424,8 @@ function makeNetwork() {
 		g.selectAll("circle.node").attr("visibility", "hidden"); // hide everything before we start flooding
 	}
 
+	g.selectAll('text').style('visibility', 'hidden');
+	g.selectAll('text').filter(function(d) { return d.topURI == sourceID}).style('visibility', 'visible');
 	// get info grom graph.js
 	var s = graph.getNode(sourceID);
     var distances = shortestPath(s, s, 'n');
@@ -422,7 +444,7 @@ function flood(network, source) {
 		siteClass = 'zone' + ( i+1) + '-node';
 		zone.forEach(function(s) {
 			g.selectAll("circle.node")
-			   .filter(function(d) { return d.topURI == s})
+			   .filter(function(d) { return d.topURI == s && d.topType != 'waystations'})
 			   .classed('zone5-node', false)
 			   .classed(siteClass, true) 
 			   .attr("r", 4)
@@ -563,8 +585,6 @@ $j('#toggle-regions').on("click", function() {
 
 function restoreFromVoronoi() {
 	$j("#options").hide();
-	$j("#network-flooding-title").hide();
-	$j("#network-flooding-select").hide();
 	d3.select("body").selectAll(".point-cell").remove();
 	g.selectAll("circle.node").style("fill", null).style("visibility", "hidden");
 	slideRight('#path-form-right');
@@ -594,7 +614,6 @@ function getRandomColor() {
 }
 
 var topTypeColors = {}; 
-var sitesByTopType = sortSitesByField(sitesWithRoutes, 'topType');
 var topTypes = d3.set(Object.keys(sitesByTopType));
 var voronoiInitialSelections = d3.set(['metropoles', 'capitals', 'villages']);
 
@@ -733,8 +752,11 @@ $j('#restore-default').on("click", function() {
  		   .attr("r", 2)
  		   .style("visibility", "visible"); 
  	d3.selectAll('.hull').remove();
- 	d3.selectAll('path').classed('path-all', true);
+ 	d3.selectAll('path').classed('path-all', true)
+ 						.classed('path-shortest', false); // change stroke thickness back
  	removeZoneClasses(); 	
+ 	d3.selectAll('text').style('visibility', 'hidden'); 
+ 	metropoleLabels.style('visibility', 'visible');// deal with labels
 })
 
 /*--------------------------------------------------------
@@ -743,7 +765,7 @@ $j('#restore-default').on("click", function() {
 ItineraryUI(); 
 var numFields; 
 function createItinerary() {
-	console.log('called itinerary!');
+	d3.selectAll('text').style('visibility', 'hidden'); //hide other labels
 	$j("#distance").empty(); 
 	var stops = []; 
 
@@ -766,6 +788,13 @@ function drawItinerary(places, pathSelections) {
 	for (var i = 0; i < places.length - 1; i++) {
 		s = places[i]; 
 		t = places[i+1]; 
+
+		// show labels for locations
+		d3.selectAll('text')
+			.filter(function(d) { 
+				return d.topURI == places[i] || d.topURI == places[i+1]; })
+			.style("visibility", "visible");
+
 		drawPathFromSourceToTarget(s, t, pathSelections, numFields > 2 ? true : false); 
 			// for now only show meters for two places 
 	}
