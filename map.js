@@ -238,9 +238,6 @@ var pathTypes = d3.set(['Shortest', 'Within A Day']); // can add back 'Through C
 var pathInitialSelections = d3.set(['Shortest', 'Within A Day']);
 pathColors['Shortest'] = '#451D5C'; 
 pathColors['Within A Day'] = '#345C1D';
-// pathTypes.forEach(function(t) {
-// 	pathColors[t] = getRandomColor();
-// })
 
 selectionsUI('#path-options', pathInitialSelections, pathColors); 
 selectionsUI('#itinerary-options', pathInitialSelections, pathColors); 
@@ -749,7 +746,7 @@ $j('#restore-default').on("click", function() {
 	g.selectAll("circle.node")
  		   .filter(function(d) { return isDefaultTopType(d)})
  		   .classed('node', true) 
- 		   .attr("r", 2)
+ 		   .attr("r", function(d) { return topTypeSizes.get(d.topType)})
  		   .style("visibility", "visible"); 
  	d3.selectAll('.hull').remove();
  	d3.selectAll('path').classed('path-all', true)
