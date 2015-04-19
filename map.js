@@ -125,6 +125,7 @@ function restoreDefaultMap() {
  		   .style("visibility", "visible"); 
 
  	g.selectAll("path").style("visibility", "visible"); //to restore after search 
+ 	g.selectAll('path').classed('path-shortest', false);
  	showAllPaths(); // to restore after voronoi 
  	removeZoneClasses(); 
 } 
@@ -393,11 +394,6 @@ function networkUI() {
 	 	} 
 	 })
 
-	$j('#network-hide').on("click", function() {
-		console.log('clicked');
-		$j('#network-flooding-select').hide();
-	})
-
 	var numMultipliers = 10; 
 	for (var i = 1; i <= numMultipliers; i++) {
 		var option = $j("<option>", { value: i, text: i}); 
@@ -539,23 +535,13 @@ function drawHull() {
 			.call(d3.helper.tooltip(
 				function(d, i){
 					return('<center><br/><br/><span class="arabic">' + d[0].region + '</span></center>'); 
-			}));
+			})); 
 		}
 	}))
-	// color based on region
-	var regionColorMap = d3.map();  
-	var regionNames = d3.set(Object.keys(sitesByProvince));
-	regionNames.forEach(function(t) {
-		regionColorMap.set(t, getRandomColor()); 
-	})
-
-	// d3.selectAll('circle.node')
-	//   .style("fill", function(d) { return regionColorMap.get(d.region)})
-	//   .attr("r", 4); 
-
 }
 
-$j('#toggle-regions').on("click", function() {
+
+$j('#regions-border').on("click", function() {
 	if (regions) {
 		d3.selectAll('.hull').remove();
 		d3.selectAll('circle.node')
@@ -569,10 +555,33 @@ $j('#toggle-regions').on("click", function() {
 	}
 })
 
+$j('#regions-color').on('click', function() {
+	if (regions) {
+		d3.selectAll('.hull').remove();
+		d3.selectAll('circle.node')
+			.style('fill', null)
+			.classed('node', true)
+			.attr('r', 2);
+		regions = false; 
+	} else {
+		colorRegions();
+		regions = true;
+	}
+})
 
+function colorRegions() {
+		// color based on region
+	var regionColorMap = d3.map();  
+	var regionNames = d3.set(Object.keys(sitesByProvince));
+	regionNames.forEach(function(t) {
+		regionColorMap.set(t, getRandomColor()); 
+	})
 
+	 d3.selectAll('circle.node')
+	   .style("fill", function(d) { return regionColorMap.get(d.region)})
+	   .attr("r", 4); 
 
-
+}
 
 /*-----------------------------------------------------
  * VORONOI 

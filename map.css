@@ -587,7 +587,7 @@ div.tooltip {
 #restore-default {
   position: absolute;
   position: absolute;
-  left: 15%;
+  left: 25%;
   bottom: 2%;
   background-color: rgba(255, 255, 255, 0.9);
   padding: 15px;
@@ -619,7 +619,7 @@ div.tooltip {
   position: absolute;
 }
 
-#toggle-regions {
+#regions {
   position: absolute;
   left: 5%;
   bottom: 2%;
